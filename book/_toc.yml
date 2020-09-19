@@ -1,0 +1,5 @@
+- file: index
+
+- part: Basics
+  chapters:
+  - file: notebooks/intro

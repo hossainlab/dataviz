@@ -1,0 +1,31 @@
+#######################################################################################
+# Book settings
+title                         : Data Visualization using Python
+author                        : Jubayer Hossain
+logo                          : 'dataviz.png'
+email                         : jubayer@hdrobd.org
+description: >-
+  NumPy for Scientific Computing
+
+execute:
+  execute_notebooks           : cache
+
+
+html:
+  favicon                     : 'dataviz.png'
+  home_page_in_navbar         : false
+  use_edit_page_button        : false
+  use_repository_button       : true
+  use_issue_button            : false
+
+repository:
+  url                         : https://github.com/hossainlab/dataviz/
+  branch                      : master
+  path_to_book                : book
+
+
+launch_buttons:
+  notebook_interface          : classic
+  binderhub_url               : "https://mybinder.org"
+  colab_url                   : "https://colab.research.google.com"
+  thebe                       : true
