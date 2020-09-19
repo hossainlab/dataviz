@@ -1,5 +1,6 @@
 - file: index
 
-- part: Basics
+- part: Plotly Basics
   chapters:
   - file: notebooks/intro
+  - file: notebooks/Plotly Basic Overview
