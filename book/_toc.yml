@@ -1,6 +1,13 @@
 - file: index
 
-- part: Plotly Basics
+- part: Visualizaion Priciples
   chapters:
   - file: notebooks/intro
-  - file: notebooks/Plotly Basic Overview
+
+- part: Plotly Basics
+  chapters:
+  - file: notebooks/Plotly Basic Overview 
+
+- part: Plotly Express
+  chapters:
+  - file: notebooks/Intro to Plotly Express
