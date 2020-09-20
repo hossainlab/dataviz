@@ -3,10 +3,12 @@
 - part: Visualizaion Priciples
   chapters:
   - file: notebooks/intro
+  - file: notebooks/Data Visualization with Pandas and Matplotlib
+
 
 - part: Plotly Basics
   chapters:
-  - file: notebooks/Plotly Basic Overview 
+  - file: notebooks/Plotly Basic Overview
 
 - part: Plotly Express
   chapters:
