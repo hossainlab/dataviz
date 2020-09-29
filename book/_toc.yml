@@ -5,6 +5,15 @@
   - file: notebooks/intro
   - file: notebooks/Data Visualization with Pandas and Matplotlib
 
+- part: Seaborn
+  chapters:
+  - file: notebooks/SB00-Introduction
+  - file: notebooks/SB01-Distribution Plots
+  - file: notebooks/SB02-Categorical Plots
+  - file: notebooks/SB03-Matrix Plots
+  - file: notebooks/SB04-Grids
+  - file: notebooks/SB05-Regression Plots
+
 
 - part: Plotly Basics
   chapters:
