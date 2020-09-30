@@ -7,7 +7,6 @@ import matplotlib.pyplot as plt
 import plotly.offline as py
 import plotly.graph_objs as go 
 import plotly.figure_factory as ff 
-from plotly.offline import download_plotlyjs, init_notebook_mode, plot, iplot
 
 ## Plot with Matplotlib
 
@@ -21,9 +20,14 @@ plt.show()
 
 # Create a fake dataset to show in plot 
 df = pd.DataFrame(np.random.rand(100, 4), columns=['A', 'B', 'C', 'D'])
-py.iplot([
+data = ([
     {'x': df.index, 'y': df[col], 'name': col} for col in df.columns
 ])
+
+# Create figure 
+fig = go.Figure(data=data)
+# Show figure 
+fig.show() 
 
 ## Scatter Plot
 
@@ -36,9 +40,10 @@ data = [go.Scatter(
     x = random_x,
     y = random_y, 
     mode= 'markers'
-)]
+)] 
 
-py.iplot(data)
+fig = go.Figure(data=data)
+fig.show() 
 
 ## Layout
 
@@ -67,7 +72,7 @@ layout = go.Layout(
 fig = go.Figure(data=data, layout=layout)
 
 # Show figure 
-py.iplot(fig)
+fig.show() 
 
 ## Customization
 
@@ -104,7 +109,7 @@ layout = go.Layout(
 fig = go.Figure(data=data, layout=layout)
 
 # Show figure 
-py.iplot(fig)
+fig.show()
 
 ## Line Charts
 
@@ -146,7 +151,7 @@ layout = go.Layout(
 fig = go.Figure(data=data, layout=layout)
 
 # Show plot 
-py.iplot(fig)
+fig.show()
 
 ## Reading Data and Plotting
 
@@ -173,7 +178,7 @@ layout = go.Layout(
 fig = go.Figure(data=traces, layout=layout)
 
 # Show figure 
-py.iplot(fig)
+fig.show()
 
 ## Bar Charts 
 
@@ -200,7 +205,7 @@ layout = go.Layout(
 fig = go.Figure(data=data, layout=layout)
 
 # Show figure 
-py.iplot(fig)
+fig.show()
 
 # Take a look at data again..
 df.head()
@@ -241,7 +246,7 @@ layout = go.Layout(
 fig = go.Figure(data=data, layout=layout)
 
 # Show figure 
-pyo.iplot(fig)
+fig.show()
 
 ## Stacked Bar Plot
 
@@ -280,7 +285,7 @@ layout = go.Layout(
 fig = go.Figure(data=data, layout=layout)
 
 # Show figure 
-py.iplot(fig)
+fig.show()
 
 ## Bubble Plot
 
@@ -309,7 +314,7 @@ layout = go.Layout(
 fig = go.Figure(data=data, layout=layout)
 
 # Show plot 
-py.iplot(fig) 
+fig.show()
 
 ## Boxplots
 
@@ -343,7 +348,7 @@ layout = go.Layout(
 fig = go.Figure(data=data, layout=layout)
 
 # Show figure 
-pyo.iplot(fig)
+fig.show()
 
 ## Show Outliers
 
@@ -365,7 +370,7 @@ layout = go.Layout(
 fig = go.Figure(data=data, layout=layout)
 
 # Show figure 
-py.iplot(fig) 
+fig.show()
 
 ## Grouped Boxplot
 
@@ -416,7 +421,7 @@ data = [trace1, trace2, trace3, trace4]
 fig = go.Figure(data=data, layout=layout)
 
 # Show figure 
-py.iplot(fig) 
+fig.show()
 
 ## Histograms 
 
@@ -435,7 +440,7 @@ layout = go.Layout(
 fig = go.Figure(data=data, layout=layout)
 
 # Show figure 
-py.iplot(fig) 
+fig.show()
 
 df = pd.read_csv("../data/mpg.csv")
 df.head()
@@ -450,7 +455,7 @@ layout = go.Layout(
 )
 
 fig = go.Figure(data=data, layout=layout)
-py.iplot(fig) 
+fig.show()
 
 data = go.Histogram(
     x = df['mpg'], 
@@ -462,7 +467,7 @@ layout = go.Layout(
 )
 
 fig = go.Figure(data=data, layout=layout)
-py.iplot(fig) 
+fig.show()
 
 data = go.Histogram(
     x = df['mpg'], 
@@ -474,7 +479,7 @@ layout = go.Layout(
 )
 
 fig = go.Figure(data=data, layout=layout)
-py.iplot(fig)
+fig.show()
 
 df = pd.read_csv("../data/arrhythmia.csv")
 df.head()
@@ -498,14 +503,14 @@ layout = go.Layout(
 
 
 fig = go.Figure(data=data, layout=layout)
-py.iplot(fig) 
+fig.show()
 
 x = np.random.randn(1000)
 hist_data = [x]
 group_labels = ['distplot']
 
 fig = ff.create_distplot(hist_data, group_labels)
-py.iplot(fig)
+fig.show()
 
 ## Heatmaps 
 
@@ -527,4 +532,4 @@ layout = go.Layout(
 
 # Create figure
 fig = go.Figure(data=data, layout=layout)
-py.iplot(fig)
+fig.show()

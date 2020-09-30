@@ -1,8 +1,8 @@
 #######################################################################################
 # Book settings
-title                         : Data Visualization using Python
+title                         : Data Visualization with Python
 author                        : Jubayer Hossain
-logo                          : 'dataviz.png'
+logo                          : 'logo.jpg'
 email                         : jubayer@hdrobd.org
 description: >-
   NumPy for Scientific Computing
@@ -12,7 +12,7 @@ execute:
 
 
 html:
-  favicon                     : 'dataviz.png'
+  favicon                     : 'logo.jpg'
   home_page_in_navbar         : false
   use_edit_page_button        : false
   use_repository_button       : true

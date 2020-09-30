@@ -1,9 +1,10 @@
 - file: index
 
-- part: Visualizaion Priciples
+- part: Matplotlib
   chapters:
-  - file: notebooks/intro
-  - file: notebooks/Data Visualization with Pandas and Matplotlib
+  - file: notebooks/MPL00-intro
+  - file: notebooks/MPL01-Intro to Data Visualization
+  - file: notebooks/MPL02-Data Visualization with Pandas and Matplotlib
 
 - part: Seaborn
   chapters:
@@ -13,12 +14,10 @@
   - file: notebooks/SB03-Matrix Plots
   - file: notebooks/SB04-Grids
   - file: notebooks/SB05-Regression Plots
+  - file: notebooks/SB06-Style and Color
 
 
-- part: Plotly Basics
+- part: Plotly
   chapters:
-  - file: notebooks/Plotly Basic Overview
-
-- part: Plotly Express
-  chapters:
-  - file: notebooks/Intro to Plotly Express
+  - file: notebooks/P00-Plotly Basic Overview
+  - file: notebooks/P01-Intro to Plotly Express
