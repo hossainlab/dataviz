@@ -24,12 +24,11 @@ import matplotlib.pyplot as plt
 import plotly.offline as py
 import plotly.graph_objs as go 
 import plotly.figure_factory as ff 
-from plotly.offline import download_plotlyjs, init_notebook_mode, plot, iplot
 ------------------
 
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mModuleNotFoundError[0m                       Traceback (most recent call last)
-[0;32m<ipython-input-1-60015cd12e35>[0m in [0;36m<module>[0;34m[0m
+[0;32m<ipython-input-1-5e29a3851205>[0m in [0;36m<module>[0;34m[0m
 [1;32m      3[0m [0;32mimport[0m [0mpandas[0m [0;32mas[0m [0mpd[0m[0;34m[0m[0;34m[0m[0m
 [1;32m      4[0m [0;32mimport[0m [0mmatplotlib[0m[0;34m.[0m[0mpyplot[0m [0;32mas[0m [0mplt[0m[0;34m[0m[0;34m[0m[0m
 [0;32m----> 5[0;31m [0;32mimport[0m [0mplotly[0m[0;34m.[0m[0moffline[0m [0;32mas[0m [0mpy[0m[0;34m[0m[0;34m[0m[0m
