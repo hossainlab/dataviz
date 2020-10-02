@@ -27,7 +27,7 @@ data = ([
 # Create figure 
 fig = go.Figure(data=data)
 # Show figure 
-fig.show() 
+py.iplot(fig)
 
 ## Scatter Plot
 

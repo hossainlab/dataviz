@@ -2,7 +2,7 @@
 
 - part: Matplotlib
   chapters:
-  - file: notebooks/MPL00-intro
+  - file: notebooks/MPL00-Introduction
   - file: notebooks/MPL01-Intro to Data Visualization
   - file: notebooks/MPL02-Data Visualization with Pandas and Matplotlib
 
@@ -21,3 +21,8 @@
   chapters:
   - file: notebooks/P00-Plotly Basic Overview
   - file: notebooks/P01-Intro to Plotly Express
+
+
+- part: Cufflinks
+  chapters:
+  - file: notebooks/CF00-Introduction
