@@ -30,6 +30,7 @@ launch_buttons:
   colab_url                   : "https://colab.research.google.com"
   thebe                       : true
 
+# For Plotly and Cufflinks
 sphinx:
   config:
     html_js_files:

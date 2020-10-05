@@ -2,18 +2,8 @@
 In this notebook I'll try to explore gapminder dataset using interactive data visualization library called Plotly. About the Dataset:
 [Data Source](https://www.gapminder.org/tools/#$state$time$value=2007;;&chart-type=bubbles)
 
-- Task-1: Import Libraries 
-- Task-2: Loading Dataset 
-- Task-3: Creating Table 
-- Task-4: Quick Visualizations with Bar Charts 
-- Task-5: Plot Life Expectency `vs` GDP Per Capita
-- Task-6: Create Interactive Bubble Charts 
-- Task-7: Create Interactive Animations and Facet Plots 
-- Task-8: Interactive Line Plots and Area Plots 
-- Task-9: Represent Geographic Data as Animated Maps
-- Task-10: Using Plotly Template in Any Graphs 
 
-## Task-1: Import Libraries 
+## Import Libraries 
 
 import numpy as np # linear algebra
 import pandas as pd # data processing, CSV file I/O (e.g. pd.read_csv)
@@ -22,7 +12,7 @@ import plotly.offline as py
 import plotly.graph_objs as go 
 from plotly.figure_factory import create_table # for creating nice table 
 
-## Task-2: Loading the Dataset 
+## Loading the Dataset 
 
 # load built-in gapminder dataset from plotly 
 gapminder = px.data.gapminder() 
@@ -30,13 +20,13 @@ gapminder = px.data.gapminder()
 # examine first few rows 
 gapminder.head() 
 
-## Task-3: Creating a Table 
+## Creating a Table 
 
 # create a publication quality table 
 table = create_table(gapminder.head(10))
 py.iplot(table)
 
-## Task-4: Quick Visualizations with Bar Charts
+## Quick Visualizations with Bar Charts
 
 # filtering data for Canada and store into a variable called canada_data 
 canada_data = px.data.gapminder().query("country == 'Canada' ")
@@ -49,7 +39,7 @@ fig.show()
 fig = px.bar(canada_data, x='year', y='pop', color='lifeExp', labels={'pop': 'Population of Canada'}, height=400)
 fig.show() 
 
-## Task-5: Plot Life Expectency vs GDP Per Capita
+## Plot Life Expectency vs GDP Per Capita
 
 # filter 2007 data only from dataset 
 gapminder2007 = gapminder.query('year == 2007')
@@ -62,7 +52,7 @@ fig.show()
 fig = px.scatter(gapminder2007, x='gdpPercap', y='lifeExp', color='continent')
 fig.show() 
 
-## Task-6: Create Interactive Bubble Charts
+##  Create Interactive Bubble Charts
 
 # create a bubble chart 
 fig = px.scatter(gapminder2007, x='gdpPercap', y='lifeExp', color='continent', size='pop', size_max=60)
@@ -73,7 +63,7 @@ fig = px.scatter(gapminder2007, x='gdpPercap', y='lifeExp', color='continent', s
                  hover_name='country')
 fig.show() 
 
-## Task-7: Create Interactive Animations and Facet Plots
+##  Create Interactive Animations and Facet Plots
 
 # create a facet plot 
 fig = px.scatter(gapminder, x='gdpPercap', y='lifeExp', color='continent', size='pop', size_max=60, 
@@ -98,7 +88,7 @@ fig = px.scatter(gapminder, x='gdpPercap', y='lifeExp', color='continent', size=
                 labels=dict(pop="Population", gdpPercap="GDP Per Capita", lifeExp="Life Expectency"))
 fig.show()
 
-## Task-9: Represent Geographic Data as Animated Maps
+##  Represent Geographic Data as Animated Maps
 
 # create a map using line_geo()
 fig = px.line_geo(gapminder.query('year == 2007'), locations='iso_alpha', color='continent', projection='orthographic')

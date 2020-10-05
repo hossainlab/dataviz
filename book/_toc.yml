@@ -1,11 +1,13 @@
 - file: index
 
+# Matplotlib notebooks
 - part: Matplotlib
   chapters:
   - file: notebooks/MPL00-Introduction
   - file: notebooks/MPL01-Intro to Data Visualization
   - file: notebooks/MPL02-Data Visualization with Pandas and Matplotlib
 
+# Seaborn notebooks
 - part: Seaborn
   chapters:
   - file: notebooks/SB00-Introduction
@@ -16,13 +18,13 @@
   - file: notebooks/SB05-Regression Plots
   - file: notebooks/SB06-Style and Color
 
-
+# Plotly notebooks
 - part: Plotly
   chapters:
   - file: notebooks/P00-Plotly Basic Overview
   - file: notebooks/P01-Intro to Plotly Express
 
-
+# Cufflinks notebooks
 - part: Cufflinks
   chapters:
   - file: notebooks/CF00-Introduction

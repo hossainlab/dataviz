@@ -2,24 +2,22 @@
 
 This library binds the power of plotly with the flexibility of pandas for easy plotting.
 
+## Import Libraries 
+
 import pandas as pd 
 import numpy as np 
 import cufflinks as cf 
 import chart_studio.plotly as py
+from plotly.offline import download_plotlyjs, init_notebook_mode, plot, iplot 
 
+## Config 
 
-%reload_ext autoreload
-%autoreload 2
+cf.set_config_file(theme='ggplot',sharing='public',offline=True)
 
-init_notebook_mode(connected=True)
+## Enable Notebook Mode
 
-cf.set_config_file(theme='ggplot',sharing='public',offline=False)
+ init_notebook_mode(connected=True)
 
-df = pd.read_csv('../data/iris.csv')
+## Let's a Create a Simple Plot 
 
-df[['sepal_length', 'sepal_width', 'petal_length', 'petal_width']].iplot(kind='box')
-
-cf.datagen.lines(1,1000).iplot()
-
-df=cf.datagen.lines(4,1000)
-df.iplot()
+cf.datagen.lines().iplot(kind='scatter',xTitle='Dates',yTitle='Returns',title='Cufflinks - Line Chart')
