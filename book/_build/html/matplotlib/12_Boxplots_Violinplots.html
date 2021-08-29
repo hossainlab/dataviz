@@ -1,0 +1,1488 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Create an array of integers for our boxplot &#8212; Data Visualization with Python</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet" />
+  <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.e8f53015daec13862f6db5e763c41738.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe,.cell"
+        const thebe_selector_input = "pre,.cell_input div.highlight"
+        const thebe_selector_output = ".output,.cell_output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="shortcut icon" href="../_static/logo.jpg"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      <img src="../_static/logo.jpg" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Data Visualization with Python</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <p class="caption">
+ <span class="caption-text">
+  Matplotlib
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="00-Intro%20to%20Data%20Visualization.html">
+   Intro to Data Visualization with Matplotlib
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="02_InteractiveBackends.html">
+     Backends
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/matplotlib/12_Boxplots_Violinplots.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/hossainlab/dataviz/"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/hossainlab/dataviz/master?urlpath=tree/book/matplotlib/12_Boxplots_Violinplots.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/hossainlab/dataviz/blob/master/book/matplotlib/12_Boxplots_Violinplots.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        <button type="button" class="btn btn-secondary topbarbtn"
+            onclick="initThebeSBT()" title="Launch Thebe" data-toggle="tooltip" data-placement="left"><i
+                class="fas fa-play"></i><span style="margin-left: .4em;">Live Code</span></button>
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Create an array of integers for our boxplot
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#create-a-boxplot">
+   Create a boxplot
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#appending-a-high-value-at-the-end-to-view-the-change-in-the-boxplot">
+   Appending a high value at the end to view the change in the boxplot
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#outliers-are-separate-from-the-box-and-whiskers">
+   Outliers are separate from the box and whiskers
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-boxplot-can-be-oriented-horizontally">
+   The boxplot can be oriented horizontally
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#a-notch-can-be-added-to-the-box-around-the-median">
+   A notch can be added to the box around the median
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-outliers-fliers-can-be-hidden-from-the-boxplot">
+   The outliers/fliers can be hidden from the boxplot
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#formatting-the-boxplot">
+   Formatting the boxplot
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#convert-the-box-to-a-pathpatch-object">
+     Convert the box to a PathPatch object
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#view-the-number-of-each-boxplot-component">
+     View the number of each boxplot component
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#we-set-the-color-of-the-box">
+     We set the color of the box
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#define-the-whiskers">
+     Define the whiskers
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#define-the-caps">
+     Define the caps
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#define-the-outlier-plots">
+     Define the outlier plots
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#define-the-median-line">
+     Define the median line
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#using-boxplots-with-real-data">
+   Using boxplots with real data
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#use-pandas-to-load-the-dataset">
+     Use Pandas to load the dataset
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#we-only-extract-the-exam-scores">
+     We only extract the exam scores
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#examine-the-data">
+     Examine the data
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#to-use-the-data-in-a-boxplot-we-convert-it-to-an-array">
+     To use the data in a boxplot, we convert it to an array
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#draw-the-boxplot-to-represent-the-exam-scores">
+     Draw the boxplot to represent the exam scores
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#components-of-the-boxplot">
+     Components of the boxplot
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#formatting-this-new-boxplot">
+   Formatting this new boxplot
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-colors-to-use-for-the-boxes">
+     The colors to use for the boxes
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#set-the-formats">
+     Set the formats
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#we-set-the-xtick-value-to-portray-what-the-box-plots-represent">
+     We set the xtick value to portray what the box plots represent
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#violin-plots">
+   Violin Plots
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exam-score-distribution">
+     Exam score distribution
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#show-median-and-xticks">
+     Show median and xticks
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#formatting-the-violin-plot">
+   Formatting the violin plot
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#we-re-define-the-same-plot-but-oriented-horizontally">
+     We re-define the same plot, but oriented horizontally
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#not-exactly-the-same-as-a-boxplot">
+     Not exactly the same as a Boxplot
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-other-violinplot-components">
+     The other Violinplot components
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#add-a-legend-to-the-plot">
+     Add a legend to the plot
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="n">matplotlib</span><span class="o">.</span><span class="n">interactive</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ion</span><span class="p">()</span>
+<span class="n">matplotlib</span><span class="o">.</span><span class="n">is_interactive</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="create-an-array-of-integers-for-our-boxplot">
+<h1>Create an array of integers for our boxplot<a class="headerlink" href="#create-an-array-of-integers-for-our-boxplot" title="Permalink to this headline">¶</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">x</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+<span class="n">x</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([ 2,  5,  6,  7,  7,  7,  8, 10, 10, 11, 11, 11, 13, 13, 15, 15, 16,
+       17, 18, 19])
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="create-a-boxplot">
+<h1>Create a boxplot<a class="headerlink" href="#create-a-boxplot" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>The box represents the data in the middle two quartiles of the range (25th percentile to 75th percentile)</p></li>
+<li><p>The horizontal colorful line in the middle is the median</p></li>
+<li><p>The lines outside the box (called whiskers) represent the range of values in the distribution - but not the outliers</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/12_Boxplots_Violinplots_4_0.png" src="../_images/12_Boxplots_Violinplots_4_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="appending-a-high-value-at-the-end-to-view-the-change-in-the-boxplot">
+<h1>Appending a high value at the end to view the change in the boxplot<a class="headerlink" href="#appending-a-high-value-at-the-end-to-view-the-change-in-the-boxplot" title="Permalink to this headline">¶</a></h1>
+<p>The top whisker gets elongated to include the new data. The box and the median should also change slightly</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">22</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> 
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/12_Boxplots_Violinplots_6_0.png" src="../_images/12_Boxplots_Violinplots_6_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="outliers-are-separate-from-the-box-and-whiskers">
+<h1>Outliers are separate from the box and whiskers<a class="headerlink" href="#outliers-are-separate-from-the-box-and-whiskers" title="Permalink to this headline">¶</a></h1>
+<p>A circle will be used to denote outliers in the data</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">37</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">40</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> 
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/12_Boxplots_Violinplots_8_0.png" src="../_images/12_Boxplots_Violinplots_8_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="the-boxplot-can-be-oriented-horizontally">
+<h1>The boxplot can be oriented horizontally<a class="headerlink" href="#the-boxplot-can-be-oriented-horizontally" title="Permalink to this headline">¶</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">vert</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> 
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/12_Boxplots_Violinplots_10_0.png" src="../_images/12_Boxplots_Violinplots_10_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="a-notch-can-be-added-to-the-box-around-the-median">
+<h1>A notch can be added to the box around the median<a class="headerlink" href="#a-notch-can-be-added-to-the-box-around-the-median" title="Permalink to this headline">¶</a></h1>
+<p>This is to make the median more prominent</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> 
+            <span class="n">vert</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+            <span class="n">notch</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> 
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/12_Boxplots_Violinplots_12_0.png" src="../_images/12_Boxplots_Violinplots_12_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="the-outliers-fliers-can-be-hidden-from-the-boxplot">
+<h1>The outliers/fliers can be hidden from the boxplot<a class="headerlink" href="#the-outliers-fliers-can-be-hidden-from-the-boxplot" title="Permalink to this headline">¶</a></h1>
+<p>Note that the values of the median, and the quartile ranges does not change - the outlier/flier values still affect those. Those fliers are just not visible in the plot</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> 
+            <span class="n">vert</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+            <span class="n">notch</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="n">showfliers</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> 
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/12_Boxplots_Violinplots_14_0.png" src="../_images/12_Boxplots_Violinplots_14_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="formatting-the-boxplot">
+<h1>Formatting the boxplot<a class="headerlink" href="#formatting-the-boxplot" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="convert-the-box-to-a-pathpatch-object">
+<h2>Convert the box to a PathPatch object<a class="headerlink" href="#convert-the-box-to-a-pathpatch-object" title="Permalink to this headline">¶</a></h2>
+<p>By default it is a Line2D object which limits formatting options. We convert to a PathPatch by setting the patch_artist of the boxplot to true. <br />
+Here, we also view all the components of a boxplot</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bp</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">patch_artist</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> 
+<span class="n">bp</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;boxes&#39;: [&lt;matplotlib.patches.PathPatch at 0x11d88f860&gt;],
+ &#39;caps&#39;: [&lt;matplotlib.lines.Line2D at 0x11d8980f0&gt;,
+  &lt;matplotlib.lines.Line2D at 0x11d898518&gt;],
+ &#39;fliers&#39;: [&lt;matplotlib.lines.Line2D at 0x11d898d68&gt;],
+ &#39;means&#39;: [],
+ &#39;medians&#39;: [&lt;matplotlib.lines.Line2D at 0x11d898940&gt;],
+ &#39;whiskers&#39;: [&lt;matplotlib.lines.Line2D at 0x11d88fac8&gt;,
+  &lt;matplotlib.lines.Line2D at 0x11d88fc18&gt;]}
+</pre></div>
+</div>
+<img alt="../_images/12_Boxplots_Violinplots_17_1.png" src="../_images/12_Boxplots_Violinplots_17_1.png" />
+</div>
+</div>
+</div>
+<div class="section" id="view-the-number-of-each-boxplot-component">
+<h2>View the number of each boxplot component<a class="headerlink" href="#view-the-number-of-each-boxplot-component" title="Permalink to this headline">¶</a></h2>
+<p>There are two whiskers (lower and upper in that order), two caps(lower and upper in that order) and one of each other component. Even though the data has two outlier points, there is one object which represents them</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Number of boxes: &#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">bp</span><span class="p">[</span><span class="s1">&#39;boxes&#39;</span><span class="p">]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Number of whiskers: &#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">bp</span><span class="p">[</span><span class="s1">&#39;whiskers&#39;</span><span class="p">]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Number of caps: &#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">bp</span><span class="p">[</span><span class="s1">&#39;caps&#39;</span><span class="p">]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Number of medians: &#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">bp</span><span class="p">[</span><span class="s1">&#39;medians&#39;</span><span class="p">]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Number of fliers: &#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">bp</span><span class="p">[</span><span class="s1">&#39;fliers&#39;</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of boxes:  1
+Number of whiskers:  2
+Number of caps:  2
+Number of medians:  1
+Number of fliers:  1
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="we-set-the-color-of-the-box">
+<h2>We set the color of the box<a class="headerlink" href="#we-set-the-color-of-the-box" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bp</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">patch_artist</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> 
+
+<span class="n">bp</span><span class="p">[</span><span class="s1">&#39;boxes&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;lightyellow&#39;</span><span class="p">,</span> 
+                   <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;maroon&#39;</span><span class="p">,</span> 
+                   <span class="n">hatch</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[None, None, None]
+</pre></div>
+</div>
+<img alt="../_images/12_Boxplots_Violinplots_21_1.png" src="../_images/12_Boxplots_Violinplots_21_1.png" />
+</div>
+</div>
+</div>
+<div class="section" id="define-the-whiskers">
+<h2>Define the whiskers<a class="headerlink" href="#define-the-whiskers" title="Permalink to this headline">¶</a></h2>
+<p>Whisker #0 is the bottom one, #1 is above the box</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bp</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">patch_artist</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> 
+
+<span class="n">bp</span><span class="p">[</span><span class="s1">&#39;boxes&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;lightyellow&#39;</span><span class="p">,</span> 
+                   <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;maroon&#39;</span><span class="p">,</span> 
+                   <span class="n">hatch</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">)</span>
+
+<span class="n">bp</span><span class="p">[</span><span class="s1">&#39;whiskers&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> 
+                      <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">bp</span><span class="p">[</span><span class="s1">&#39;whiskers&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[None]
+</pre></div>
+</div>
+<img alt="../_images/12_Boxplots_Violinplots_23_1.png" src="../_images/12_Boxplots_Violinplots_23_1.png" />
+</div>
+</div>
+</div>
+<div class="section" id="define-the-caps">
+<h2>Define the caps<a class="headerlink" href="#define-the-caps" title="Permalink to this headline">¶</a></h2>
+<p>Caps are the horizontal lines at the ends of the whiskers. Cap #0 is at the end of whisker #0 and whisker and cap #1 are also attached</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bp</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">patch_artist</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> 
+
+<span class="n">bp</span><span class="p">[</span><span class="s1">&#39;boxes&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;lightyellow&#39;</span><span class="p">,</span> 
+                   <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;maroon&#39;</span><span class="p">,</span> 
+                   <span class="n">hatch</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">)</span>
+
+<span class="n">bp</span><span class="p">[</span><span class="s1">&#39;whiskers&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> 
+                      <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">bp</span><span class="p">[</span><span class="s1">&#39;whiskers&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
+
+<span class="n">bp</span><span class="p">[</span><span class="s1">&#39;caps&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;purple&#39;</span><span class="p">)</span>
+
+<span class="n">bp</span><span class="p">[</span><span class="s1">&#39;caps&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;pink&#39;</span><span class="p">,</span>
+                  <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[None, None]
+</pre></div>
+</div>
+<img alt="../_images/12_Boxplots_Violinplots_25_1.png" src="../_images/12_Boxplots_Violinplots_25_1.png" />
+</div>
+</div>
+</div>
+<div class="section" id="define-the-outlier-plots">
+<h2>Define the outlier plots<a class="headerlink" href="#define-the-outlier-plots" title="Permalink to this headline">¶</a></h2>
+<p>Outliers are termed “fliers” in boxplots. We can set the format for these as well</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bp</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">patch_artist</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> 
+
+<span class="n">bp</span><span class="p">[</span><span class="s1">&#39;boxes&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;lightyellow&#39;</span><span class="p">,</span> 
+                   <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;maroon&#39;</span><span class="p">,</span> 
+                   <span class="n">hatch</span><span class="o">=</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
+
+<span class="n">bp</span><span class="p">[</span><span class="s1">&#39;fliers&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">marker</span><span class="o">=</span><span class="s1">&#39;D&#39;</span><span class="p">,</span> 
+                    <span class="n">markerfacecolor</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[None, None]
+</pre></div>
+</div>
+<img alt="../_images/12_Boxplots_Violinplots_27_1.png" src="../_images/12_Boxplots_Violinplots_27_1.png" />
+</div>
+</div>
+</div>
+<div class="section" id="define-the-median-line">
+<h2>Define the median line<a class="headerlink" href="#define-the-median-line" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bp</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">patch_artist</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> 
+
+<span class="n">bp</span><span class="p">[</span><span class="s1">&#39;boxes&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;lightyellow&#39;</span><span class="p">,</span> 
+                   <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;maroon&#39;</span><span class="p">)</span>
+
+<span class="n">bp</span><span class="p">[</span><span class="s1">&#39;medians&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> 
+                     <span class="n">linewidth</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[None, None]
+</pre></div>
+</div>
+<img alt="../_images/12_Boxplots_Violinplots_29_1.png" src="../_images/12_Boxplots_Violinplots_29_1.png" />
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="using-boxplots-with-real-data">
+<h1>Using boxplots with real data<a class="headerlink" href="#using-boxplots-with-real-data" title="Permalink to this headline">¶</a></h1>
+<p>We load student scores in Math, Reading and Writing.<br />
+<b>Dataset source: </b><a class="reference external" href="http://roycekimmons.com/system/generate_data.php?dataset=exams&amp;n=100">http://roycekimmons.com/system/generate_data.php?dataset=exams&amp;n=100</a></p>
+<div class="section" id="use-pandas-to-load-the-dataset">
+<h2>Use Pandas to load the dataset<a class="headerlink" href="#use-pandas-to-load-the-dataset" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">exam_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;datasets/exams.csv&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">exam_data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>gender</th>
+      <th>race/ethnicity</th>
+      <th>parental level of education</th>
+      <th>lunch</th>
+      <th>test preparation course</th>
+      <th>math score</th>
+      <th>reading score</th>
+      <th>writing score</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>male</td>
+      <td>group C</td>
+      <td>some high school</td>
+      <td>free/reduced</td>
+      <td>none</td>
+      <td>69</td>
+      <td>61</td>
+      <td>58</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>female</td>
+      <td>group C</td>
+      <td>some college</td>
+      <td>free/reduced</td>
+      <td>completed</td>
+      <td>47</td>
+      <td>65</td>
+      <td>69</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>male</td>
+      <td>group A</td>
+      <td>high school</td>
+      <td>standard</td>
+      <td>none</td>
+      <td>66</td>
+      <td>52</td>
+      <td>53</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>male</td>
+      <td>group B</td>
+      <td>some college</td>
+      <td>standard</td>
+      <td>none</td>
+      <td>88</td>
+      <td>89</td>
+      <td>82</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>female</td>
+      <td>group C</td>
+      <td>master's degree</td>
+      <td>free/reduced</td>
+      <td>none</td>
+      <td>62</td>
+      <td>82</td>
+      <td>76</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</div>
+<div class="section" id="we-only-extract-the-exam-scores">
+<h2>We only extract the exam scores<a class="headerlink" href="#we-only-extract-the-exam-scores" title="Permalink to this headline">¶</a></h2>
+<p>We will then use the data in our boxplot</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">exam_scores</span> <span class="o">=</span> <span class="n">exam_data</span><span class="p">[[</span><span class="s1">&#39;math score&#39;</span><span class="p">,</span> <span class="s1">&#39;reading score&#39;</span><span class="p">,</span> <span class="s1">&#39;writing score&#39;</span><span class="p">]]</span>
+<span class="n">exam_scores</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>math score</th>
+      <th>reading score</th>
+      <th>writing score</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>69</td>
+      <td>61</td>
+      <td>58</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>47</td>
+      <td>65</td>
+      <td>69</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>66</td>
+      <td>52</td>
+      <td>53</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>88</td>
+      <td>89</td>
+      <td>82</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>62</td>
+      <td>82</td>
+      <td>76</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</div>
+<div class="section" id="examine-the-data">
+<h2>Examine the data<a class="headerlink" href="#examine-the-data" title="Permalink to this headline">¶</a></h2>
+<p>This will give an idea of what our box plot will look like</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">exam_scores</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>math score</th>
+      <th>reading score</th>
+      <th>writing score</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>100.000000</td>
+      <td>100.000000</td>
+      <td>100.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>67.150000</td>
+      <td>69.180000</td>
+      <td>67.780000</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>12.797865</td>
+      <td>13.832607</td>
+      <td>14.874954</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>36.000000</td>
+      <td>34.000000</td>
+      <td>33.000000</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>56.000000</td>
+      <td>60.000000</td>
+      <td>57.750000</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>68.000000</td>
+      <td>69.000000</td>
+      <td>68.500000</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>76.000000</td>
+      <td>80.000000</td>
+      <td>77.250000</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>95.000000</td>
+      <td>99.000000</td>
+      <td>100.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</div>
+<div class="section" id="to-use-the-data-in-a-boxplot-we-convert-it-to-an-array">
+<h2>To use the data in a boxplot, we convert it to an array<a class="headerlink" href="#to-use-the-data-in-a-boxplot-we-convert-it-to-an-array" title="Permalink to this headline">¶</a></h2>
+<p>Numpy is nice enough to eliminate the header row</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">exam_scores_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">exam_scores</span><span class="p">)</span>
+<span class="n">exam_scores_array</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 69,  61,  58],
+       [ 47,  65,  69],
+       [ 66,  52,  53],
+       [ 88,  89,  82],
+       [ 62,  82,  76],
+       [ 47,  69,  60],
+       [ 71,  66,  74],
+       [ 57,  62,  60],
+       [ 60,  67,  65],
+       [ 74,  72,  76],
+       [ 77,  71,  67],
+       [ 69,  79,  83],
+       [ 65,  62,  56],
+       [ 55,  58,  51],
+       [ 78,  88,  91],
+       [ 70,  72,  72],
+       [ 55,  69,  55],
+       [ 68,  68,  62],
+       [ 73,  62,  58],
+       [ 54,  50,  51],
+       [ 81,  76,  77],
+       [ 70,  76,  73],
+       [ 64,  62,  63],
+       [ 51,  66,  63],
+       [ 49,  50,  43],
+       [ 83,  80,  82],
+       [ 86,  92,  81],
+       [ 83,  89,  94],
+       [ 61,  77,  68],
+       [ 55,  50,  44],
+       [ 56,  59,  55],
+       [ 46,  57,  61],
+       [ 68,  60,  52],
+       [ 78,  75,  69],
+       [ 85,  94,  93],
+       [ 95,  99,  95],
+       [ 82,  74,  78],
+       [ 94,  85,  96],
+       [ 64,  71,  68],
+       [ 70,  80,  85],
+       [ 84,  78,  84],
+       [ 62,  81,  73],
+       [ 52,  58,  53],
+       [ 89,  72,  74],
+       [ 64,  63,  63],
+       [ 74,  77,  72],
+       [ 50,  54,  54],
+       [ 86,  76,  82],
+       [ 53,  62,  64],
+       [ 36,  35,  33],
+       [ 64,  81,  75],
+       [ 71,  69,  74],
+       [ 73,  79,  77],
+       [ 80,  81,  72],
+       [ 75,  66,  67],
+       [ 64,  57,  51],
+       [ 68,  87,  77],
+       [ 73,  60,  65],
+       [ 77,  76,  69],
+       [ 85,  89,  85],
+       [ 77,  85,  82],
+       [ 53,  70,  72],
+       [ 48,  43,  42],
+       [ 91,  91, 100],
+       [ 67,  81,  85],
+       [ 74,  87,  88],
+       [ 70,  82,  78],
+       [ 65,  56,  58],
+       [ 75,  67,  63],
+       [ 63,  56,  49],
+       [ 86,  92,  94],
+       [ 76,  87,  85],
+       [ 56,  62,  67],
+       [ 48,  61,  64],
+       [ 67,  62,  60],
+       [ 80,  86,  88],
+       [ 77,  73,  74],
+       [ 51,  58,  53],
+       [ 71,  80,  84],
+       [ 59,  67,  72],
+       [ 69,  62,  57],
+       [ 74,  71,  71],
+       [ 63,  68,  65],
+       [ 68,  54,  50],
+       [ 69,  79,  73],
+       [ 75,  86,  89],
+       [ 79,  81,  74],
+       [ 51,  36,  44],
+       [ 59,  60,  56],
+       [ 49,  55,  49],
+       [ 76,  76,  69],
+       [ 75,  78,  77],
+       [ 54,  45,  43],
+       [ 45,  63,  65],
+       [ 75,  75,  78],
+       [ 56,  59,  61],
+       [ 64,  57,  62],
+       [ 62,  48,  38],
+       [ 44,  34,  36],
+       [ 48,  48,  40]])
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="draw-the-boxplot-to-represent-the-exam-scores">
+<h2>Draw the boxplot to represent the exam scores<a class="headerlink" href="#draw-the-boxplot-to-represent-the-exam-scores" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bp</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">exam_scores_array</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/12_Boxplots_Violinplots_42_0.png" src="../_images/12_Boxplots_Violinplots_42_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="components-of-the-boxplot">
+<h2>Components of the boxplot<a class="headerlink" href="#components-of-the-boxplot" title="Permalink to this headline">¶</a></h2>
+<p>The number of each component should be 3 times what we saw in when we only had one set of data</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bp</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">exam_scores_array</span><span class="p">,</span> 
+                 <span class="n">patch_artist</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/12_Boxplots_Violinplots_44_0.png" src="../_images/12_Boxplots_Violinplots_44_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Number of boxes: &#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">bp</span><span class="p">[</span><span class="s1">&#39;boxes&#39;</span><span class="p">]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Number of whiskers: &#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">bp</span><span class="p">[</span><span class="s1">&#39;whiskers&#39;</span><span class="p">]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Number of caps: &#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">bp</span><span class="p">[</span><span class="s1">&#39;caps&#39;</span><span class="p">]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Number of medians: &#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">bp</span><span class="p">[</span><span class="s1">&#39;medians&#39;</span><span class="p">]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Number of fliers: &#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">bp</span><span class="p">[</span><span class="s1">&#39;fliers&#39;</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of boxes:  3
+Number of whiskers:  6
+Number of caps:  6
+Number of medians:  3
+Number of fliers:  3
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="formatting-this-new-boxplot">
+<h1>Formatting this new boxplot<a class="headerlink" href="#formatting-this-new-boxplot" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="the-colors-to-use-for-the-boxes">
+<h2>The colors to use for the boxes<a class="headerlink" href="#the-colors-to-use-for-the-boxes" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="s1">&#39;grey&#39;</span><span class="p">,</span> <span class="s1">&#39;lawngreen&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="set-the-formats">
+<h2>Set the formats<a class="headerlink" href="#set-the-formats" title="Permalink to this headline">¶</a></h2>
+<p>We don’t do much here - just set the facecolor for the box and the color for the top cap</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bp</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">exam_scores_array</span><span class="p">,</span> 
+                 <span class="n">patch_artist</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">bp</span><span class="p">[</span><span class="s1">&#39;boxes&#39;</span><span class="p">])):</span>
+    
+    <span class="n">bp</span><span class="p">[</span><span class="s1">&#39;boxes&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">facecolor</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+    
+    <span class="n">bp</span><span class="p">[</span><span class="s1">&#39;caps&#39;</span><span class="p">][</span><span class="mi">2</span><span class="o">*</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/12_Boxplots_Violinplots_50_0.png" src="../_images/12_Boxplots_Violinplots_50_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="we-set-the-xtick-value-to-portray-what-the-box-plots-represent">
+<h2>We set the xtick value to portray what the box plots represent<a class="headerlink" href="#we-set-the-xtick-value-to-portray-what-the-box-plots-represent" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bp</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">exam_scores_array</span><span class="p">,</span> 
+                 <span class="n">patch_artist</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">bp</span><span class="p">[</span><span class="s1">&#39;boxes&#39;</span><span class="p">])):</span>
+    
+    <span class="n">bp</span><span class="p">[</span><span class="s1">&#39;boxes&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">facecolor</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+    
+    <span class="n">bp</span><span class="p">[</span><span class="s1">&#39;caps&#39;</span><span class="p">][</span><span class="mi">2</span><span class="o">*</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+    
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;Math&#39;</span><span class="p">,</span> <span class="s1">&#39;Reading&#39;</span><span class="p">,</span> <span class="s1">&#39;Writing&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>([&lt;matplotlib.axis.XTick at 0x11ef4ccf8&gt;,
+  &lt;matplotlib.axis.XTick at 0x11d56b4a8&gt;,
+  &lt;matplotlib.axis.XTick at 0x11ef614a8&gt;],
+ &lt;a list of 3 Text xticklabel objects&gt;)
+</pre></div>
+</div>
+<img alt="../_images/12_Boxplots_Violinplots_52_1.png" src="../_images/12_Boxplots_Violinplots_52_1.png" />
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="violin-plots">
+<h1>Violin Plots<a class="headerlink" href="#violin-plots" title="Permalink to this headline">¶</a></h1>
+<p>These are similar to boxplots, except they can show the density of the data points around a particular value with their widths</p>
+<div class="section" id="exam-score-distribution">
+<h2>Exam score distribution<a class="headerlink" href="#exam-score-distribution" title="Permalink to this headline">¶</a></h2>
+<p>This allows us to visualise how the scores are spread out in each course: <br /></p>
+<ul class="simple">
+<li><p>Math and Writing scores are densest around 70</p></li>
+<li><p>Reading scores have the highest density at arund 60 but density gets only marginally lower all the way up to 80. Density drops significantly below 60</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">vp</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">violinplot</span><span class="p">(</span><span class="n">exam_scores_array</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/12_Boxplots_Violinplots_55_0.png" src="../_images/12_Boxplots_Violinplots_55_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="show-median-and-xticks">
+<h2>Show median and xticks<a class="headerlink" href="#show-median-and-xticks" title="Permalink to this headline">¶</a></h2>
+<p>Use the showmedians parameter to display the median value on the plot (unlike boxplots, it’s not visible by default). <br />
+Set the xticks just as we did in the boxplot</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">vp</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">violinplot</span><span class="p">(</span><span class="n">exam_scores_array</span><span class="p">,</span>
+                    <span class="n">showmedians</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;Math&#39;</span><span class="p">,</span> <span class="s1">&#39;Reading&#39;</span><span class="p">,</span> <span class="s1">&#39;Writing&#39;</span><span class="p">])</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/12_Boxplots_Violinplots_57_0.png" src="../_images/12_Boxplots_Violinplots_57_0.png" />
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="formatting-the-violin-plot">
+<h1>Formatting the violin plot<a class="headerlink" href="#formatting-the-violin-plot" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="we-re-define-the-same-plot-but-oriented-horizontally">
+<h2>We re-define the same plot, but oriented horizontally<a class="headerlink" href="#we-re-define-the-same-plot-but-oriented-horizontally" title="Permalink to this headline">¶</a></h2>
+<p>Note that we now set the yticks to display the subjects rather than xticks. <br />
+We also view the components of the violin plot</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">vp</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">violinplot</span><span class="p">(</span><span class="n">exam_scores_array</span><span class="p">,</span>
+                    <span class="n">showmedians</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                    <span class="n">vert</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;Math&#39;</span><span class="p">,</span> <span class="s1">&#39;Reading&#39;</span><span class="p">,</span> <span class="s1">&#39;Writing&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>([&lt;matplotlib.axis.YTick at 0x11d9ccc88&gt;,
+  &lt;matplotlib.axis.YTick at 0x11d9cc978&gt;,
+  &lt;matplotlib.axis.YTick at 0x11d9e55c0&gt;],
+ &lt;a list of 3 Text yticklabel objects&gt;)
+</pre></div>
+</div>
+<img alt="../_images/12_Boxplots_Violinplots_60_1.png" src="../_images/12_Boxplots_Violinplots_60_1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">vp</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;bodies&#39;: [&lt;matplotlib.collections.PolyCollection at 0x11d4dcbe0&gt;,
+  &lt;matplotlib.collections.PolyCollection at 0x11d4dc898&gt;,
+  &lt;matplotlib.collections.PolyCollection at 0x11d4dcac8&gt;],
+ &#39;cbars&#39;: &lt;matplotlib.collections.LineCollection at 0x11ee62320&gt;,
+ &#39;cmaxes&#39;: &lt;matplotlib.collections.LineCollection at 0x11d4dcc18&gt;,
+ &#39;cmedians&#39;: &lt;matplotlib.collections.LineCollection at 0x11ee62f60&gt;,
+ &#39;cmins&#39;: &lt;matplotlib.collections.LineCollection at 0x11d4dcda0&gt;}
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="not-exactly-the-same-as-a-boxplot">
+<h2>Not exactly the same as a Boxplot<a class="headerlink" href="#not-exactly-the-same-as-a-boxplot" title="Permalink to this headline">¶</a></h2>
+<p>Only the “bodies” component is a list and can be compared to the “boxes” in a Boxplot</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">vp</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">violinplot</span><span class="p">(</span><span class="n">exam_scores_array</span><span class="p">,</span>
+                    <span class="n">showmedians</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                    <span class="n">vert</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;Math&#39;</span><span class="p">,</span> <span class="s1">&#39;Reading&#39;</span><span class="p">,</span> <span class="s1">&#39;Writing&#39;</span><span class="p">])</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">vp</span><span class="p">[</span><span class="s1">&#39;bodies&#39;</span><span class="p">])):</span>
+    
+    <span class="n">vp</span><span class="p">[</span><span class="s1">&#39;bodies&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">facecolor</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/12_Boxplots_Violinplots_63_0.png" src="../_images/12_Boxplots_Violinplots_63_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="the-other-violinplot-components">
+<h2>The other Violinplot components<a class="headerlink" href="#the-other-violinplot-components" title="Permalink to this headline">¶</a></h2>
+<p>Everything else is common for the entire plot - so we can’t customize them individually for each violin (unlike in a Boxplot). We specify some formatting for each of these components which will apply to every violin</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">vp</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">violinplot</span><span class="p">(</span><span class="n">exam_scores_array</span><span class="p">,</span>
+                    <span class="n">showmedians</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                    <span class="n">vert</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;Math&#39;</span><span class="p">,</span> <span class="s1">&#39;Reading&#39;</span><span class="p">,</span> <span class="s1">&#39;Writing&#39;</span><span class="p">])</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">vp</span><span class="p">[</span><span class="s1">&#39;bodies&#39;</span><span class="p">])):</span>
+    <span class="n">vp</span><span class="p">[</span><span class="s1">&#39;bodies&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">facecolor</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> 
+    
+<span class="n">vp</span><span class="p">[</span><span class="s1">&#39;cmaxes&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;maroon&#39;</span><span class="p">)</span>
+
+<span class="n">vp</span><span class="p">[</span><span class="s1">&#39;cmins&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+
+<span class="n">vp</span><span class="p">[</span><span class="s1">&#39;cbars&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;:&#39;</span><span class="p">)</span>
+
+<span class="n">vp</span><span class="p">[</span><span class="s1">&#39;cmedians&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[None]
+</pre></div>
+</div>
+<img alt="../_images/12_Boxplots_Violinplots_65_1.png" src="../_images/12_Boxplots_Violinplots_65_1.png" />
+</div>
+</div>
+</div>
+<div class="section" id="add-a-legend-to-the-plot">
+<h2>Add a legend to the plot<a class="headerlink" href="#add-a-legend-to-the-plot" title="Permalink to this headline">¶</a></h2>
+<p>When adding a legend we pass the following data: <br /></p>
+<ul class="simple">
+<li><p><b>handles:</b> These represent Artists(lines/patches) in the plot for which legends are needed (the colors for these are automatically picked up by Matplotlib). Here we only include 2 of the 3 Patches in the legend</p></li>
+<li><p><b>labels:</b> These are the labels for the corresponding handles</p></li>
+<li><p><b>loc:</b> This is the location of the legend - we use this in conjunction with the bbox_to_anchor</p></li>
+<li><p><b>bbox_to_anchor:</b> The axis coordinates (on a 1x1 scale where (1,1) is the top right of the axis) at which the legend will be anchored from the “loc”. In our example, the “top left” of the legend will be anchored to position (1,1) i.e. the top right of the axis</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">vp</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">violinplot</span><span class="p">(</span><span class="n">exam_scores_array</span><span class="p">,</span>
+                    <span class="n">showmedians</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                    <span class="n">vert</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;Math&#39;</span><span class="p">,</span> <span class="s1">&#39;Reading&#39;</span><span class="p">,</span> <span class="s1">&#39;Writing&#39;</span><span class="p">])</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">vp</span><span class="p">[</span><span class="s1">&#39;bodies&#39;</span><span class="p">])):</span>
+    <span class="n">vp</span><span class="p">[</span><span class="s1">&#39;bodies&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">facecolor</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> 
+    
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">handles</span> <span class="o">=</span> <span class="p">[</span><span class="n">vp</span><span class="p">[</span><span class="s1">&#39;bodies&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">vp</span><span class="p">[</span><span class="s1">&#39;bodies&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">]],</span>
+           <span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Math&#39;</span><span class="p">,</span> <span class="s1">&#39;Reading&#39;</span><span class="p">],</span> 
+           <span class="n">loc</span> <span class="o">=</span> <span class="s1">&#39;upper left&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x11f7ec390&gt;
+</pre></div>
+</div>
+<img alt="../_images/12_Boxplots_Violinplots_67_1.png" src="../_images/12_Boxplots_Violinplots_67_1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">vp</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">violinplot</span><span class="p">(</span><span class="n">exam_scores_array</span><span class="p">,</span>
+                    <span class="n">showmedians</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                    <span class="n">vert</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;Math&#39;</span><span class="p">,</span> <span class="s1">&#39;Reading&#39;</span><span class="p">,</span> <span class="s1">&#39;Writing&#39;</span><span class="p">])</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">vp</span><span class="p">[</span><span class="s1">&#39;bodies&#39;</span><span class="p">])):</span>
+    <span class="n">vp</span><span class="p">[</span><span class="s1">&#39;bodies&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">facecolor</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> 
+    
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">handles</span> <span class="o">=</span> <span class="p">[</span><span class="n">vp</span><span class="p">[</span><span class="s1">&#39;bodies&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">vp</span><span class="p">[</span><span class="s1">&#39;bodies&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">]],</span>
+           <span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Math&#39;</span><span class="p">,</span> <span class="s1">&#39;Reading&#39;</span><span class="p">],</span> 
+           <span class="n">loc</span> <span class="o">=</span> <span class="s1">&#39;upper left&#39;</span><span class="p">,</span>
+           <span class="n">bbox_to_anchor</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x11d56e198&gt;
+</pre></div>
+</div>
+<img alt="../_images/12_Boxplots_Violinplots_68_1.png" src="../_images/12_Boxplots_Violinplots_68_1.png" />
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "hossainlab/dataviz",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./matplotlib"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            
+
+
+
+<div class='prev-next-bottom'>
+    
+
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Jubayer Hossain<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>

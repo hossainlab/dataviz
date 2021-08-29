@@ -1,0 +1,674 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>VISUALISING LINEAR RELATIONSHIPS ACROSS DATASETS &#8212; Data Visualization with Python</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet" />
+  <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.e8f53015daec13862f6db5e763c41738.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe,.cell"
+        const thebe_selector_input = "pre,.cell_input div.highlight"
+        const thebe_selector_output = ".output,.cell_output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="shortcut icon" href="../_static/logo.jpg"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      <img src="../_static/logo.jpg" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Data Visualization with Python</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <p class="caption">
+ <span class="caption-text">
+  Matplotlib
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../matplotlib/00-Intro%20to%20Data%20Visualization.html">
+   Intro to Data Visualization with Matplotlib
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../matplotlib/02_InteractiveBackends.html">
+     Backends
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/seaborn/3-VisualizingLinearRelationships.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/hossainlab/dataviz/"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/hossainlab/dataviz/master?urlpath=tree/book/seaborn/3-VisualizingLinearRelationships.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/hossainlab/dataviz/blob/master/book/seaborn/3-VisualizingLinearRelationships.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        <button type="button" class="btn btn-secondary topbarbtn"
+            onclick="initThebeSBT()" title="Launch Thebe" data-toggle="tooltip" data-placement="left"><i
+                class="fas fa-play"></i><span style="margin-left: .4em;">Live Code</span></button>
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#for-a-better-estimate-we-could-do-one-of-the-below">
+   For a better estimate, we could do one of the below
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#fitting-different-kinds-of-models">
+   Fitting Different kinds of models
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#what-if-we-want-to-compare-and-contrast-more-than-just-two-parameters">
+     What if we want to compare and contrast more than just two parameters?
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#instead-of-adding-a-row-attribute-let-us-replace-the-col-attribute-by-the-row-attribute">
+     Instead of adding a row attribute, let us replace the col attribute by the row attribute.
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#an-alternative-to-lmplot">
+     An alternative to lmplot()
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#seaborn-offers-another-function-for-plotting-regression-plots-called-the-regplot">
+       Seaborn offers another function for plotting regression plots - called the regplot.
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#illustrating-sending-other-data-formats-into-the-regplot-we-expect-the-same-plot-as-above">
+       Illustrating sending other data formats into the regplot. We expect the same plot as above
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#controlling-the-size-and-shape-of-the-plot">
+   Controlling the size and shape of the plot
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#for-the-reg-plot">
+     For the reg plot,
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#for-the-lmplot">
+     For the lmplot
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#can-we-use-the-regression-plot-to-create-interesting-scenarios-in-our-bivariate-distributions">
+     Can we use the regression plot to create interesting scenarios in our bivariate distributions?
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="visualising-linear-relationships-across-datasets">
+<h1>VISUALISING LINEAR RELATIONSHIPS ACROSS DATASETS<a class="headerlink" href="#visualising-linear-relationships-across-datasets" title="Permalink to this headline">¶</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wine_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;datasets/winequality-white.csv&#39;</span><span class="p">,</span> 
+                        <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Fixed Acidity&quot;</span><span class="p">,</span> <span class="s2">&quot;Volatile Acidity&quot;</span><span class="p">,</span> <span class="s2">&quot;Citric Acid&quot;</span><span class="p">,</span> <span class="s2">&quot;Residual Sugar&quot;</span><span class="p">,</span>
+                                <span class="s2">&quot;Chlorides&quot;</span><span class="p">,</span> <span class="s2">&quot;Free Sulfur Dioxide&quot;</span><span class="p">,</span> <span class="s2">&quot;Total Sulfur Dioxide&quot;</span><span class="p">,</span> <span class="s2">&quot;Density&quot;</span><span class="p">,</span> 
+                                <span class="s2">&quot;pH&quot;</span><span class="p">,</span> <span class="s2">&quot;Sulphates&quot;</span><span class="p">,</span> <span class="s2">&quot;Alcohol&quot;</span><span class="p">,</span> <span class="s2">&quot;Quality&quot;</span><span class="p">],</span>
+                        <span class="n">skiprows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                        <span class="n">sep</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;\s*;\s*&#39;</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s1">&#39;python&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Sometimes, when working with bivariate plots, it is not clear as to how exactly one variable varies with respect to another. Thus, it becomes easier to study the variation in one variable with respect to another independent variable. In statistics, this is called the regression plot.</p>
+<p>Let us first look at the lmplot() function, a function in seaborn used to visualize a linear relationship as determined through regression. Maybe this will give us more clarity about our wine samples.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">lmplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;Residual Sugar&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Density&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">wine_data</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">aspect</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x1a081cef60&gt;
+</pre></div>
+</div>
+<img alt="../_images/3-VisualizingLinearRelationships_4_1.png" src="../_images/3-VisualizingLinearRelationships_4_1.png" />
+</div>
+</div>
+<p>From the regression plot, the residual sugar content seems to have a somewhat direct relationship with the density of the wine sample.</p>
+<p>From the plot, we observe that:</p>
+<ul class="simple">
+<li><p>The lmplot draws a scatter plot of the input variables</p></li>
+<li><p>The functions fit the regression model y~x</p></li>
+<li><p>The regression line is plotted</p></li>
+<li><p>There is 95% confidence interval for the regression that can be observed as a shaded region around the regression line</p></li>
+</ul>
+<p><em>A confidence interval gives an estimated range of values which is likely to include an unknown population parameter, the estimated range being calculated from a given set of sample data. (Definition taken from Valerie J. Easton and John H. McColl’s Statistics Glossary v1.1)</em>
+<a class="reference external" href="https://www.investopedia.com/terms/c/confidenceinterval.asp">https://www.investopedia.com/terms/c/confidenceinterval.asp</a></p>
+<p>Let us try to understand the relationship between the alcohol content and the quality of the wine.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">lmplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;Quality&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Alcohol&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">wine_data</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x1a161c9f60&gt;
+</pre></div>
+</div>
+<img alt="../_images/3-VisualizingLinearRelationships_10_1.png" src="../_images/3-VisualizingLinearRelationships_10_1.png" />
+</div>
+</div>
+<p>As Quality takes only certain fixed values, we see that the scatter plot is more like a set of lines rather than a set of points that guides the regression line.</p>
+<div class="section" id="for-a-better-estimate-we-could-do-one-of-the-below">
+<h2>For a better estimate, we could do one of the below<a class="headerlink" href="#for-a-better-estimate-we-could-do-one-of-the-below" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>add some jitter to the points (the regression line fit is not affected by this)</p></li>
+<li><p>Consider a statistical analysis of the points, and replace the plot by its central tendency, along with permissible margins</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Adding jitter to the scatter plots</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">lmplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;Quality&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Alcohol&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">wine_data</span><span class="p">,</span> <span class="n">x_jitter</span><span class="o">=</span><span class="mf">.1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x1a16104c88&gt;
+</pre></div>
+</div>
+<img alt="../_images/3-VisualizingLinearRelationships_12_1.png" src="../_images/3-VisualizingLinearRelationships_12_1.png" />
+</div>
+</div>
+<p>You can see that the added jitter has taken effect in the form of shifting the points a little along the x-axis.</p>
+<p>For the central tendency approach, we need a statistical function that can estimate the mean value of the given set of values. This can be obtained from Numpy library, which is a Python scientific computing package that adds support for large multi dimensional arrays and matrices.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#importing numpy</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1">#Collapsing the data points in each bin and plotting the central tendency</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">lmplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;Quality&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Alcohol&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">wine_data</span><span class="p">,</span> <span class="n">x_estimator</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x1a1607e5c0&gt;
+</pre></div>
+</div>
+<img alt="../_images/3-VisualizingLinearRelationships_14_1.png" src="../_images/3-VisualizingLinearRelationships_14_1.png" />
+</div>
+</div>
+<p>From the above graph, we know that there is a good balance of wine samples across various alcohol levels, with a quality of 6.</p>
+</div>
+<div class="section" id="fitting-different-kinds-of-models">
+<h2>Fitting Different kinds of models<a class="headerlink" href="#fitting-different-kinds-of-models" title="Permalink to this headline">¶</a></h2>
+<p><strong>The data we have dealt with so far follows linear relationships with respect to the regression line.
+What if the plots follows different order relationships? Can we still use the same method to obtain regression plots?</strong></p>
+<p>lmplot has parameters that can be set to study such distributions. The regression line is then plotted based on the way the distribution is handled, and the curve is a better fit to the distribution.
+A few examples of such distributions are parabolic distributions, binary data representations etc.</p>
+<p>In such cases, a function called residplot can be used to get a rough sketch to see if the linear regression is appropriate for the distribution. If there are structures in the resulting graph, rather than points spread around the regression line, we need to consider applying an alternative regression method.</p>
+<div class="section" id="what-if-we-want-to-compare-and-contrast-more-than-just-two-parameters">
+<h3>What if we want to compare and contrast more than just two parameters?<a class="headerlink" href="#what-if-we-want-to-compare-and-contrast-more-than-just-two-parameters" title="Permalink to this headline">¶</a></h3>
+<p>lmplot combines regplot() and Facetgrid(), an object that links Pandas DataFrame to a matplotlib figure, which makes it possible to visualise interactions with upto 3 additional categories. The plots can be differentiated by colour/markers, additional rows and columns.<br>
+<em>Lets use this to try and find the effect every component has on the pH level of the wine sample</em></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># We plot the relationship between Fixed Acidity content in the wine sample to its pH value</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">lmplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;pH&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Fixed Acidity&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">wine_data</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x1a15f939b0&gt;
+</pre></div>
+</div>
+<img alt="../_images/3-VisualizingLinearRelationships_24_1.png" src="../_images/3-VisualizingLinearRelationships_24_1.png" />
+</div>
+</div>
+<p>Let us create a column of graphs which varies by the quality of the wine sample.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># We thus have as many columns as the number of different quality values.</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">lmplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;pH&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Fixed Acidity&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">wine_data</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s2">&quot;Quality&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x1a15f08c50&gt;
+</pre></div>
+</div>
+<img alt="../_images/3-VisualizingLinearRelationships_26_1.png" src="../_images/3-VisualizingLinearRelationships_26_1.png" />
+</div>
+</div>
+<p>We add colours to the plot based on the Alcohol content.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Thus we get a set of shaded plots. </span>
+<span class="n">sns</span><span class="o">.</span><span class="n">lmplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;pH&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Fixed Acidity&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">wine_data</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s2">&quot;Quality&quot;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;Alcohol&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x1a205c9390&gt;
+</pre></div>
+</div>
+<img alt="../_images/3-VisualizingLinearRelationships_28_1.png" src="../_images/3-VisualizingLinearRelationships_28_1.png" />
+</div>
+</div>
+<p>From the colors, we see that higher alcohol content samples dominate a quality of 9, while mid range dominates quality 4.</p>
+<p>Let us add a row of wine density,</p>
+</div>
+<div class="section" id="instead-of-adding-a-row-attribute-let-us-replace-the-col-attribute-by-the-row-attribute">
+<h3>Instead of adding a row attribute, let us replace the col attribute by the row attribute.<a class="headerlink" href="#instead-of-adding-a-row-attribute-let-us-replace-the-col-attribute-by-the-row-attribute" title="Permalink to this headline">¶</a></h3>
+<p>Both can be used together to create a matrix of graphs</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">lmplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;pH&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Fixed Acidity&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">wine_data</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;Alcohol&quot;</span><span class="p">,</span> <span class="n">row</span><span class="o">=</span><span class="s2">&quot;Quality&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x11228c908&gt;
+</pre></div>
+</div>
+<img alt="../_images/3-VisualizingLinearRelationships_32_1.png" src="../_images/3-VisualizingLinearRelationships_32_1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Thus we get a set of shaded plots. </span>
+<span class="n">sns</span><span class="o">.</span><span class="n">lmplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;pH&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Fixed Acidity&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">wine_data</span><span class="p">,</span> <span class="n">row</span><span class="o">=</span><span class="s2">&quot;Quality&quot;</span><span class="p">,</span><span class="n">hue</span><span class="o">=</span><span class="s2">&quot;Alcohol&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x107fa8ba8&gt;
+</pre></div>
+</div>
+<img alt="../_images/3-VisualizingLinearRelationships_33_1.png" src="../_images/3-VisualizingLinearRelationships_33_1.png" />
+</div>
+</div>
+</div>
+<div class="section" id="an-alternative-to-lmplot">
+<h3>An alternative to lmplot()<a class="headerlink" href="#an-alternative-to-lmplot" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="seaborn-offers-another-function-for-plotting-regression-plots-called-the-regplot">
+<h4>Seaborn offers another function for plotting regression plots - called the regplot.<a class="headerlink" href="#seaborn-offers-another-function-for-plotting-regression-plots-called-the-regplot" title="Permalink to this headline">¶</a></h4>
+<p>Let’s plot one using the regplot() function</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">regplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;Alcohol&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Density&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">wine_data</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x1a1ba1dc88&gt;
+</pre></div>
+</div>
+<img alt="../_images/3-VisualizingLinearRelationships_38_1.png" src="../_images/3-VisualizingLinearRelationships_38_1.png" />
+</div>
+</div>
+<p>Isn’t this identical to the lmplot graph output? <br>
+What are the differences between the regplot and the lmplot functions?</p>
+<ul class="simple">
+<li><p>Visibly, the figure shapes are different. This is because regplot is an axes-level function, meaning you can specify the axes on which the graph is drawn. Quoting from the official documentation, “This means that you can make multi-panel figures yourself and control exactly where the regression plot goes. If no axes object is explictly provided, it simply uses the “currently active” axes, which is why the default plot has the same size and shape as most other matplotlib functions.”</p></li>
+<li><p>regplot() accepts variables in different formats (numpy arrays, pandas series, dataframe variable references)</p></li>
+<li><p>lmplot() needs data as a parameter and strings x and y</p></li>
+<li><p>regplot has a subset of the features provided by lmplot()</p></li>
+<li><p>The other important difference is that lmplot allows you to compare more than just two variables, as we saw above.</p></li>
+</ul>
+</div>
+<div class="section" id="illustrating-sending-other-data-formats-into-the-regplot-we-expect-the-same-plot-as-above">
+<h4>Illustrating sending other data formats into the regplot. We expect the same plot as above<a class="headerlink" href="#illustrating-sending-other-data-formats-into-the-regplot-we-expect-the-same-plot-as-above" title="Permalink to this headline">¶</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">regplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">wine_data</span><span class="p">[</span><span class="s1">&#39;Alcohol&#39;</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="n">wine_data</span><span class="p">[</span><span class="s1">&#39;Density&#39;</span><span class="p">],</span> <span class="n">data</span><span class="o">=</span><span class="n">wine_data</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x1a0859e9b0&gt;
+</pre></div>
+</div>
+<img alt="../_images/3-VisualizingLinearRelationships_41_1.png" src="../_images/3-VisualizingLinearRelationships_41_1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">regplot</span><span class="p">(</span><span class="n">wine_data</span><span class="o">.</span><span class="n">Alcohol</span><span class="p">,</span> <span class="n">wine_data</span><span class="o">.</span><span class="n">Density</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">wine_data</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x1a081cebe0&gt;
+</pre></div>
+</div>
+<img alt="../_images/3-VisualizingLinearRelationships_42_1.png" src="../_images/3-VisualizingLinearRelationships_42_1.png" />
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="controlling-the-size-and-shape-of-the-plot">
+<h2>Controlling the size and shape of the plot<a class="headerlink" href="#controlling-the-size-and-shape-of-the-plot" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="for-the-reg-plot">
+<h3>For the reg plot,<a class="headerlink" href="#for-the-reg-plot" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#We create a figure object to control the size. </span>
+<span class="c1">#The parameters inside the figsize denote the lengths of the box alloted for the plot</span>
+<span class="n">f</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+
+<span class="c1">#Pass the defined axis as the axis to be used for the regplot</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">regplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;Residual Sugar&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Density&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">wine_data</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/3-VisualizingLinearRelationships_45_0.png" src="../_images/3-VisualizingLinearRelationships_45_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="for-the-lmplot">
+<h3>For the lmplot<a class="headerlink" href="#for-the-lmplot" title="Permalink to this headline">¶</a></h3>
+<p>We use the size and aspect parameters. These apply to each facet in the plot, not the complete plotting area.
+size refers to the height; aspect*size gives the width of each facet in inches</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">lmplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;Residual Sugar&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Density&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">wine_data</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">aspect</span><span class="o">=</span><span class="mi">2</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/3-VisualizingLinearRelationships_47_0.png" src="../_images/3-VisualizingLinearRelationships_47_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="can-we-use-the-regression-plot-to-create-interesting-scenarios-in-our-bivariate-distributions">
+<h3>Can we use the regression plot to create interesting scenarios in our bivariate distributions?<a class="headerlink" href="#can-we-use-the-regression-plot-to-create-interesting-scenarios-in-our-bivariate-distributions" title="Permalink to this headline">¶</a></h3>
+<p>With the jointplot, we can use regplot to show the linear regression fit on the joint axes</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># We have simply added the kind=reg parameter to the jointplot we created earlier.</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">jointplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;Free Sulfur Dioxide&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Total Sulfur Dioxide&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">wine_data</span><span class="p">,</span> 
+              <span class="n">xlim</span><span class="o">=</span><span class="p">{</span><span class="o">-</span><span class="mi">20</span><span class="p">,</span><span class="mi">150</span><span class="p">},</span> <span class="n">ylim</span><span class="o">=</span><span class="p">{</span><span class="o">-</span><span class="mi">20</span><span class="p">,</span><span class="mi">300</span><span class="p">},</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;reg&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.JointGrid at 0x1a24876518&gt;
+</pre></div>
+</div>
+<img alt="../_images/3-VisualizingLinearRelationships_51_1.png" src="../_images/3-VisualizingLinearRelationships_51_1.png" />
+</div>
+</div>
+<p>With the pairplot, regplot can be used to show the linear relationship between variables in the dataset</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#We have used the pairplot we created earlier but tweaked the x and y variables to get a more compact graph, </span>
+<span class="c1">#changed the size and aspect ratio, and added a kind parameter.</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">pairplot</span><span class="p">(</span><span class="n">wine_data</span><span class="p">,</span> 
+             <span class="n">size</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">aspect</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span> 
+             <span class="n">x_vars</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Fixed Acidity&quot;</span><span class="p">,</span><span class="s2">&quot;Volatile Acidity&quot;</span><span class="p">,</span><span class="s2">&quot;Citric Acid&quot;</span><span class="p">],</span>
+             <span class="n">y_vars</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Residual Sugar&quot;</span><span class="p">],</span>
+             <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;reg&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.PairGrid at 0x1a246a6080&gt;
+</pre></div>
+</div>
+<img alt="../_images/3-VisualizingLinearRelationships_53_1.png" src="../_images/3-VisualizingLinearRelationships_53_1.png" />
+</div>
+</div>
+<p>The graphs show he relation between Fixed acidity, volatile acidity and citric acid with residual sugar in the wine samples.
+<em>Observe that unlike the lmplot, this creates separate plots for each set of variables.</em></p>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "hossainlab/dataviz",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./seaborn"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            
+
+
+
+<div class='prev-next-bottom'>
+    
+
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Jubayer Hossain<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>

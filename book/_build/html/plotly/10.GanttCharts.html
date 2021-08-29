@@ -1,0 +1,701 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>A Gantt chart provides a graphical illustration of a schedule that helps to plan, coordinate, and track specific tasks in a project. &#8212; Data Visualization with Python</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet" />
+  <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.e8f53015daec13862f6db5e763c41738.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe,.cell"
+        const thebe_selector_input = "pre,.cell_input div.highlight"
+        const thebe_selector_output = ".output,.cell_output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="shortcut icon" href="../_static/logo.jpg"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      <img src="../_static/logo.jpg" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Data Visualization with Python</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <p class="caption">
+ <span class="caption-text">
+  Matplotlib
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../matplotlib/00-Intro%20to%20Data%20Visualization.html">
+   Intro to Data Visualization with Matplotlib
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../matplotlib/02_InteractiveBackends.html">
+     Backends
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/plotly/10.GanttCharts.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/hossainlab/dataviz/"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/hossainlab/dataviz/master?urlpath=tree/book/plotly/10.GanttCharts.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/hossainlab/dataviz/blob/master/book/plotly/10.GanttCharts.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        <button type="button" class="btn btn-secondary topbarbtn"
+            onclick="initThebeSBT()" title="Launch Thebe" data-toggle="tooltip" data-placement="left"><i
+                class="fas fa-play"></i><span style="margin-left: .4em;">Live Code</span></button>
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#import-plotly-s-figure-factory">
+   Import Plotly’s figure factory
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#define-a-simple-schedule">
+   Define a simple schedule
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#plot-the-gantt-chart">
+   Plot the Gantt chart
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#using-color-scales">
+   Using Color Scales
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#numeric-data-represented-with-a-color-scale">
+   Numeric data represented with a color scale
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#define-the-gantt-chart">
+     Define the Gantt chart
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#color-scales-to-represent-string-categories">
+   Color Scales to represent string categories
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#import-a-csv-file-containing-a-schedule">
+     Import a CSV file containing a schedule
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#define-a-color-map">
+     Define a color map
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#draw-the-gantt-chart">
+     Draw the Gantt Chart
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#alternatively-we-use-a-color-list">
+     Alternatively, we use a color list
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#grouping-tasks">
+     Grouping tasks
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="a-gantt-chart-provides-a-graphical-illustration-of-a-schedule-that-helps-to-plan-coordinate-and-track-specific-tasks-in-a-project">
+<h1>A Gantt chart provides a graphical illustration of a schedule that helps to plan, coordinate, and track specific tasks in a project.<a class="headerlink" href="#a-gantt-chart-provides-a-graphical-illustration-of-a-schedule-that-helps-to-plan-coordinate-and-track-specific-tasks-in-a-project" title="Permalink to this headline">¶</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">plotly.plotly</span> <span class="k">as</span> <span class="nn">py</span>
+<span class="kn">import</span> <span class="nn">plotly.offline</span> <span class="k">as</span> <span class="nn">offline</span>
+
+<span class="n">offline</span><span class="o">.</span><span class="n">init_notebook_mode</span><span class="p">(</span><span class="n">connected</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><script>requirejs.config({paths: { 'plotly': ['https://cdn.plot.ly/plotly-latest.min']},});if(!window.Plotly) {{require(['plotly'],function(plotly) {window.Plotly=plotly;});}}</script></div></div>
+</div>
+<div class="section" id="import-plotly-s-figure-factory">
+<h2>Import Plotly’s figure factory<a class="headerlink" href="#import-plotly-s-figure-factory" title="Permalink to this headline">¶</a></h2>
+<p>This is the package which contains the Gantt chart</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">plotly.figure_factory</span> <span class="k">as</span> <span class="nn">ff</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="define-a-simple-schedule">
+<h2>Define a simple schedule<a class="headerlink" href="#define-a-simple-schedule" title="Permalink to this headline">¶</a></h2>
+<p>The fields which are required to plot a Gantt Chart are:</p>
+<ul class="simple">
+<li><p><b>Task</b>, which is a string</p></li>
+<li><p><b>Start</b> which is the task’s start time expressed in some date format</p></li>
+<li><p><b>Finish</b> which is the end time for the task, also in some date format</p></li>
+</ul>
+<p>Note that the times for the tasks can overlap</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tasks</span> <span class="o">=</span> <span class="p">[</span><span class="nb">dict</span><span class="p">(</span><span class="n">Task</span><span class="o">=</span><span class="s1">&#39;Task 1&#39;</span><span class="p">,</span> 
+              <span class="n">Start</span><span class="o">=</span><span class="s1">&#39;2018-01-01&#39;</span><span class="p">,</span> 
+              <span class="n">Finish</span><span class="o">=</span><span class="s1">&#39;2018-02-28&#39;</span><span class="p">),</span>
+         
+         <span class="nb">dict</span><span class="p">(</span><span class="n">Task</span><span class="o">=</span><span class="s1">&#39;Task 2&#39;</span><span class="p">,</span> 
+              <span class="n">Start</span><span class="o">=</span><span class="s1">&#39;2018-03-05&#39;</span><span class="p">,</span> 
+              <span class="n">Finish</span><span class="o">=</span><span class="s1">&#39;2018-05-15&#39;</span><span class="p">),</span>
+         
+         <span class="nb">dict</span><span class="p">(</span><span class="n">Task</span><span class="o">=</span><span class="s1">&#39;Task 3&#39;</span><span class="p">,</span> 
+              <span class="n">Start</span><span class="o">=</span><span class="s1">&#39;2018-05-01&#39;</span><span class="p">,</span> 
+              <span class="n">Finish</span><span class="o">=</span><span class="s1">&#39;2018-06-30&#39;</span><span class="p">)]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="plot-the-gantt-chart">
+<h2>Plot the Gantt chart<a class="headerlink" href="#plot-the-gantt-chart" title="Permalink to this headline">¶</a></h2>
+<p>Use the figure factory to generate a Gantt Chart figure with our list of tasks</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">ff</span><span class="o">.</span><span class="n">create_gantt</span><span class="p">(</span><span class="n">tasks</span><span class="p">)</span>
+
+<span class="n">offline</span><span class="o">.</span><span class="n">iplot</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div id="b4c67b33-3440-44d3-9c7a-d33c7b4583bc" style="height: 600px; width: 900px;" class="plotly-graph-div"></div><script type="text/javascript">require(["plotly"], function(Plotly) { window.PLOTLYENV=window.PLOTLYENV || {};window.PLOTLYENV.BASE_URL="https://plot.ly";Plotly.newPlot("b4c67b33-3440-44d3-9c7a-d33c7b4583bc", [{"type": "scatter", "x": ["2018-01-01", "2018-02-28"], "y": [0, 0], "name": "", "marker": {"color": "white"}}, {"type": "scatter", "x": ["2018-03-05", "2018-05-15"], "y": [1, 1], "name": "", "marker": {"color": "white"}}, {"type": "scatter", "x": ["2018-05-01", "2018-06-30"], "y": [2, 2], "name": "", "marker": {"color": "white"}}], {"title": "Gantt Chart", "showlegend": false, "height": 600, "width": 900, "shapes": [{"x0": "2018-01-01", "x1": "2018-02-28", "type": "rect", "xref": "x", "yref": "y", "opacity": 1, "line": {"width": 0}, "y0": -0.2, "y1": 0.2, "fillcolor": "rgb(31, 119, 180)"}, {"x0": "2018-03-05", "x1": "2018-05-15", "type": "rect", "xref": "x", "yref": "y", "opacity": 1, "line": {"width": 0}, "y0": 0.8, "y1": 1.2, "fillcolor": "rgb(255, 127, 14)"}, {"x0": "2018-05-01", "x1": "2018-06-30", "type": "rect", "xref": "x", "yref": "y", "opacity": 1, "line": {"width": 0}, "y0": 1.8, "y1": 2.2, "fillcolor": "rgb(44, 160, 44)"}], "hovermode": "closest", "yaxis": {"showgrid": false, "ticktext": ["Task 1", "Task 2", "Task 3"], "tickvals": [0, 1, 2], "range": [-1, 4], "autorange": false, "zeroline": false}, "xaxis": {"showgrid": false, "zeroline": false, "rangeselector": {"buttons": [{"count": 7, "label": "1w", "step": "day", "stepmode": "backward"}, {"count": 1, "label": "1m", "step": "month", "stepmode": "backward"}, {"count": 6, "label": "6m", "step": "month", "stepmode": "backward"}, {"count": 1, "label": "YTD", "step": "year", "stepmode": "todate"}, {"count": 1, "label": "1y", "step": "year", "stepmode": "backward"}, {"step": "all"}]}, "type": "date"}}, {"showLink": true, "linkText": "Export to plot.ly"})});</script></div></div>
+</div>
+</div>
+<div class="section" id="using-color-scales">
+<h2>Using Color Scales<a class="headerlink" href="#using-color-scales" title="Permalink to this headline">¶</a></h2>
+<p>Color scales can be used in Gantt charts to represent information</p>
+</div>
+<div class="section" id="numeric-data-represented-with-a-color-scale">
+<h2>Numeric data represented with a color scale<a class="headerlink" href="#numeric-data-represented-with-a-color-scale" title="Permalink to this headline">¶</a></h2>
+<p>By using a color scale, we can portray how much of a task is completed</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tasks</span> <span class="o">=</span> <span class="p">[</span><span class="nb">dict</span><span class="p">(</span><span class="n">Task</span><span class="o">=</span><span class="s1">&#39;Task 1&#39;</span><span class="p">,</span> 
+              <span class="n">Start</span><span class="o">=</span><span class="s1">&#39;2018-01-01&#39;</span><span class="p">,</span> 
+              <span class="n">Finish</span><span class="o">=</span><span class="s1">&#39;2018-02-28&#39;</span><span class="p">,</span>
+              <span class="n">Complete</span><span class="o">=</span><span class="mi">100</span><span class="p">),</span>
+         
+         <span class="nb">dict</span><span class="p">(</span><span class="n">Task</span><span class="o">=</span><span class="s1">&#39;Task 2&#39;</span><span class="p">,</span> 
+              <span class="n">Start</span><span class="o">=</span><span class="s1">&#39;2018-03-05&#39;</span><span class="p">,</span> 
+              <span class="n">Finish</span><span class="o">=</span><span class="s1">&#39;2018-04-15&#39;</span><span class="p">,</span>
+              <span class="n">Complete</span><span class="o">=</span><span class="mi">60</span><span class="p">),</span>
+         
+         <span class="nb">dict</span><span class="p">(</span><span class="n">Task</span><span class="o">=</span><span class="s1">&#39;Task 3&#39;</span><span class="p">,</span> 
+              <span class="n">Start</span><span class="o">=</span><span class="s1">&#39;2018-04-15&#39;</span><span class="p">,</span> 
+              <span class="n">Finish</span><span class="o">=</span><span class="s1">&#39;2018-06-30&#39;</span><span class="p">,</span>
+              <span class="n">Complete</span><span class="o">=</span><span class="mi">20</span><span class="p">)]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="define-the-gantt-chart">
+<h3>Define the Gantt chart<a class="headerlink" href="#define-the-gantt-chart" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>The <b>colors</b> attribute takes in the name of a built-in color scale or a list of RGB or Hexademical numbers</p></li>
+<li><p><b>index_col</b> is used to specify which field should be represented using the color scale</p></li>
+<li><p><b>show_colorbar</b> can be set to view the color scale as a reference</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">ff</span><span class="o">.</span><span class="n">create_gantt</span><span class="p">(</span><span class="n">tasks</span><span class="p">,</span> 
+                      <span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;Gantt Chart with a color scale&#39;</span><span class="p">,</span>
+                      
+                      <span class="n">colors</span> <span class="o">=</span> <span class="s1">&#39;Picnic&#39;</span><span class="p">,</span> 
+                      <span class="n">index_col</span> <span class="o">=</span> <span class="s1">&#39;Complete&#39;</span><span class="p">,</span> 
+                      <span class="n">show_colorbar</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+
+<span class="n">offline</span><span class="o">.</span><span class="n">iplot</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div id="31875f57-7757-40cb-921f-493ab2ce8744" style="height: 600px; width: 900px;" class="plotly-graph-div"></div><script type="text/javascript">require(["plotly"], function(Plotly) { window.PLOTLYENV=window.PLOTLYENV || {};window.PLOTLYENV.BASE_URL="https://plot.ly";Plotly.newPlot("31875f57-7757-40cb-921f-493ab2ce8744", [{"x": ["2018-01-01", "2018-02-28"], "y": [0, 0], "name": "", "marker": {"color": "white"}}, {"x": ["2018-03-05", "2018-04-15"], "y": [1, 1], "name": "", "marker": {"color": "white"}}, {"x": ["2018-04-15", "2018-06-30"], "y": [2, 2], "name": "", "marker": {"color": "white"}}, {"x": ["2018-04-15", "2018-04-15"], "y": [2, 2], "name": "", "marker": {"color": "white", "colorscale": [[0, "rgb(0.0, 0.0, 255.0)"], [1, "rgb(255.0, 0.0, 0.0)"]], "showscale": true, "cmax": 100, "cmin": 0}}], {"title": "Gantt Chart with a color scale", "showlegend": false, "height": 600, "width": 900, "shapes": [{"x0": "2018-01-01", "x1": "2018-02-28", "type": "rect", "xref": "x", "yref": "y", "opacity": 1, "line": {"width": 0}, "y0": -0.2, "y1": 0.2, "fillcolor": "rgb(255.0, 0.0, 0.0)"}, {"x0": "2018-03-05", "x1": "2018-04-15", "type": "rect", "xref": "x", "yref": "y", "opacity": 1, "line": {"width": 0}, "y0": 0.8, "y1": 1.2, "fillcolor": "rgb(153.0, 0.0, 102.0)"}, {"x0": "2018-04-15", "x1": "2018-06-30", "type": "rect", "xref": "x", "yref": "y", "opacity": 1, "line": {"width": 0}, "y0": 1.8, "y1": 2.2, "fillcolor": "rgb(51.0, 0.0, 204.0)"}], "hovermode": "closest", "yaxis": {"showgrid": false, "ticktext": ["Task 1", "Task 2", "Task 3"], "tickvals": [0, 1, 2], "range": [-1, 4], "autorange": false, "zeroline": false}, "xaxis": {"showgrid": false, "zeroline": false, "rangeselector": {"buttons": [{"count": 7, "label": "1w", "step": "day", "stepmode": "backward"}, {"count": 1, "label": "1m", "step": "month", "stepmode": "backward"}, {"count": 6, "label": "6m", "step": "month", "stepmode": "backward"}, {"count": 1, "label": "YTD", "step": "year", "stepmode": "todate"}, {"count": 1, "label": "1y", "step": "year", "stepmode": "backward"}, {"step": "all"}]}, "type": "date"}}, {"showLink": true, "linkText": "Export to plot.ly"})});</script></div></div>
+</div>
+</div>
+</div>
+<div class="section" id="color-scales-to-represent-string-categories">
+<h2>Color Scales to represent string categories<a class="headerlink" href="#color-scales-to-represent-string-categories" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="import-a-csv-file-containing-a-schedule">
+<h3>Import a CSV file containing a schedule<a class="headerlink" href="#import-a-csv-file-containing-a-schedule" title="Permalink to this headline">¶</a></h3>
+<p>The following is a schedule for a school going kid depicting his/her activities for 1-July-2018</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="n">schedule</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./datasets/schedule.csv&#39;</span><span class="p">)</span>
+<span class="n">schedule</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Task</th>
+      <th>Start</th>
+      <th>Finish</th>
+      <th>Category</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Sleep</td>
+      <td>2018-07-01 0:00:00</td>
+      <td>2018-07-01 7:00:00</td>
+      <td>Rest</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Breakfast</td>
+      <td>2018-07-01 7:30:00</td>
+      <td>2018-07-01 8:00:00</td>
+      <td>Eat</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Music</td>
+      <td>2018-07-01 8:00:00</td>
+      <td>2018-07-01 12:00:00</td>
+      <td>Music</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Math</td>
+      <td>2018-07-01 9:00:00</td>
+      <td>2018-07-01 12:00:00</td>
+      <td>Homework</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Lunch</td>
+      <td>2018-07-01 12:00:00</td>
+      <td>2018-07-01 13:00:00</td>
+      <td>Eat</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Physics</td>
+      <td>2018-07-01 13:00:00</td>
+      <td>2018-07-01 14:30:00</td>
+      <td>Homework</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>Music</td>
+      <td>2018-07-01 14:00:00</td>
+      <td>2018-07-01 15:30:00</td>
+      <td>Music</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>Nap</td>
+      <td>2018-07-01 16:00:00</td>
+      <td>2018-07-01 16:30:00</td>
+      <td>Rest</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>Tennis</td>
+      <td>2018-07-01 17:30:00</td>
+      <td>2018-07-01 19:00:00</td>
+      <td>Play</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>Dinner</td>
+      <td>2018-07-01 20:00:00</td>
+      <td>2018-07-01 20:30:00</td>
+      <td>Eat</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>Music</td>
+      <td>2018-07-01 20:30:00</td>
+      <td>2018-07-01 22:00:00</td>
+      <td>Music</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>History</td>
+      <td>2018-07-01 21:00:00</td>
+      <td>2018-07-01 22:00:00</td>
+      <td>Homework</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</div>
+<div class="section" id="define-a-color-map">
+<h3>Define a color map<a class="headerlink" href="#define-a-color-map" title="Permalink to this headline">¶</a></h3>
+<p>This needs to contain colors specified in either RGB or Hexadecimal format (named colors will not work in a Gantt Chart). The list can contain a mix of both RGB and Hex colors.</p>
+<p>Here, we map the Category names to the color we want it to be portrayed by.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">color_dict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">Rest</span> <span class="o">=</span> <span class="s1">&#39;rgb(46, 137, 205)&#39;</span><span class="p">,</span>
+                  <span class="n">Eat</span> <span class="o">=</span> <span class="s1">&#39;rgb(114, 44, 121)&#39;</span><span class="p">,</span>
+                  <span class="n">Homework</span> <span class="o">=</span> <span class="s1">&#39;rgb(198, 47, 105)&#39;</span><span class="p">,</span>
+                  
+                  <span class="n">Play</span> <span class="o">=</span> <span class="s1">&#39;#BD8FD7&#39;</span><span class="p">,</span>
+                  <span class="n">Music</span> <span class="o">=</span> <span class="s1">&#39;#78F7DE&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="draw-the-gantt-chart">
+<h3>Draw the Gantt Chart<a class="headerlink" href="#draw-the-gantt-chart" title="Permalink to this headline">¶</a></h3>
+<p>We cannot use a named color scale to map String values, so we pass in our colors dictionary to be used to assign colors to the different values of ‘Category’ in our dataset.</p>
+<p><b>bar_width</b> sets the width (in this portrayal, the height) of each bar. A bar_width of 0.5 equals the distance between two grid lines on the Y axis.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">ff</span><span class="o">.</span><span class="n">create_gantt</span><span class="p">(</span><span class="n">schedule</span><span class="p">,</span>
+                      <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Schedule for 1-July-2018&#39;</span><span class="p">,</span>
+                      
+                      <span class="n">colors</span><span class="o">=</span><span class="n">color_dict</span><span class="p">,</span> 
+                      <span class="n">index_col</span><span class="o">=</span><span class="s1">&#39;Category&#39;</span><span class="p">,</span>
+                      <span class="n">show_colorbar</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                      
+                      <span class="n">bar_width</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+                      
+                      <span class="n">showgrid_x</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> 
+                      <span class="n">showgrid_y</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">offline</span><span class="o">.</span><span class="n">iplot</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div id="85a7c7cc-5022-4717-ad41-1bb9ec70a9ee" style="height: 600px; width: 900px;" class="plotly-graph-div"></div><script type="text/javascript">require(["plotly"], function(Plotly) { window.PLOTLYENV=window.PLOTLYENV || {};window.PLOTLYENV.BASE_URL="https://plot.ly";Plotly.newPlot("85a7c7cc-5022-4717-ad41-1bb9ec70a9ee", [{"x": ["2018-07-01 0:00:00", "2018-07-01 7:00:00"], "y": [0, 0], "name": "", "marker": {"color": "white"}}, {"x": ["2018-07-01 7:30:00", "2018-07-01 8:00:00"], "y": [1, 1], "name": "", "marker": {"color": "white"}}, {"x": ["2018-07-01 8:00:00", "2018-07-01 12:00:00"], "y": [2, 2], "name": "", "marker": {"color": "white"}}, {"x": ["2018-07-01 9:00:00", "2018-07-01 12:00:00"], "y": [3, 3], "name": "", "marker": {"color": "white"}}, {"x": ["2018-07-01 12:00:00", "2018-07-01 13:00:00"], "y": [4, 4], "name": "", "marker": {"color": "white"}}, {"x": ["2018-07-01 13:00:00", "2018-07-01 14:30:00"], "y": [5, 5], "name": "", "marker": {"color": "white"}}, {"x": ["2018-07-01 14:00:00", "2018-07-01 15:30:00"], "y": [6, 6], "name": "", "marker": {"color": "white"}}, {"x": ["2018-07-01 16:00:00", "2018-07-01 16:30:00"], "y": [7, 7], "name": "", "marker": {"color": "white"}}, {"x": ["2018-07-01 17:30:00", "2018-07-01 19:00:00"], "y": [8, 8], "name": "", "marker": {"color": "white"}}, {"x": ["2018-07-01 20:00:00", "2018-07-01 20:30:00"], "y": [9, 9], "name": "", "marker": {"color": "white"}}, {"x": ["2018-07-01 20:30:00", "2018-07-01 22:00:00"], "y": [10, 10], "name": "", "marker": {"color": "white"}}, {"x": ["2018-07-01 21:00:00", "2018-07-01 22:00:00"], "y": [11, 11], "name": "", "marker": {"color": "white"}}, {"x": ["2018-07-01 21:00:00", "2018-07-01 21:00:00"], "y": [0, 0], "showlegend": true, "hoverinfo": "none", "name": "Eat", "marker": {"color": "rgb(114, 44, 121)", "size": 1}}, {"x": ["2018-07-01 21:00:00", "2018-07-01 21:00:00"], "y": [1, 1], "showlegend": true, "hoverinfo": "none", "name": "Homework", "marker": {"color": "rgb(198, 47, 105)", "size": 1}}, {"x": ["2018-07-01 21:00:00", "2018-07-01 21:00:00"], "y": [2, 2], "showlegend": true, "hoverinfo": "none", "name": "Music", "marker": {"color": "rgb(120, 247, 222)", "size": 1}}, {"x": ["2018-07-01 21:00:00", "2018-07-01 21:00:00"], "y": [3, 3], "showlegend": true, "hoverinfo": "none", "name": "Play", "marker": {"color": "rgb(189, 143, 215)", "size": 1}}, {"x": ["2018-07-01 21:00:00", "2018-07-01 21:00:00"], "y": [4, 4], "showlegend": true, "hoverinfo": "none", "name": "Rest", "marker": {"color": "rgb(46, 137, 205)", "size": 1}}], {"title": "Schedule for 1-July-2018", "showlegend": true, "height": 600, "width": 900, "shapes": [{"x0": "2018-07-01 0:00:00", "x1": "2018-07-01 7:00:00", "type": "rect", "xref": "x", "yref": "y", "opacity": 1, "line": {"width": 0}, "y0": -0.5, "y1": 0.5, "fillcolor": "rgb(46, 137, 205)"}, {"x0": "2018-07-01 7:30:00", "x1": "2018-07-01 8:00:00", "type": "rect", "xref": "x", "yref": "y", "opacity": 1, "line": {"width": 0}, "y0": 0.5, "y1": 1.5, "fillcolor": "rgb(114, 44, 121)"}, {"x0": "2018-07-01 8:00:00", "x1": "2018-07-01 12:00:00", "type": "rect", "xref": "x", "yref": "y", "opacity": 1, "line": {"width": 0}, "y0": 1.5, "y1": 2.5, "fillcolor": "rgb(120, 247, 222)"}, {"x0": "2018-07-01 9:00:00", "x1": "2018-07-01 12:00:00", "type": "rect", "xref": "x", "yref": "y", "opacity": 1, "line": {"width": 0}, "y0": 2.5, "y1": 3.5, "fillcolor": "rgb(198, 47, 105)"}, {"x0": "2018-07-01 12:00:00", "x1": "2018-07-01 13:00:00", "type": "rect", "xref": "x", "yref": "y", "opacity": 1, "line": {"width": 0}, "y0": 3.5, "y1": 4.5, "fillcolor": "rgb(114, 44, 121)"}, {"x0": "2018-07-01 13:00:00", "x1": "2018-07-01 14:30:00", "type": "rect", "xref": "x", "yref": "y", "opacity": 1, "line": {"width": 0}, "y0": 4.5, "y1": 5.5, "fillcolor": "rgb(198, 47, 105)"}, {"x0": "2018-07-01 14:00:00", "x1": "2018-07-01 15:30:00", "type": "rect", "xref": "x", "yref": "y", "opacity": 1, "line": {"width": 0}, "y0": 5.5, "y1": 6.5, "fillcolor": "rgb(120, 247, 222)"}, {"x0": "2018-07-01 16:00:00", "x1": "2018-07-01 16:30:00", "type": "rect", "xref": "x", "yref": "y", "opacity": 1, "line": {"width": 0}, "y0": 6.5, "y1": 7.5, "fillcolor": "rgb(46, 137, 205)"}, {"x0": "2018-07-01 17:30:00", "x1": "2018-07-01 19:00:00", "type": "rect", "xref": "x", "yref": "y", "opacity": 1, "line": {"width": 0}, "y0": 7.5, "y1": 8.5, "fillcolor": "rgb(189, 143, 215)"}, {"x0": "2018-07-01 20:00:00", "x1": "2018-07-01 20:30:00", "type": "rect", "xref": "x", "yref": "y", "opacity": 1, "line": {"width": 0}, "y0": 8.5, "y1": 9.5, "fillcolor": "rgb(114, 44, 121)"}, {"x0": "2018-07-01 20:30:00", "x1": "2018-07-01 22:00:00", "type": "rect", "xref": "x", "yref": "y", "opacity": 1, "line": {"width": 0}, "y0": 9.5, "y1": 10.5, "fillcolor": "rgb(120, 247, 222)"}, {"x0": "2018-07-01 21:00:00", "x1": "2018-07-01 22:00:00", "type": "rect", "xref": "x", "yref": "y", "opacity": 1, "line": {"width": 0}, "y0": 10.5, "y1": 11.5, "fillcolor": "rgb(198, 47, 105)"}], "hovermode": "closest", "yaxis": {"showgrid": true, "ticktext": ["Sleep", "Breakfast", "Music", "Math", "Lunch", "Physics", "Music", "Nap", "Tennis", "Dinner", "Music", "History"], "tickvals": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], "range": [-1, 13], "autorange": false, "zeroline": false}, "xaxis": {"showgrid": true, "zeroline": false, "rangeselector": {"buttons": [{"count": 7, "label": "1w", "step": "day", "stepmode": "backward"}, {"count": 1, "label": "1m", "step": "month", "stepmode": "backward"}, {"count": 6, "label": "6m", "step": "month", "stepmode": "backward"}, {"count": 1, "label": "YTD", "step": "year", "stepmode": "todate"}, {"count": 1, "label": "1y", "step": "year", "stepmode": "backward"}, {"step": "all"}]}, "type": "date"}}, {"showLink": true, "linkText": "Export to plot.ly"})});</script></div></div>
+</div>
+</div>
+<div class="section" id="alternatively-we-use-a-color-list">
+<h3>Alternatively, we use a color list<a class="headerlink" href="#alternatively-we-use-a-color-list" title="Permalink to this headline">¶</a></h3>
+<p>Here, the ordering of colors will be mapped to the list of categories in alphabetical order.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">color_list</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;#BD8FD7&#39;</span><span class="p">,</span> 
+              <span class="s1">&#39;#78F7DE&#39;</span><span class="p">,</span> 
+              <span class="s1">&#39;rgb(198, 47, 105)&#39;</span><span class="p">,</span> 
+              <span class="s1">&#39;rgb(114, 44, 121)&#39;</span><span class="p">,</span> 
+              <span class="s1">&#39;rgb(46, 137, 205)&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">ff</span><span class="o">.</span><span class="n">create_gantt</span><span class="p">(</span><span class="n">schedule</span><span class="p">,</span>
+                      <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Schedule for 1-July-2018&#39;</span><span class="p">,</span>
+                      
+                      <span class="n">colors</span><span class="o">=</span><span class="n">color_list</span><span class="p">,</span> 
+                      <span class="n">index_col</span><span class="o">=</span><span class="s1">&#39;Category&#39;</span><span class="p">,</span>
+                      <span class="n">show_colorbar</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                      
+                      <span class="n">bar_width</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> 
+                      <span class="n">showgrid_x</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> 
+                      <span class="n">showgrid_y</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">offline</span><span class="o">.</span><span class="n">iplot</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div id="3dc1532f-fd9d-42a9-8499-443a66caed6c" style="height: 600px; width: 900px;" class="plotly-graph-div"></div><script type="text/javascript">require(["plotly"], function(Plotly) { window.PLOTLYENV=window.PLOTLYENV || {};window.PLOTLYENV.BASE_URL="https://plot.ly";Plotly.newPlot("3dc1532f-fd9d-42a9-8499-443a66caed6c", [{"x": ["2018-07-01 0:00:00", "2018-07-01 7:00:00"], "y": [0, 0], "name": "", "marker": {"color": "white"}}, {"x": ["2018-07-01 7:30:00", "2018-07-01 8:00:00"], "y": [1, 1], "name": "", "marker": {"color": "white"}}, {"x": ["2018-07-01 8:00:00", "2018-07-01 12:00:00"], "y": [2, 2], "name": "", "marker": {"color": "white"}}, {"x": ["2018-07-01 9:00:00", "2018-07-01 12:00:00"], "y": [3, 3], "name": "", "marker": {"color": "white"}}, {"x": ["2018-07-01 12:00:00", "2018-07-01 13:00:00"], "y": [4, 4], "name": "", "marker": {"color": "white"}}, {"x": ["2018-07-01 13:00:00", "2018-07-01 14:30:00"], "y": [5, 5], "name": "", "marker": {"color": "white"}}, {"x": ["2018-07-01 14:00:00", "2018-07-01 15:30:00"], "y": [6, 6], "name": "", "marker": {"color": "white"}}, {"x": ["2018-07-01 16:00:00", "2018-07-01 16:30:00"], "y": [7, 7], "name": "", "marker": {"color": "white"}}, {"x": ["2018-07-01 17:30:00", "2018-07-01 19:00:00"], "y": [8, 8], "name": "", "marker": {"color": "white"}}, {"x": ["2018-07-01 20:00:00", "2018-07-01 20:30:00"], "y": [9, 9], "name": "", "marker": {"color": "white"}}, {"x": ["2018-07-01 20:30:00", "2018-07-01 22:00:00"], "y": [10, 10], "name": "", "marker": {"color": "white"}}, {"x": ["2018-07-01 21:00:00", "2018-07-01 22:00:00"], "y": [11, 11], "name": "", "marker": {"color": "white"}}, {"x": ["2018-07-01 21:00:00", "2018-07-01 21:00:00"], "y": [0, 0], "showlegend": true, "name": "Eat", "hoverinfo": "none", "marker": {"color": "rgb(189, 143, 215)", "size": 1}}, {"x": ["2018-07-01 21:00:00", "2018-07-01 21:00:00"], "y": [1, 1], "showlegend": true, "name": "Homework", "hoverinfo": "none", "marker": {"color": "rgb(120, 247, 222)", "size": 1}}, {"x": ["2018-07-01 21:00:00", "2018-07-01 21:00:00"], "y": [2, 2], "showlegend": true, "name": "Music", "hoverinfo": "none", "marker": {"color": "rgb(198, 47, 105)", "size": 1}}, {"x": ["2018-07-01 21:00:00", "2018-07-01 21:00:00"], "y": [3, 3], "showlegend": true, "name": "Play", "hoverinfo": "none", "marker": {"color": "rgb(114, 44, 121)", "size": 1}}, {"x": ["2018-07-01 21:00:00", "2018-07-01 21:00:00"], "y": [4, 4], "showlegend": true, "name": "Rest", "hoverinfo": "none", "marker": {"color": "rgb(46, 137, 205)", "size": 1}}], {"title": "Schedule for 1-July-2018", "showlegend": true, "height": 600, "width": 900, "shapes": [{"x0": "2018-07-01 0:00:00", "x1": "2018-07-01 7:00:00", "type": "rect", "xref": "x", "yref": "y", "opacity": 1, "line": {"width": 0}, "y0": -0.5, "y1": 0.5, "fillcolor": "rgb(46, 137, 205)"}, {"x0": "2018-07-01 7:30:00", "x1": "2018-07-01 8:00:00", "type": "rect", "xref": "x", "yref": "y", "opacity": 1, "line": {"width": 0}, "y0": 0.5, "y1": 1.5, "fillcolor": "rgb(189, 143, 215)"}, {"x0": "2018-07-01 8:00:00", "x1": "2018-07-01 12:00:00", "type": "rect", "xref": "x", "yref": "y", "opacity": 1, "line": {"width": 0}, "y0": 1.5, "y1": 2.5, "fillcolor": "rgb(198, 47, 105)"}, {"x0": "2018-07-01 9:00:00", "x1": "2018-07-01 12:00:00", "type": "rect", "xref": "x", "yref": "y", "opacity": 1, "line": {"width": 0}, "y0": 2.5, "y1": 3.5, "fillcolor": "rgb(120, 247, 222)"}, {"x0": "2018-07-01 12:00:00", "x1": "2018-07-01 13:00:00", "type": "rect", "xref": "x", "yref": "y", "opacity": 1, "line": {"width": 0}, "y0": 3.5, "y1": 4.5, "fillcolor": "rgb(189, 143, 215)"}, {"x0": "2018-07-01 13:00:00", "x1": "2018-07-01 14:30:00", "type": "rect", "xref": "x", "yref": "y", "opacity": 1, "line": {"width": 0}, "y0": 4.5, "y1": 5.5, "fillcolor": "rgb(120, 247, 222)"}, {"x0": "2018-07-01 14:00:00", "x1": "2018-07-01 15:30:00", "type": "rect", "xref": "x", "yref": "y", "opacity": 1, "line": {"width": 0}, "y0": 5.5, "y1": 6.5, "fillcolor": "rgb(198, 47, 105)"}, {"x0": "2018-07-01 16:00:00", "x1": "2018-07-01 16:30:00", "type": "rect", "xref": "x", "yref": "y", "opacity": 1, "line": {"width": 0}, "y0": 6.5, "y1": 7.5, "fillcolor": "rgb(46, 137, 205)"}, {"x0": "2018-07-01 17:30:00", "x1": "2018-07-01 19:00:00", "type": "rect", "xref": "x", "yref": "y", "opacity": 1, "line": {"width": 0}, "y0": 7.5, "y1": 8.5, "fillcolor": "rgb(114, 44, 121)"}, {"x0": "2018-07-01 20:00:00", "x1": "2018-07-01 20:30:00", "type": "rect", "xref": "x", "yref": "y", "opacity": 1, "line": {"width": 0}, "y0": 8.5, "y1": 9.5, "fillcolor": "rgb(189, 143, 215)"}, {"x0": "2018-07-01 20:30:00", "x1": "2018-07-01 22:00:00", "type": "rect", "xref": "x", "yref": "y", "opacity": 1, "line": {"width": 0}, "y0": 9.5, "y1": 10.5, "fillcolor": "rgb(198, 47, 105)"}, {"x0": "2018-07-01 21:00:00", "x1": "2018-07-01 22:00:00", "type": "rect", "xref": "x", "yref": "y", "opacity": 1, "line": {"width": 0}, "y0": 10.5, "y1": 11.5, "fillcolor": "rgb(120, 247, 222)"}], "hovermode": "closest", "yaxis": {"showgrid": true, "ticktext": ["Sleep", "Breakfast", "Music", "Math", "Lunch", "Physics", "Music", "Nap", "Tennis", "Dinner", "Music", "History"], "tickvals": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], "range": [-1, 13], "autorange": false, "zeroline": false}, "xaxis": {"showgrid": true, "zeroline": false, "rangeselector": {"buttons": [{"count": 7, "label": "1w", "step": "day", "stepmode": "backward"}, {"count": 1, "label": "1m", "step": "month", "stepmode": "backward"}, {"count": 6, "label": "6m", "step": "month", "stepmode": "backward"}, {"count": 1, "label": "YTD", "step": "year", "stepmode": "todate"}, {"count": 1, "label": "1y", "step": "year", "stepmode": "backward"}, {"step": "all"}]}, "type": "date"}}, {"showLink": true, "linkText": "Export to plot.ly"})});</script></div></div>
+</div>
+</div>
+<div class="section" id="grouping-tasks">
+<h3>Grouping tasks<a class="headerlink" href="#grouping-tasks" title="Permalink to this headline">¶</a></h3>
+<p>In our schedule, there are 3 occurences of Music which have so far appeared as separate tasks. We use the group_tasks attribute so that they all appear in the same row on our plot.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">ff</span><span class="o">.</span><span class="n">create_gantt</span><span class="p">(</span><span class="n">schedule</span><span class="p">,</span>
+                      <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Schedule for 1-July-2018&#39;</span><span class="p">,</span>
+                      
+                      <span class="n">colors</span><span class="o">=</span><span class="n">color_list</span><span class="p">,</span> 
+                      <span class="n">index_col</span><span class="o">=</span><span class="s1">&#39;Category&#39;</span><span class="p">,</span>
+                      <span class="n">show_colorbar</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                      
+                      <span class="n">bar_width</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> 
+                      <span class="n">showgrid_x</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> 
+                      <span class="n">showgrid_y</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                      
+                      <span class="n">group_tasks</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">offline</span><span class="o">.</span><span class="n">iplot</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div id="4040cc7c-bee4-41dc-951f-c8df96b3adf4" style="height: 600px; width: 900px;" class="plotly-graph-div"></div><script type="text/javascript">require(["plotly"], function(Plotly) { window.PLOTLYENV=window.PLOTLYENV || {};window.PLOTLYENV.BASE_URL="https://plot.ly";Plotly.newPlot("4040cc7c-bee4-41dc-951f-c8df96b3adf4", [{"x": ["2018-07-01 0:00:00", "2018-07-01 7:00:00"], "y": [9, 9], "name": "", "marker": {"color": "white"}}, {"x": ["2018-07-01 7:30:00", "2018-07-01 8:00:00"], "y": [8, 8], "name": "", "marker": {"color": "white"}}, {"x": ["2018-07-01 8:00:00", "2018-07-01 12:00:00"], "y": [7, 7], "name": "", "marker": {"color": "white"}}, {"x": ["2018-07-01 9:00:00", "2018-07-01 12:00:00"], "y": [6, 6], "name": "", "marker": {"color": "white"}}, {"x": ["2018-07-01 12:00:00", "2018-07-01 13:00:00"], "y": [5, 5], "name": "", "marker": {"color": "white"}}, {"x": ["2018-07-01 13:00:00", "2018-07-01 14:30:00"], "y": [4, 4], "name": "", "marker": {"color": "white"}}, {"x": ["2018-07-01 14:00:00", "2018-07-01 15:30:00"], "y": [7, 7], "name": "", "marker": {"color": "white"}}, {"x": ["2018-07-01 16:00:00", "2018-07-01 16:30:00"], "y": [3, 3], "name": "", "marker": {"color": "white"}}, {"x": ["2018-07-01 17:30:00", "2018-07-01 19:00:00"], "y": [2, 2], "name": "", "marker": {"color": "white"}}, {"x": ["2018-07-01 20:00:00", "2018-07-01 20:30:00"], "y": [1, 1], "name": "", "marker": {"color": "white"}}, {"x": ["2018-07-01 20:30:00", "2018-07-01 22:00:00"], "y": [7, 7], "name": "", "marker": {"color": "white"}}, {"x": ["2018-07-01 21:00:00", "2018-07-01 22:00:00"], "y": [0, 0], "name": "", "marker": {"color": "white"}}, {"x": ["2018-07-01 21:00:00", "2018-07-01 21:00:00"], "y": [0, 0], "showlegend": true, "name": "Eat", "hoverinfo": "none", "marker": {"color": "rgb(189, 143, 215)", "size": 1}}, {"x": ["2018-07-01 21:00:00", "2018-07-01 21:00:00"], "y": [1, 1], "showlegend": true, "name": "Homework", "hoverinfo": "none", "marker": {"color": "rgb(120, 247, 222)", "size": 1}}, {"x": ["2018-07-01 21:00:00", "2018-07-01 21:00:00"], "y": [2, 2], "showlegend": true, "name": "Music", "hoverinfo": "none", "marker": {"color": "rgb(198, 47, 105)", "size": 1}}, {"x": ["2018-07-01 21:00:00", "2018-07-01 21:00:00"], "y": [3, 3], "showlegend": true, "name": "Play", "hoverinfo": "none", "marker": {"color": "rgb(114, 44, 121)", "size": 1}}, {"x": ["2018-07-01 21:00:00", "2018-07-01 21:00:00"], "y": [4, 4], "showlegend": true, "name": "Rest", "hoverinfo": "none", "marker": {"color": "rgb(46, 137, 205)", "size": 1}}], {"title": "Schedule for 1-July-2018", "showlegend": true, "height": 600, "width": 900, "shapes": [{"x0": "2018-07-01 0:00:00", "x1": "2018-07-01 7:00:00", "type": "rect", "xref": "x", "yref": "y", "opacity": 1, "line": {"width": 0}, "y0": 8.5, "y1": 9.5, "fillcolor": "rgb(46, 137, 205)"}, {"x0": "2018-07-01 7:30:00", "x1": "2018-07-01 8:00:00", "type": "rect", "xref": "x", "yref": "y", "opacity": 1, "line": {"width": 0}, "y0": 7.5, "y1": 8.5, "fillcolor": "rgb(189, 143, 215)"}, {"x0": "2018-07-01 8:00:00", "x1": "2018-07-01 12:00:00", "type": "rect", "xref": "x", "yref": "y", "opacity": 1, "line": {"width": 0}, "y0": 6.5, "y1": 7.5, "fillcolor": "rgb(198, 47, 105)"}, {"x0": "2018-07-01 9:00:00", "x1": "2018-07-01 12:00:00", "type": "rect", "xref": "x", "yref": "y", "opacity": 1, "line": {"width": 0}, "y0": 5.5, "y1": 6.5, "fillcolor": "rgb(120, 247, 222)"}, {"x0": "2018-07-01 12:00:00", "x1": "2018-07-01 13:00:00", "type": "rect", "xref": "x", "yref": "y", "opacity": 1, "line": {"width": 0}, "y0": 4.5, "y1": 5.5, "fillcolor": "rgb(189, 143, 215)"}, {"x0": "2018-07-01 13:00:00", "x1": "2018-07-01 14:30:00", "type": "rect", "xref": "x", "yref": "y", "opacity": 1, "line": {"width": 0}, "y0": 3.5, "y1": 4.5, "fillcolor": "rgb(120, 247, 222)"}, {"x0": "2018-07-01 14:00:00", "x1": "2018-07-01 15:30:00", "type": "rect", "xref": "x", "yref": "y", "opacity": 1, "line": {"width": 0}, "y0": 6.5, "y1": 7.5, "fillcolor": "rgb(198, 47, 105)"}, {"x0": "2018-07-01 16:00:00", "x1": "2018-07-01 16:30:00", "type": "rect", "xref": "x", "yref": "y", "opacity": 1, "line": {"width": 0}, "y0": 2.5, "y1": 3.5, "fillcolor": "rgb(46, 137, 205)"}, {"x0": "2018-07-01 17:30:00", "x1": "2018-07-01 19:00:00", "type": "rect", "xref": "x", "yref": "y", "opacity": 1, "line": {"width": 0}, "y0": 1.5, "y1": 2.5, "fillcolor": "rgb(114, 44, 121)"}, {"x0": "2018-07-01 20:00:00", "x1": "2018-07-01 20:30:00", "type": "rect", "xref": "x", "yref": "y", "opacity": 1, "line": {"width": 0}, "y0": 0.5, "y1": 1.5, "fillcolor": "rgb(189, 143, 215)"}, {"x0": "2018-07-01 20:30:00", "x1": "2018-07-01 22:00:00", "type": "rect", "xref": "x", "yref": "y", "opacity": 1, "line": {"width": 0}, "y0": 6.5, "y1": 7.5, "fillcolor": "rgb(198, 47, 105)"}, {"x0": "2018-07-01 21:00:00", "x1": "2018-07-01 22:00:00", "type": "rect", "xref": "x", "yref": "y", "opacity": 1, "line": {"width": 0}, "y0": -0.5, "y1": 0.5, "fillcolor": "rgb(120, 247, 222)"}], "hovermode": "closest", "yaxis": {"showgrid": true, "ticktext": ["History", "Dinner", "Tennis", "Nap", "Physics", "Lunch", "Math", "Music", "Breakfast", "Sleep"], "tickvals": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9], "range": [-1, 11], "autorange": false, "zeroline": false}, "xaxis": {"showgrid": true, "zeroline": false, "rangeselector": {"buttons": [{"count": 7, "label": "1w", "step": "day", "stepmode": "backward"}, {"count": 1, "label": "1m", "step": "month", "stepmode": "backward"}, {"count": 6, "label": "6m", "step": "month", "stepmode": "backward"}, {"count": 1, "label": "YTD", "step": "year", "stepmode": "todate"}, {"count": 1, "label": "1y", "step": "year", "stepmode": "backward"}, {"step": "all"}]}, "type": "date"}}, {"showLink": true, "linkText": "Export to plot.ly"})});</script></div></div>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "hossainlab/dataviz",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./plotly"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            
+
+
+
+<div class='prev-next-bottom'>
+    
+
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Jubayer Hossain<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>

@@ -1,0 +1,884 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Style Line Plots &#8212; Data Visualization with Python</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet" />
+  <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.e8f53015daec13862f6db5e763c41738.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe,.cell"
+        const thebe_selector_input = "pre,.cell_input div.highlight"
+        const thebe_selector_output = ".output,.cell_output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="shortcut icon" href="../_static/logo.jpg"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      <img src="../_static/logo.jpg" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Data Visualization with Python</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <p class="caption">
+ <span class="caption-text">
+  Matplotlib
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../matplotlib/00-Intro%20to%20Data%20Visualization.html">
+   Intro to Data Visualization with Matplotlib
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../matplotlib/02_InteractiveBackends.html">
+     Backends
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/plotly/4.LineCharts.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/hossainlab/dataviz/"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/hossainlab/dataviz/master?urlpath=tree/book/plotly/4.LineCharts.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/hossainlab/dataviz/blob/master/book/plotly/4.LineCharts.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        <button type="button" class="btn btn-secondary topbarbtn"
+            onclick="initThebeSBT()" title="Launch Thebe" data-toggle="tooltip" data-placement="left"><i
+                class="fas fa-play"></i><span style="margin-left: .4em;">Live Code</span></button>
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Style Line Plots
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#download-data-set">
+     Download data set
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#the-first-trace">
+       The first trace
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#the-second-trace">
+       The second trace
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#the-last-trace">
+       The last trace
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#define-the-data-and-layout">
+       Define the data and layout
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#define-and-plot-the-figure">
+       Define and plot the figure
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#connect-data-gaps">
+   Connect Data Gaps
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#for-the-first-trace-we-fill-in-the-gap">
+     For the first trace, we fill in the gap
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#for-the-second-trace-we-don-t-fill-the-gap">
+     For the second trace, we don’t fill the gap
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#for-the-third-trace-we-don-t-specify-the-value-explicitly">
+     For the third trace, we don’t specify the value explicitly
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#plots-with-annotations">
+     Plots with Annotations
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#annotation-without-an-arrow">
+       Annotation without an arrow
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#the-second-annotation-has-an-arrow">
+       The second annotation has an arrow
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#the-third-annotation-uses-the-yref-attribute">
+       The third annotation uses the yref attribute
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#add-the-annotations-to-our-layout">
+       Add the annotations to our layout
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#plot-the-figure-with-the-data-and-layout-with-annotations">
+       Plot the figure with the data and layout with annotations
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">plotly.graph_objs</span> <span class="k">as</span> <span class="nn">go</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">plotly.offline</span> <span class="k">as</span> <span class="nn">offline</span>
+
+<span class="n">offline</span><span class="o">.</span><span class="n">init_notebook_mode</span><span class="p">(</span><span class="n">connected</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><script>requirejs.config({paths: { 'plotly': ['https://cdn.plot.ly/plotly-latest.min']},});if(!window.Plotly) {{require(['plotly'],function(plotly) {window.Plotly=plotly;});}}</script></div></div>
+</div>
+<div class="section" id="style-line-plots">
+<h1>Style Line Plots<a class="headerlink" href="#style-line-plots" title="Permalink to this headline">¶</a></h1>
+<p>We have seen how line plots can be plotted. Now we see how those can be formatted</p>
+<div class="section" id="download-data-set">
+<h2>Download data set<a class="headerlink" href="#download-data-set" title="Permalink to this headline">¶</a></h2>
+<p>Europe international tourist arrivals by region over time.</p>
+<p>Dataset location: <a class="reference external" href="https://www.e-unwto.org/doi/pdf/10.18111/9789284419029">https://www.e-unwto.org/doi/pdf/10.18111/9789284419029</a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="n">tourism_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;datasets/europe_tourism.csv&#39;</span><span class="p">)</span>
+<span class="n">tourism_data</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Year</th>
+      <th>Western</th>
+      <th>Eastern</th>
+      <th>Southern</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1990</td>
+      <td>108.6</td>
+      <td>33.9</td>
+      <td>90.3</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1995</td>
+      <td>112.2</td>
+      <td>58.9</td>
+      <td>96.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2000</td>
+      <td>139.7</td>
+      <td>69.6</td>
+      <td>132.6</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2005</td>
+      <td>141.7</td>
+      <td>95.3</td>
+      <td>156.4</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2010</td>
+      <td>154.4</td>
+      <td>98.5</td>
+      <td>173.3</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>2015</td>
+      <td>181.4</td>
+      <td>121.4</td>
+      <td>225.5</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="section" id="the-first-trace">
+<h3>The first trace<a class="headerlink" href="#the-first-trace" title="Permalink to this headline">¶</a></h3>
+<p>Plot a line for Western Europe’s tourism numbers. We format the line by:</p>
+<ul class="simple">
+<li><p>specifying a color in RGB format (we can also use RGBA)</p></li>
+<li><p>specify a width</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">trace0</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span>
+    
+    <span class="n">x</span> <span class="o">=</span> <span class="n">tourism_data</span><span class="p">[</span><span class="s1">&#39;Year&#39;</span><span class="p">],</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">tourism_data</span><span class="p">[</span><span class="s1">&#39;Western&#39;</span><span class="p">],</span>
+    
+    <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;Western Europe&#39;</span><span class="p">,</span>
+    
+    <span class="n">line</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">color</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;rgb(0, 250, 24)&#39;</span><span class="p">),</span>
+                <span class="n">width</span> <span class="o">=</span> <span class="mi">4</span><span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="the-second-trace">
+<h3>The second trace<a class="headerlink" href="#the-second-trace" title="Permalink to this headline">¶</a></h3>
+<p>Plot the line for Eastern Europe’s tourism numbers. We format the line by:</p>
+<ul class="simple">
+<li><p>specifying a color in RGB format</p></li>
+<li><p>specify a width</p></li>
+<li><p>use a dotted line using the ‘dash’ attribute</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">trace1</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span>
+    
+    <span class="n">x</span> <span class="o">=</span> <span class="n">tourism_data</span><span class="p">[</span><span class="s1">&#39;Year&#39;</span><span class="p">],</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">tourism_data</span><span class="p">[</span><span class="s1">&#39;Eastern&#39;</span><span class="p">],</span>
+    
+    <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;Eastern Europe&#39;</span><span class="p">,</span>
+    
+    <span class="n">line</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">color</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;rgb(205, 12, 24)&#39;</span><span class="p">),</span>
+                <span class="n">width</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span>
+                <span class="n">dash</span><span class="o">=</span><span class="s1">&#39;dot&#39;</span><span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="the-last-trace">
+<h3>The last trace<a class="headerlink" href="#the-last-trace" title="Permalink to this headline">¶</a></h3>
+<p>Plot a line for Southern Europe’s tourism numbers. We format the line by:</p>
+<ul class="simple">
+<li><p>specifying a color in RGBA format, with an alpha of 191/255</p></li>
+<li><p>specify a width</p></li>
+<li><p>this will be a dashed line</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">trace2</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span>
+    
+    <span class="n">x</span> <span class="o">=</span> <span class="n">tourism_data</span><span class="p">[</span><span class="s1">&#39;Year&#39;</span><span class="p">],</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">tourism_data</span><span class="p">[</span><span class="s1">&#39;Southern&#39;</span><span class="p">],</span>
+    
+    <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;Southern Europe&#39;</span><span class="p">,</span>
+    
+    <span class="n">line</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">color</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;rgba(2, 12, 240, 191)&#39;</span><span class="p">),</span>
+                <span class="n">width</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span>
+                <span class="n">dash</span> <span class="o">=</span> <span class="s1">&#39;dash&#39;</span><span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="define-the-data-and-layout">
+<h3>Define the data and layout<a class="headerlink" href="#define-the-data-and-layout" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="n">trace0</span><span class="p">,</span> <span class="n">trace1</span><span class="p">,</span> <span class="n">trace2</span><span class="p">]</span>
+
+<span class="n">layout</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;International Tourist Arrivals (millions)&#39;</span><span class="p">,</span>
+              <span class="n">xaxis</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;Year&#39;</span><span class="p">),</span>
+              <span class="n">yaxis</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;Tourists&#39;</span><span class="p">),</span>
+              <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="define-and-plot-the-figure">
+<h3>Define and plot the figure<a class="headerlink" href="#define-and-plot-the-figure" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> <span class="n">layout</span><span class="o">=</span><span class="n">layout</span><span class="p">)</span>
+
+<span class="n">offline</span><span class="o">.</span><span class="n">iplot</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div id="31074821-903e-4875-8fc5-ab48e3f3b10e" style="height: 525px; width: 100%;" class="plotly-graph-div"></div><script type="text/javascript">require(["plotly"], function(Plotly) { window.PLOTLYENV=window.PLOTLYENV || {};window.PLOTLYENV.BASE_URL="https://plot.ly";Plotly.newPlot("31074821-903e-4875-8fc5-ab48e3f3b10e", [{"type": "scatter", "x": [1990, 1995, 2000, 2005, 2010, 2015], "y": [108.6, 112.2, 139.7, 141.7, 154.4, 181.4], "name": "Western Europe", "line": {"color": "rgb(0, 250, 24)", "width": 4}}, {"type": "scatter", "x": [1990, 1995, 2000, 2005, 2010, 2015], "y": [33.9, 58.9, 69.6, 95.3, 98.5, 121.4], "name": "Eastern Europe", "line": {"color": "rgb(205, 12, 24)", "width": 4, "dash": "dot"}}, {"type": "scatter", "x": [1990, 1995, 2000, 2005, 2010, 2015], "y": [90.3, 96.0, 132.6, 156.4, 173.3, 225.5], "name": "Southern Europe", "line": {"color": "rgba(2, 12, 240, 191)", "width": 4, "dash": "dash"}}], {"title": "International Tourist Arrivals (millions)", "xaxis": {"title": "Year"}, "yaxis": {"title": "Tourists"}}, {"showLink": true, "linkText": "Export to plot.ly"})});</script></div></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="connect-data-gaps">
+<h1>Connect Data Gaps<a class="headerlink" href="#connect-data-gaps" title="Permalink to this headline">¶</a></h1>
+<p>Plotly can handle cases where the series to be plotted has missing data. It does so by connecting the points on either side of the missing data points.</p>
+<p>To see this in action, we introduce missing data into our data set. Assume the tourism numbers for the year 2000 are unavailable for some reason.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tourism_data</span><span class="p">[</span><span class="s1">&#39;Western&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iat</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">tourism_data</span><span class="p">[</span><span class="s1">&#39;Eastern&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iat</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">tourism_data</span><span class="p">[</span><span class="s1">&#39;Southern&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iat</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+
+<span class="n">tourism_data</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Year</th>
+      <th>Western</th>
+      <th>Eastern</th>
+      <th>Southern</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1990</td>
+      <td>108.6</td>
+      <td>33.9</td>
+      <td>90.3</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1995</td>
+      <td>112.2</td>
+      <td>58.9</td>
+      <td>96.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2000</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2005</td>
+      <td>141.7</td>
+      <td>95.3</td>
+      <td>156.4</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2010</td>
+      <td>154.4</td>
+      <td>98.5</td>
+      <td>173.3</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>2015</td>
+      <td>181.4</td>
+      <td>121.4</td>
+      <td>225.5</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="section" id="for-the-first-trace-we-fill-in-the-gap">
+<h2>For the first trace, we fill in the gap<a class="headerlink" href="#for-the-first-trace-we-fill-in-the-gap" title="Permalink to this headline">¶</a></h2>
+<p>By setting the connectgaps attribute to True, the line will remain continuous</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">trace0</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span>
+    
+    <span class="n">x</span> <span class="o">=</span> <span class="n">tourism_data</span><span class="p">[</span><span class="s1">&#39;Year&#39;</span><span class="p">],</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">tourism_data</span><span class="p">[</span><span class="s1">&#39;Western&#39;</span><span class="p">],</span>
+    
+    <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;Western Europe&#39;</span><span class="p">,</span>
+    
+    <span class="n">line</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">color</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;rgb(0, 250, 24)&#39;</span><span class="p">),</span>
+                <span class="n">width</span> <span class="o">=</span> <span class="mi">4</span><span class="p">),</span>
+    
+    <span class="n">connectgaps</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="for-the-second-trace-we-don-t-fill-the-gap">
+<h2>For the second trace, we don’t fill the gap<a class="headerlink" href="#for-the-second-trace-we-don-t-fill-the-gap" title="Permalink to this headline">¶</a></h2>
+<p>We explicitly set connectgaps to False. This will result in a gap in the line</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">trace1</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span>
+    
+    <span class="n">x</span> <span class="o">=</span> <span class="n">tourism_data</span><span class="p">[</span><span class="s1">&#39;Year&#39;</span><span class="p">],</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">tourism_data</span><span class="p">[</span><span class="s1">&#39;Eastern&#39;</span><span class="p">],</span>
+    
+    <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;Eastern Europe&#39;</span><span class="p">,</span>
+    
+    <span class="n">line</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">color</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;rgb(205, 12, 24)&#39;</span><span class="p">),</span>
+                <span class="n">width</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span>
+                <span class="n">dash</span><span class="o">=</span><span class="s1">&#39;dot&#39;</span><span class="p">),</span>
+    
+    <span class="n">connectgaps</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="for-the-third-trace-we-don-t-specify-the-value-explicitly">
+<h2>For the third trace, we don’t specify the value explicitly<a class="headerlink" href="#for-the-third-trace-we-don-t-specify-the-value-explicitly" title="Permalink to this headline">¶</a></h2>
+<p>The default value of connectgaps is False, so the line is disconnected</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">trace2</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span>
+    
+    <span class="n">x</span> <span class="o">=</span> <span class="n">tourism_data</span><span class="p">[</span><span class="s1">&#39;Year&#39;</span><span class="p">],</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">tourism_data</span><span class="p">[</span><span class="s1">&#39;Southern&#39;</span><span class="p">],</span>
+    
+    <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;Southern Europe&#39;</span><span class="p">,</span>
+    
+    <span class="n">line</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">color</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;rgba(2, 12, 240, 191)&#39;</span><span class="p">),</span>
+                <span class="n">width</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span>
+                <span class="n">dash</span> <span class="o">=</span> <span class="s1">&#39;dash&#39;</span><span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="n">trace0</span><span class="p">,</span> <span class="n">trace1</span><span class="p">,</span> <span class="n">trace2</span><span class="p">]</span>
+
+<span class="n">layout</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;International Tourist Arrivals (millions)&#39;</span><span class="p">,</span>
+              <span class="n">xaxis</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;Year&#39;</span><span class="p">),</span>
+              <span class="n">yaxis</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;Tourists&#39;</span><span class="p">),</span>
+              <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> <span class="n">layout</span><span class="o">=</span><span class="n">layout</span><span class="p">)</span>
+
+<span class="n">offline</span><span class="o">.</span><span class="n">iplot</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div id="e75f36d8-6b81-4c26-af54-80c394caf063" style="height: 525px; width: 100%;" class="plotly-graph-div"></div><script type="text/javascript">require(["plotly"], function(Plotly) { window.PLOTLYENV=window.PLOTLYENV || {};window.PLOTLYENV.BASE_URL="https://plot.ly";Plotly.newPlot("e75f36d8-6b81-4c26-af54-80c394caf063", [{"type": "scatter", "x": [1990, 1995, 2000, 2005, 2010, 2015], "y": [108.6, 112.2, null, 141.7, 154.4, 181.4], "name": "Western Europe", "line": {"color": "rgb(0, 250, 24)", "width": 4}, "connectgaps": true}, {"type": "scatter", "x": [1990, 1995, 2000, 2005, 2010, 2015], "y": [33.9, 58.9, null, 95.3, 98.5, 121.4], "name": "Eastern Europe", "line": {"color": "rgb(205, 12, 24)", "width": 4, "dash": "dot"}, "connectgaps": false}, {"type": "scatter", "x": [1990, 1995, 2000, 2005, 2010, 2015], "y": [90.3, 96.0, null, 156.4, 173.3, 225.5], "name": "Southern Europe", "line": {"color": "rgba(2, 12, 240, 191)", "width": 4, "dash": "dash"}}], {"title": "International Tourist Arrivals (millions)", "xaxis": {"title": "Year"}, "yaxis": {"title": "Tourists"}}, {"showLink": true, "linkText": "Export to plot.ly"})});</script></div></div>
+</div>
+</div>
+<div class="section" id="plots-with-annotations">
+<h2>Plots with Annotations<a class="headerlink" href="#plots-with-annotations" title="Permalink to this headline">¶</a></h2>
+<p>Plotly allows different forms of annotations to be added to a plot. We create a list of annotations which is later added to the layout</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">annotations</span> <span class="o">=</span> <span class="p">[]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="annotation-without-an-arrow">
+<h3>Annotation without an arrow<a class="headerlink" href="#annotation-without-an-arrow" title="Permalink to this headline">¶</a></h3>
+<p>The attributes for an annotation include:</p>
+<ul class="simple">
+<li><p>The x and y coordinates where the annotation will appear</p></li>
+<li><p>the x and y anchor values which determine which part of the annotation will be anchored to the (x,y) coordinates</p></li>
+<li><p>The annotation text</p></li>
+<li><p>The font of the annotation text</p></li>
+<li><p>showarrow determines whether an arrow is used to point to (x,y)</p></li>
+</ul>
+<p>This annotation marks the international tourist number for Western Europe at the beginning of our series - 1990.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">annotations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">tourism_data</span><span class="p">[</span><span class="s1">&#39;Year&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> 
+                        <span class="n">y</span> <span class="o">=</span> <span class="n">tourism_data</span><span class="p">[</span><span class="s1">&#39;Western&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span>
+                            
+                        <span class="n">xanchor</span><span class="o">=</span><span class="s1">&#39;right&#39;</span><span class="p">,</span> 
+                        <span class="n">yanchor</span><span class="o">=</span><span class="s1">&#39;middle&#39;</span><span class="p">,</span>
+                            
+                        <span class="n">text</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">tourism_data</span><span class="p">[</span><span class="s1">&#39;Western&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span> <span class="o">+</span> <span class="s1">&#39;M&#39;</span><span class="p">,</span>
+                            
+                        <span class="n">font</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">family</span> <span class="o">=</span> <span class="s1">&#39;Arial&#39;</span><span class="p">,</span>
+                                  <span class="n">size</span> <span class="o">=</span> <span class="mi">16</span><span class="p">,</span>
+                                  <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;grey&#39;</span>
+                                 <span class="p">),</span>
+                                  
+                        <span class="n">showarrow</span> <span class="o">=</span> <span class="kc">False</span>
+                       <span class="p">)</span>
+                  <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="the-second-annotation-has-an-arrow">
+<h3>The second annotation has an arrow<a class="headerlink" href="#the-second-annotation-has-an-arrow" title="Permalink to this headline">¶</a></h3>
+<p>An arrow will be drawn from the xanchor,yanchor of the annotation text to the (x,y) point. We also have an arrowcolor.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">annotations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">tourism_data</span><span class="p">[</span><span class="s1">&#39;Year&#39;</span><span class="p">][</span><span class="mi">5</span><span class="p">],</span> 
+                        <span class="n">y</span> <span class="o">=</span> <span class="n">tourism_data</span><span class="p">[</span><span class="s1">&#39;Eastern&#39;</span><span class="p">][</span><span class="mi">5</span><span class="p">],</span>
+                            
+                        <span class="n">xanchor</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> 
+                        <span class="n">yanchor</span><span class="o">=</span><span class="s1">&#39;bottom&#39;</span><span class="p">,</span>
+                            
+                        <span class="n">text</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">tourism_data</span><span class="p">[</span><span class="s1">&#39;Eastern&#39;</span><span class="p">][</span><span class="mi">5</span><span class="p">])</span> <span class="o">+</span> <span class="s1">&#39;M&#39;</span><span class="p">,</span>
+                            
+                        <span class="n">font</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">family</span> <span class="o">=</span> <span class="s1">&#39;Arial&#39;</span><span class="p">,</span>
+                                  <span class="n">size</span> <span class="o">=</span> <span class="mi">16</span><span class="p">,</span>
+                                  <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;grey&#39;</span><span class="p">),</span>
+                                  
+                        <span class="n">showarrow</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+                        <span class="n">arrowcolor</span> <span class="o">=</span> <span class="s1">&#39;grey&#39;</span>
+                       <span class="p">)</span>
+                  <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="the-third-annotation-uses-the-yref-attribute">
+<h3>The third annotation uses the yref attribute<a class="headerlink" href="#the-third-annotation-uses-the-yref-attribute" title="Permalink to this headline">¶</a></h3>
+<p>By default, when we specify x and y values for the annotation, it is used to mark the (x,y) points using the units of the axis (#tourists vs year in our graph). When xref or yref is set to ‘paper’, the corresponding x or y coordinate is scaled to a value between 0 and 1.</p>
+<p>Here, we want the annotation to appear 80% of the way up in the plot.</p>
+<p>Each annotation also appears in a text box which is actually transparent. Here, we set a background color for the text box.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">annotations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="n">yref</span><span class="o">=</span><span class="s1">&#39;paper&#39;</span><span class="p">,</span> 
+                        
+                        <span class="n">x</span> <span class="o">=</span> <span class="mi">2000</span><span class="p">,</span> 
+                        <span class="n">y</span> <span class="o">=</span> <span class="mf">0.8</span><span class="p">,</span>
+                        
+                        <span class="n">text</span> <span class="o">=</span> <span class="s1">&#39;Data missing for year 2000&#39;</span><span class="p">,</span>
+                        
+                        <span class="n">font</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">family</span> <span class="o">=</span> <span class="s1">&#39;Times New Roman&#39;</span><span class="p">,</span>
+                                  <span class="n">size</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span>
+                                  <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;white&#39;</span><span class="p">),</span> 
+                        
+                        <span class="n">bgcolor</span> <span class="o">=</span> <span class="s1">&#39;purple&#39;</span><span class="p">,</span>
+                        
+                        <span class="n">showarrow</span> <span class="o">=</span> <span class="kc">False</span>
+                       <span class="p">)</span>
+                  <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="add-the-annotations-to-our-layout">
+<h3>Add the annotations to our layout<a class="headerlink" href="#add-the-annotations-to-our-layout" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">layout</span><span class="p">[</span><span class="s1">&#39;annotations&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">annotations</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="plot-the-figure-with-the-data-and-layout-with-annotations">
+<h3>Plot the figure with the data and layout with annotations<a class="headerlink" href="#plot-the-figure-with-the-data-and-layout-with-annotations" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> 
+           <span class="n">layout</span><span class="o">=</span><span class="n">layout</span><span class="p">)</span>
+
+<span class="n">offline</span><span class="o">.</span><span class="n">iplot</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div id="0e5a894d-5f8e-446f-9104-407cc4079376" style="height: 525px; width: 100%;" class="plotly-graph-div"></div><script type="text/javascript">require(["plotly"], function(Plotly) { window.PLOTLYENV=window.PLOTLYENV || {};window.PLOTLYENV.BASE_URL="https://plot.ly";Plotly.newPlot("0e5a894d-5f8e-446f-9104-407cc4079376", [{"type": "scatter", "x": [1990, 1995, 2000, 2005, 2010, 2015], "y": [108.6, 112.2, null, 141.7, 154.4, 181.4], "name": "Western Europe", "line": {"color": "rgb(0, 250, 24)", "width": 4}, "connectgaps": true}, {"type": "scatter", "x": [1990, 1995, 2000, 2005, 2010, 2015], "y": [33.9, 58.9, null, 95.3, 98.5, 121.4], "name": "Eastern Europe", "line": {"color": "rgb(205, 12, 24)", "width": 4, "dash": "dot"}, "connectgaps": false}, {"type": "scatter", "x": [1990, 1995, 2000, 2005, 2010, 2015], "y": [90.3, 96.0, null, 156.4, 173.3, 225.5], "name": "Southern Europe", "line": {"color": "rgba(2, 12, 240, 191)", "width": 4, "dash": "dash"}}], {"title": "International Tourist Arrivals (millions)", "xaxis": {"title": "Year"}, "yaxis": {"title": "Tourists"}, "annotations": [{"x": 1990, "y": 108.6, "xanchor": "right", "yanchor": "middle", "text": "108.6M", "font": {"family": "Arial", "size": 16, "color": "grey"}, "showarrow": false}, {"x": 2015, "y": 121.4, "xanchor": "left", "yanchor": "bottom", "text": "121.4M", "font": {"family": "Arial", "size": 16, "color": "grey"}, "showarrow": true, "arrowcolor": "grey"}, {"yref": "paper", "x": 2000, "y": 0.8, "text": "Data missing for year 2000", "font": {"family": "Times New Roman", "size": 20, "color": "white"}, "bgcolor": "purple", "showarrow": false}]}, {"showLink": true, "linkText": "Export to plot.ly"})});</script></div></div>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "hossainlab/dataviz",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./plotly"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            
+
+
+
+<div class='prev-next-bottom'>
+    
+
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Jubayer Hossain<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>

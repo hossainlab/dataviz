@@ -1,0 +1,1624 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Data Visualization with Pandas and Matplotlib &#8212; Data Visualization with Python</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet" />
+  <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.e8f53015daec13862f6db5e763c41738.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe,.cell"
+        const thebe_selector_input = "pre,.cell_input div.highlight"
+        const thebe_selector_output = ".output,.cell_output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="shortcut icon" href="../_static/logo.jpg"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      <img src="../_static/logo.jpg" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Data Visualization with Python</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <p class="caption">
+ <span class="caption-text">
+  Matplotlib
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../matplotlib/00-Intro%20to%20Data%20Visualization.html">
+   Intro to Data Visualization with Matplotlib
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../matplotlib/02_InteractiveBackends.html">
+     Backends
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/intro/MPL02-Data Visualization with Pandas and Matplotlib.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/hossainlab/dataviz/"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/hossainlab/dataviz/master?urlpath=tree/book/intro/MPL02-Data Visualization with Pandas and Matplotlib.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/hossainlab/dataviz/blob/master/book/intro/MPL02-Data Visualization with Pandas and Matplotlib.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        <button type="button" class="btn btn-secondary topbarbtn"
+            onclick="initThebeSBT()" title="Launch Thebe" data-toggle="tooltip" data-placement="left"><i
+                class="fas fa-play"></i><span style="margin-left: .4em;">Live Code</span></button>
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#data-exploration">
+   Data Exploration
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#histogram-show-the-distribution-of-a-numerical-variable">
+   Histogram: show the distribution of a numerical variable
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#scatter-plot-show-the-relationship-between-two-numerical-variables">
+   Scatter Plot: show the relationship between two numerical variables
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#bar-plot-show-a-numerical-comparison-across-different-categories">
+   Bar Plot: show a numerical comparison across different categories
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#box-plot-show-quartiles-and-outliers-for-one-or-more-numerical-variables">
+   Box Plot: show quartiles (and outliers) for one or more numerical variables
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#line-plot-show-the-trend-of-a-numerical-variable-over-time">
+   Line Plot: show the trend of a numerical variable over time
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#grouped-box-plots-show-one-box-plot-for-each-group">
+   Grouped Box Plots: show one box plot for each group
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#grouped-histograms-show-one-histogram-for-each-group">
+   Grouped Histograms: show one histogram for each group
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#assorted-functionality">
+   Assorted Functionality
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="data-visualization-with-pandas-and-matplotlib">
+<h1>Data Visualization with Pandas and Matplotlib<a class="headerlink" href="#data-visualization-with-pandas-and-matplotlib" title="Permalink to this headline">¶</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># import library </span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span> 
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span> 
+
+<span class="c1"># display plot in the notebook </span>
+<span class="o">%</span><span class="k">matplotlib</span> inline 
+
+<span class="c1"># set figuresize and fontsize </span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;figure.figsize&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">)</span> 
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.size&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">14</span> 
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># read data </span>
+<span class="n">drink_cols</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;country&quot;</span><span class="p">,</span> <span class="s1">&#39;beer&#39;</span><span class="p">,</span> <span class="s1">&#39;spirit&#39;</span><span class="p">,</span> <span class="s1">&#39;wine&#39;</span><span class="p">,</span> <span class="s1">&#39;liters&#39;</span><span class="p">,</span> <span class="s1">&#39;continent&#39;</span><span class="p">]</span>
+<span class="n">drinks</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../data/drinks.csv&quot;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="n">drink_cols</span><span class="p">,</span> <span class="n">na_filter</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="data-exploration">
+<h2>Data Exploration<a class="headerlink" href="#data-exploration" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># examine first few rows </span>
+<span class="n">drinks</span><span class="o">.</span><span class="n">head</span><span class="p">()</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>country</th>
+      <th>beer</th>
+      <th>spirit</th>
+      <th>wine</th>
+      <th>liters</th>
+      <th>continent</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Afghanistan</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.0</td>
+      <td>AS</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Albania</td>
+      <td>89</td>
+      <td>132</td>
+      <td>54</td>
+      <td>4.9</td>
+      <td>EU</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Algeria</td>
+      <td>25</td>
+      <td>0</td>
+      <td>14</td>
+      <td>0.7</td>
+      <td>AF</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Andorra</td>
+      <td>245</td>
+      <td>138</td>
+      <td>312</td>
+      <td>12.4</td>
+      <td>EU</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Angola</td>
+      <td>217</td>
+      <td>57</td>
+      <td>45</td>
+      <td>5.9</td>
+      <td>AF</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># observations and columns </span>
+<span class="n">drinks</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(193, 6)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># data structure </span>
+<span class="n">drinks</span><span class="o">.</span><span class="n">info</span><span class="p">()</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+RangeIndex: 193 entries, 0 to 192
+Data columns (total 6 columns):
+ #   Column     Non-Null Count  Dtype  
+---  ------     --------------  -----  
+ 0   country    193 non-null    object 
+ 1   beer       193 non-null    int64  
+ 2   spirit     193 non-null    int64  
+ 3   wine       193 non-null    int64  
+ 4   liters     193 non-null    float64
+ 5   continent  193 non-null    object 
+dtypes: float64(1), int64(3), object(2)
+memory usage: 9.2+ KB
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># numerical summary </span>
+<span class="n">drinks</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>beer</th>
+      <th>spirit</th>
+      <th>wine</th>
+      <th>liters</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>193.000000</td>
+      <td>193.000000</td>
+      <td>193.000000</td>
+      <td>193.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>106.160622</td>
+      <td>80.994819</td>
+      <td>49.450777</td>
+      <td>4.717098</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>101.143103</td>
+      <td>88.284312</td>
+      <td>79.697598</td>
+      <td>3.773298</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>20.000000</td>
+      <td>4.000000</td>
+      <td>1.000000</td>
+      <td>1.300000</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>76.000000</td>
+      <td>56.000000</td>
+      <td>8.000000</td>
+      <td>4.200000</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>188.000000</td>
+      <td>128.000000</td>
+      <td>59.000000</td>
+      <td>7.200000</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>376.000000</td>
+      <td>438.000000</td>
+      <td>370.000000</td>
+      <td>14.400000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</div>
+<div class="section" id="histogram-show-the-distribution-of-a-numerical-variable">
+<h2>Histogram: show the distribution of a numerical variable<a class="headerlink" href="#histogram-show-the-distribution-of-a-numerical-variable" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># sort the beer columns and split it into 3 groups </span>
+<span class="n">drinks</span><span class="o">.</span><span class="n">beer</span><span class="o">.</span><span class="n">sort_values</span><span class="p">()</span><span class="o">.</span><span class="n">values</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([  0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,
+         0,   0,   1,   1,   1,   1,   2,   3,   5,   5,   5,   5,   5,
+         6,   6,   6,   6,   8,   8,   8,   9,   9,   9,   9,  12,  13,
+        15,  15,  16,  16,  17,  18,  19,  19,  20,  20,  21,  21,  21,
+        21,  22,  23,  25,  25,  25,  25,  26,  28,  31,  31,  31,  31,
+        32,  32,  34,  36,  36,  36,  37,  42,  42,  43,  44,  45,  47,
+        49,  51,  51,  52,  52,  52,  53,  56,  56,  57,  58,  60,  62,
+        62,  63,  64,  69,  71,  76,  76,  77,  77,  77,  78,  79,  82,
+        82,  85,  88,  89,  90,  92,  93,  93,  98,  99, 102, 105, 106,
+       109, 111, 115, 120, 122, 124, 127, 128, 130, 133, 140, 142, 143,
+       144, 147, 149, 149, 152, 157, 159, 162, 163, 167, 169, 171, 173,
+       185, 188, 192, 193, 193, 194, 194, 196, 197, 199, 203, 206, 213,
+       217, 219, 224, 224, 225, 230, 231, 233, 234, 236, 238, 240, 245,
+       245, 247, 249, 251, 261, 263, 263, 270, 279, 281, 283, 284, 285,
+       295, 297, 306, 313, 333, 343, 343, 346, 347, 361, 376])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># compare with histogram </span>
+<span class="n">drinks</span><span class="o">.</span><span class="n">beer</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s2">&quot;hist&quot;</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">3</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/MPL02-Data Visualization with Pandas and Matplotlib_10_0.png" src="../_images/MPL02-Data Visualization with Pandas and Matplotlib_10_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># try more bins </span>
+<span class="n">drinks</span><span class="o">.</span><span class="n">beer</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s2">&quot;hist&quot;</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">20</span><span class="p">);</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/MPL02-Data Visualization with Pandas and Matplotlib_11_0.png" src="../_images/MPL02-Data Visualization with Pandas and Matplotlib_11_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># add title and labels </span>
+<span class="n">drinks</span><span class="o">.</span><span class="n">beer</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s2">&quot;hist&quot;</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Histogram of Beer Servings&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Beer Survings&quot;</span><span class="p">)</span> 
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Frequency&quot;</span><span class="p">)</span>
+<span class="c1"># show plot </span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/MPL02-Data Visualization with Pandas and Matplotlib_12_0.png" src="../_images/MPL02-Data Visualization with Pandas and Matplotlib_12_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># compare with density plot(smooth version of a histogram) </span>
+<span class="n">drinks</span><span class="o">.</span><span class="n">beer</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s2">&quot;density&quot;</span><span class="p">,</span> <span class="n">xlim</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">500</span><span class="p">));</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/MPL02-Data Visualization with Pandas and Matplotlib_13_0.png" src="../_images/MPL02-Data Visualization with Pandas and Matplotlib_13_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="scatter-plot-show-the-relationship-between-two-numerical-variables">
+<h2>Scatter Plot: show the relationship between two numerical variables<a class="headerlink" href="#scatter-plot-show-the-relationship-between-two-numerical-variables" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># select the beer and wine columns and sort by beer </span>
+<span class="n">drinks</span><span class="p">[[</span><span class="s2">&quot;beer&quot;</span><span class="p">,</span> <span class="s2">&quot;wine&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s2">&quot;beer&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">values</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[  0,   0],
+       [  0,  74],
+       [  0,   0],
+       [  0,   0],
+       [  0,   0],
+       [  0,   0],
+       [  0,   0],
+       [  0,   0],
+       [  0,   0],
+       [  0,   0],
+       [  0,   0],
+       [  0,   0],
+       [  0,   0],
+       [  0,   0],
+       [  0,   0],
+       [  1,   7],
+       [  1,   1],
+       [  1,   4],
+       [  1,   1],
+       [  2,   0],
+       [  3,   1],
+       [  5,   0],
+       [  5,   0],
+       [  5,  16],
+       [  5,   1],
+       [  5,   0],
+       [  6,   1],
+       [  6,   0],
+       [  6,   1],
+       [  6,   9],
+       [  8,   0],
+       [  8,   1],
+       [  8,   1],
+       [  9,   2],
+       [  9,   0],
+       [  9,   7],
+       [  9,   0],
+       [ 12,  10],
+       [ 13,   0],
+       [ 15,   3],
+       [ 15,   1],
+       [ 16,   5],
+       [ 16,   0],
+       [ 17,   1],
+       [ 18,   0],
+       [ 19,  32],
+       [ 19,   2],
+       [ 20,   0],
+       [ 20,  31],
+       [ 21,  11],
+       [ 21,  11],
+       [ 21,   5],
+       [ 21,   1],
+       [ 22,   1],
+       [ 23,   0],
+       [ 25,   8],
+       [ 25,  14],
+       [ 25,   2],
+       [ 25,   7],
+       [ 26,   4],
+       [ 28,  21],
+       [ 31, 128],
+       [ 31,   6],
+       [ 31,  10],
+       [ 31,   1],
+       [ 32,   4],
+       [ 32,   1],
+       [ 34,  13],
+       [ 36,  19],
+       [ 36,   5],
+       [ 36,   1],
+       [ 37,   7],
+       [ 42,   2],
+       [ 42,   7],
+       [ 43,   0],
+       [ 44,   1],
+       [ 45,   0],
+       [ 47,   5],
+       [ 49,   8],
+       [ 51,  20],
+       [ 51,   7],
+       [ 52,   2],
+       [ 52, 149],
+       [ 52,  26],
+       [ 53,   2],
+       [ 56, 140],
+       [ 56,   1],
+       [ 57,   1],
+       [ 58,   2],
+       [ 60,  11],
+       [ 62,  18],
+       [ 62, 123],
+       [ 63,   9],
+       [ 64,   4],
+       [ 69,   2],
+       [ 71,   1],
+       [ 76,   8],
+       [ 76,   9],
+       [ 77,   8],
+       [ 77,  16],
+       [ 77,   1],
+       [ 78,   1],
+       [ 79,   8],
+       [ 82,   9],
+       [ 82,   0],
+       [ 85, 237],
+       [ 88,   0],
+       [ 89,  54],
+       [ 90,   2],
+       [ 92, 233],
+       [ 93,   5],
+       [ 93,   1],
+       [ 98,  18],
+       [ 99,   1],
+       [102,  45],
+       [105,  24],
+       [106,  86],
+       [109,  18],
+       [111,   1],
+       [115, 220],
+       [120,  11],
+       [122,  51],
+       [124,  12],
+       [127, 370],
+       [128,   7],
+       [130, 172],
+       [133, 218],
+       [140,   9],
+       [142,  42],
+       [143,  36],
+       [144,  16],
+       [147,   4],
+       [149, 120],
+       [149,  11],
+       [152, 186],
+       [157,  51],
+       [159,   3],
+       [162,   3],
+       [163,  21],
+       [167,   8],
+       [169, 129],
+       [171,  71],
+       [173,  35],
+       [185, 280],
+       [188,   7],
+       [192, 113],
+       [193,   9],
+       [193, 221],
+       [194, 339],
+       [194,  32],
+       [196, 116],
+       [197,   7],
+       [199,  28],
+       [203, 175],
+       [206,  45],
+       [213,  74],
+       [217,  45],
+       [219, 195],
+       [224,  59],
+       [224, 278],
+       [225,  81],
+       [230, 254],
+       [231,  94],
+       [233,  78],
+       [234, 185],
+       [236, 271],
+       [238,   5],
+       [240, 100],
+       [245, 312],
+       [245,  16],
+       [247,  73],
+       [249,  84],
+       [251, 190],
+       [261, 212],
+       [263,  97],
+       [263,   8],
+       [270, 276],
+       [279, 191],
+       [281,  62],
+       [283, 127],
+       [284, 112],
+       [285,  18],
+       [295, 212],
+       [297, 167],
+       [306,  23],
+       [313, 165],
+       [333,   3],
+       [343,  56],
+       [343,  56],
+       [346, 175],
+       [347,  59],
+       [361, 134],
+       [376,   1]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># comapre with scatter plot </span>
+<span class="n">drinks</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s2">&quot;scatter&quot;</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;beer&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;wine&quot;</span><span class="p">);</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/MPL02-Data Visualization with Pandas and Matplotlib_16_0.png" src="../_images/MPL02-Data Visualization with Pandas and Matplotlib_16_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># add transparency </span>
+<span class="n">drinks</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;scatter&#39;</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;beer&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;wine&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">);</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/MPL02-Data Visualization with Pandas and Matplotlib_17_0.png" src="../_images/MPL02-Data Visualization with Pandas and Matplotlib_17_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># vary point color by spirit servings </span>
+<span class="n">drinks</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s2">&quot;scatter&quot;</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;beer&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;wine&quot;</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s2">&quot;spirit&quot;</span><span class="p">,</span> <span class="n">colormap</span><span class="o">=</span><span class="s2">&quot;Blues&quot;</span><span class="p">);</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/MPL02-Data Visualization with Pandas and Matplotlib_18_0.png" src="../_images/MPL02-Data Visualization with Pandas and Matplotlib_18_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># scatter matrix of 3 numerical columns </span>
+<span class="n">pd</span><span class="o">.</span><span class="n">plotting</span><span class="o">.</span><span class="n">scatter_matrix</span><span class="p">(</span><span class="n">drinks</span><span class="p">[[</span><span class="s1">&#39;beer&#39;</span><span class="p">,</span> <span class="s1">&#39;wine&#39;</span><span class="p">,</span> <span class="s1">&#39;spirit&#39;</span><span class="p">]]);</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/MPL02-Data Visualization with Pandas and Matplotlib_19_0.png" src="../_images/MPL02-Data Visualization with Pandas and Matplotlib_19_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># increase figure size </span>
+<span class="c1"># scatter matrix of 3 numerical columns </span>
+<span class="n">pd</span><span class="o">.</span><span class="n">plotting</span><span class="o">.</span><span class="n">scatter_matrix</span><span class="p">(</span><span class="n">drinks</span><span class="p">[[</span><span class="s1">&#39;beer&#39;</span><span class="p">,</span> <span class="s1">&#39;wine&#39;</span><span class="p">,</span> <span class="s1">&#39;spirit&#39;</span><span class="p">]],</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">8</span><span class="p">));</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/MPL02-Data Visualization with Pandas and Matplotlib_20_0.png" src="../_images/MPL02-Data Visualization with Pandas and Matplotlib_20_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="bar-plot-show-a-numerical-comparison-across-different-categories">
+<h2>Bar Plot: show a numerical comparison across different categories<a class="headerlink" href="#bar-plot-show-a-numerical-comparison-across-different-categories" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># count the number of countries in each continent </span>
+<span class="n">drinks</span><span class="o">.</span><span class="n">continent</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>AF    53
+EU    45
+AS    44
+NA    23
+OC    16
+SA    12
+Name: continent, dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># compare with bar plot </span>
+<span class="n">drinks</span><span class="o">.</span><span class="n">continent</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s2">&quot;bar&quot;</span><span class="p">);</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/MPL02-Data Visualization with Pandas and Matplotlib_23_0.png" src="../_images/MPL02-Data Visualization with Pandas and Matplotlib_23_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># calculate the mean alcohol amounts for each continent </span>
+<span class="n">drinks</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;continent&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>beer</th>
+      <th>spirit</th>
+      <th>wine</th>
+      <th>liters</th>
+    </tr>
+    <tr>
+      <th>continent</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>AF</th>
+      <td>61.471698</td>
+      <td>16.339623</td>
+      <td>16.264151</td>
+      <td>3.007547</td>
+    </tr>
+    <tr>
+      <th>AS</th>
+      <td>37.045455</td>
+      <td>60.840909</td>
+      <td>9.068182</td>
+      <td>2.170455</td>
+    </tr>
+    <tr>
+      <th>EU</th>
+      <td>193.777778</td>
+      <td>132.555556</td>
+      <td>142.222222</td>
+      <td>8.617778</td>
+    </tr>
+    <tr>
+      <th>NA</th>
+      <td>145.434783</td>
+      <td>165.739130</td>
+      <td>24.521739</td>
+      <td>5.995652</td>
+    </tr>
+    <tr>
+      <th>OC</th>
+      <td>89.687500</td>
+      <td>58.437500</td>
+      <td>35.625000</td>
+      <td>3.381250</td>
+    </tr>
+    <tr>
+      <th>SA</th>
+      <td>175.083333</td>
+      <td>114.750000</td>
+      <td>62.416667</td>
+      <td>6.308333</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># side-by-side bar plots </span>
+<span class="n">drinks</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;continent&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;bar&#39;</span><span class="p">);</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/MPL02-Data Visualization with Pandas and Matplotlib_25_0.png" src="../_images/MPL02-Data Visualization with Pandas and Matplotlib_25_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># drop the liters column</span>
+<span class="n">drinks</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;continent&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;liters&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;bar&#39;</span><span class="p">);</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/MPL02-Data Visualization with Pandas and Matplotlib_26_0.png" src="../_images/MPL02-Data Visualization with Pandas and Matplotlib_26_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># stacked bar plots </span>
+<span class="n">drinks</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;continent&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;liters&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;bar&#39;</span><span class="p">,</span> <span class="n">stacked</span><span class="o">=</span><span class="kc">True</span><span class="p">);</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/MPL02-Data Visualization with Pandas and Matplotlib_27_0.png" src="../_images/MPL02-Data Visualization with Pandas and Matplotlib_27_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="box-plot-show-quartiles-and-outliers-for-one-or-more-numerical-variables">
+<h2>Box Plot: show quartiles (and outliers) for one or more numerical variables<a class="headerlink" href="#box-plot-show-quartiles-and-outliers-for-one-or-more-numerical-variables" title="Permalink to this headline">¶</a></h2>
+<p><strong>Five-Number Summary</strong></p>
+<ul class="simple">
+<li><p>min = minimum value</p></li>
+<li><p>5% = first quartile (Q1) = median of the lower half of the data</p></li>
+<li><p>50% = second quartile (Q2) = median of the data</p></li>
+<li><p>75% = third quartile (Q3) = median of the upper half of the data</p></li>
+<li><p>max = maximum value
+(More useful than mean and standard deviation for describing skewed distributions)</p></li>
+<li><p>Interquartile Range (IQR) = Q3 - Q1</p></li>
+</ul>
+<p><strong>Outliers</strong></p>
+<ul class="simple">
+<li><p>below Q1 - 1.5 * IQR</p></li>
+<li><p>above Q3 + 1.5 * IQR</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># sort the spirit column </span>
+<span class="n">drinks</span><span class="o">.</span><span class="n">spirit</span><span class="o">.</span><span class="n">sort_values</span><span class="p">()</span><span class="o">.</span><span class="n">values</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([  0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,
+         0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   1,   1,   1,
+         1,   1,   1,   1,   1,   1,   2,   2,   2,   2,   2,   2,   2,
+         3,   3,   3,   3,   3,   3,   3,   3,   4,   4,   4,   5,   5,
+         6,   6,   6,   7,   9,  11,  11,  12,  13,  15,  15,  16,  16,
+        18,  18,  18,  18,  19,  21,  21,  22,  22,  25,  25,  27,  29,
+        31,  31,  34,  35,  35,  35,  35,  38,  39,  41,  41,  42,  42,
+        44,  46,  50,  51,  55,  56,  57,  60,  61,  63,  63,  65,  67,
+        68,  69,  69,  69,  71,  71,  72,  74,  75,  76,  76,  79,  81,
+        84,  87,  87,  88,  97,  97,  98,  98, 100, 100, 100, 100, 101,
+       104, 104, 112, 114, 114, 114, 117, 117, 118, 118, 122, 122, 124,
+       126, 128, 131, 132, 133, 133, 135, 137, 138, 145, 147, 151, 152,
+       154, 156, 157, 158, 160, 170, 173, 173, 176, 178, 179, 186, 189,
+       192, 194, 200, 202, 205, 215, 215, 216, 221, 226, 237, 244, 246,
+       252, 254, 258, 286, 293, 302, 315, 326, 326, 373, 438])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># show five-number summary of spirit </span>
+<span class="n">drinks</span><span class="o">.</span><span class="n">spirit</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>count    193.000000
+mean      80.994819
+std       88.284312
+min        0.000000
+25%        4.000000
+50%       56.000000
+75%      128.000000
+max      438.000000
+Name: spirit, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># compare with boxplot </span>
+<span class="n">drinks</span><span class="o">.</span><span class="n">spirit</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;box&#39;</span><span class="p">);</span>  
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/MPL02-Data Visualization with Pandas and Matplotlib_31_0.png" src="../_images/MPL02-Data Visualization with Pandas and Matplotlib_31_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># include multiple variables </span>
+<span class="n">drinks</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;liters&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;box&#39;</span><span class="p">);</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/MPL02-Data Visualization with Pandas and Matplotlib_32_0.png" src="../_images/MPL02-Data Visualization with Pandas and Matplotlib_32_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="line-plot-show-the-trend-of-a-numerical-variable-over-time">
+<h2>Line Plot: show the trend of a numerical variable over time<a class="headerlink" href="#line-plot-show-the-trend-of-a-numerical-variable-over-time" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># read ufo data </span>
+<span class="n">ufo</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../data/ufo.csv&quot;</span><span class="p">)</span>
+<span class="n">ufo</span><span class="p">[</span><span class="s1">&#39;Time&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">ufo</span><span class="o">.</span><span class="n">Time</span><span class="p">)</span> 
+<span class="n">ufo</span><span class="p">[</span><span class="s1">&#39;Year&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ufo</span><span class="o">.</span><span class="n">Time</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">year</span> 
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># examine first few rows  </span>
+<span class="n">ufo</span><span class="o">.</span><span class="n">head</span><span class="p">()</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>City</th>
+      <th>Colors Reported</th>
+      <th>Shape Reported</th>
+      <th>State</th>
+      <th>Time</th>
+      <th>Year</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Ithaca</td>
+      <td>NaN</td>
+      <td>TRIANGLE</td>
+      <td>NY</td>
+      <td>1930-06-01 22:00:00</td>
+      <td>1930</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Willingboro</td>
+      <td>NaN</td>
+      <td>OTHER</td>
+      <td>NJ</td>
+      <td>1930-06-30 20:00:00</td>
+      <td>1930</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Holyoke</td>
+      <td>NaN</td>
+      <td>OVAL</td>
+      <td>CO</td>
+      <td>1931-02-15 14:00:00</td>
+      <td>1931</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Abilene</td>
+      <td>NaN</td>
+      <td>DISK</td>
+      <td>KS</td>
+      <td>1931-06-01 13:00:00</td>
+      <td>1931</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>New York Worlds Fair</td>
+      <td>NaN</td>
+      <td>LIGHT</td>
+      <td>NY</td>
+      <td>1933-04-18 19:00:00</td>
+      <td>1933</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># observations and columns </span>
+<span class="n">ufo</span><span class="o">.</span><span class="n">shape</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(80543, 6)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># data structure </span>
+<span class="n">ufo</span><span class="o">.</span><span class="n">info</span><span class="p">()</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+RangeIndex: 80543 entries, 0 to 80542
+Data columns (total 6 columns):
+ #   Column           Non-Null Count  Dtype         
+---  ------           --------------  -----         
+ 0   City             80496 non-null  object        
+ 1   Colors Reported  17034 non-null  object        
+ 2   Shape Reported   72141 non-null  object        
+ 3   State            80543 non-null  object        
+ 4   Time             80543 non-null  datetime64[ns]
+ 5   Year             80543 non-null  int64         
+dtypes: datetime64[ns](1), int64(1), object(4)
+memory usage: 3.7+ MB
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># numerical summary </span>
+<span class="n">ufo</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>  
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Year</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>80543.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>2004.178737</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>10.602487</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>1930.000000</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>2001.000000</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>2007.000000</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>2011.000000</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>2014.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># count the number of ufo reports each year (and sort by year)</span>
+<span class="n">ufo</span><span class="o">.</span><span class="n">Year</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1930       2
+1931       2
+1933       1
+1934       1
+1935       1
+        ... 
+2010    4154
+2011    5089
+2012    7263
+2013    7003
+2014    5382
+Name: Year, Length: 82, dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># compare with line plot </span>
+<span class="n">ufo</span><span class="o">.</span><span class="n">Year</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/MPL02-Data Visualization with Pandas and Matplotlib_40_0.png" src="../_images/MPL02-Data Visualization with Pandas and Matplotlib_40_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># don&#39;t use a line plot when there is no logical ordering </span>
+<span class="n">drinks</span><span class="o">.</span><span class="n">continent</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;line&#39;</span><span class="p">);</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/MPL02-Data Visualization with Pandas and Matplotlib_41_0.png" src="../_images/MPL02-Data Visualization with Pandas and Matplotlib_41_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="grouped-box-plots-show-one-box-plot-for-each-group">
+<h2>Grouped Box Plots: show one box plot for each group<a class="headerlink" href="#grouped-box-plots-show-one-box-plot-for-each-group" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># remainder: boxplot of beer survings </span>
+<span class="n">drinks</span><span class="o">.</span><span class="n">beer</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;box&#39;</span><span class="p">);</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/MPL02-Data Visualization with Pandas and Matplotlib_43_0.png" src="../_images/MPL02-Data Visualization with Pandas and Matplotlib_43_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># boxplot of beer survings group by continent </span>
+<span class="n">drinks</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="s1">&#39;beer&#39;</span><span class="p">,</span> <span class="n">by</span><span class="o">=</span><span class="s1">&#39;continent&#39;</span><span class="p">);</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/MPL02-Data Visualization with Pandas and Matplotlib_44_0.png" src="../_images/MPL02-Data Visualization with Pandas and Matplotlib_44_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># boxplot of all numerical columns group by continent </span>
+<span class="n">drinks</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s1">&#39;continent&#39;</span><span class="p">);</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/MPL02-Data Visualization with Pandas and Matplotlib_45_0.png" src="../_images/MPL02-Data Visualization with Pandas and Matplotlib_45_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="grouped-histograms-show-one-histogram-for-each-group">
+<h2>Grouped Histograms: show one histogram for each group<a class="headerlink" href="#grouped-histograms-show-one-histogram-for-each-group" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># remainder: histogram of beer survings </span>
+<span class="n">drinks</span><span class="o">.</span><span class="n">beer</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;hist&#39;</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">20</span><span class="p">);</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/MPL02-Data Visualization with Pandas and Matplotlib_47_0.png" src="../_images/MPL02-Data Visualization with Pandas and Matplotlib_47_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># histogram of beer  survings group by continent </span>
+<span class="n">drinks</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="s1">&#39;beer&#39;</span><span class="p">,</span> <span class="n">by</span><span class="o">=</span><span class="s1">&#39;continent&#39;</span><span class="p">);</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/MPL02-Data Visualization with Pandas and Matplotlib_48_0.png" src="../_images/MPL02-Data Visualization with Pandas and Matplotlib_48_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># share the x-axis </span>
+<span class="n">drinks</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="s1">&#39;beer&#39;</span><span class="p">,</span> <span class="n">by</span><span class="o">=</span><span class="s1">&#39;continent&#39;</span><span class="p">,</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">);</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/MPL02-Data Visualization with Pandas and Matplotlib_49_0.png" src="../_images/MPL02-Data Visualization with Pandas and Matplotlib_49_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># share the x and y axis </span>
+<span class="n">drinks</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="s1">&#39;beer&#39;</span><span class="p">,</span> <span class="n">by</span><span class="o">=</span><span class="s1">&#39;continent&#39;</span><span class="p">,</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">True</span><span class="p">);</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/MPL02-Data Visualization with Pandas and Matplotlib_50_0.png" src="../_images/MPL02-Data Visualization with Pandas and Matplotlib_50_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># change the layout </span>
+<span class="n">drinks</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="s1">&#39;beer&#39;</span><span class="p">,</span> <span class="n">by</span><span class="o">=</span><span class="s1">&#39;continent&#39;</span><span class="p">,</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">layout</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">));</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/MPL02-Data Visualization with Pandas and Matplotlib_51_0.png" src="../_images/MPL02-Data Visualization with Pandas and Matplotlib_51_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="assorted-functionality">
+<h2>Assorted Functionality<a class="headerlink" href="#assorted-functionality" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># saving a plot to a file </span>
+<span class="n">drinks</span><span class="o">.</span><span class="n">beer</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;hist&#39;</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Histogram of Beer Survings&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Beer Survings&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Freequency&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;beer_survings.png&quot;</span><span class="p">)</span> <span class="c1"># .png, .tiff, .pdf, .jpeg </span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/MPL02-Data Visualization with Pandas and Matplotlib_53_0.png" src="../_images/MPL02-Data Visualization with Pandas and Matplotlib_53_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># list available plot style </span>
+<span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">available</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;Solarize_Light2&#39;,
+ &#39;_classic_test_patch&#39;,
+ &#39;bmh&#39;,
+ &#39;classic&#39;,
+ &#39;dark_background&#39;,
+ &#39;fast&#39;,
+ &#39;fivethirtyeight&#39;,
+ &#39;ggplot&#39;,
+ &#39;grayscale&#39;,
+ &#39;seaborn&#39;,
+ &#39;seaborn-bright&#39;,
+ &#39;seaborn-colorblind&#39;,
+ &#39;seaborn-dark&#39;,
+ &#39;seaborn-dark-palette&#39;,
+ &#39;seaborn-darkgrid&#39;,
+ &#39;seaborn-deep&#39;,
+ &#39;seaborn-muted&#39;,
+ &#39;seaborn-notebook&#39;,
+ &#39;seaborn-paper&#39;,
+ &#39;seaborn-pastel&#39;,
+ &#39;seaborn-poster&#39;,
+ &#39;seaborn-talk&#39;,
+ &#39;seaborn-ticks&#39;,
+ &#39;seaborn-white&#39;,
+ &#39;seaborn-whitegrid&#39;,
+ &#39;tableau-colorblind10&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># use plot style: ggplot </span>
+<span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;ggplot&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># histogram of beer survings in ggplot style </span>
+<span class="n">drinks</span><span class="o">.</span><span class="n">beer</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s2">&quot;hist&quot;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Histogram of Beer Survings&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Beer Survings&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Frequnecy&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;Frequnecy&#39;)
+</pre></div>
+</div>
+<img alt="../_images/MPL02-Data Visualization with Pandas and Matplotlib_56_1.png" src="../_images/MPL02-Data Visualization with Pandas and Matplotlib_56_1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># use plot style: ggplot </span>
+<span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;seaborn&#39;</span><span class="p">)</span> 
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># histogram of beer survings in seaborn style </span>
+<span class="n">drinks</span><span class="o">.</span><span class="n">beer</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s2">&quot;hist&quot;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Histogram of Beer Survings&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Beer Survings&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Frequnecy&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;Frequnecy&#39;)
+</pre></div>
+</div>
+<img alt="../_images/MPL02-Data Visualization with Pandas and Matplotlib_58_1.png" src="../_images/MPL02-Data Visualization with Pandas and Matplotlib_58_1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># use plot style: ggplot </span>
+<span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;fivethirtyeight&#39;</span><span class="p">)</span> 
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># histogram of beer survings in fivethirtyeight style </span>
+<span class="n">drinks</span><span class="o">.</span><span class="n">beer</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s2">&quot;hist&quot;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Histogram of Beer Survings&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Beer Survings&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Frequnecy&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;Frequnecy&#39;)
+</pre></div>
+</div>
+<img alt="../_images/MPL02-Data Visualization with Pandas and Matplotlib_60_1.png" src="../_images/MPL02-Data Visualization with Pandas and Matplotlib_60_1.png" />
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "hossainlab/dataviz",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./intro"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            
+
+
+
+<div class='prev-next-bottom'>
+    
+
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Jubayer Hossain<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>

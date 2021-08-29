@@ -1,0 +1,810 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>First, let’s get an idea of the demand for bike sharing. &#8212; Data Visualization with Python</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet" />
+  <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.e8f53015daec13862f6db5e763c41738.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe,.cell"
+        const thebe_selector_input = "pre,.cell_input div.highlight"
+        const thebe_selector_output = ".output,.cell_output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="shortcut icon" href="../_static/logo.jpg"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      <img src="../_static/logo.jpg" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Data Visualization with Python</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <p class="caption">
+ <span class="caption-text">
+  Matplotlib
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../matplotlib/00-Intro%20to%20Data%20Visualization.html">
+   Intro to Data Visualization with Matplotlib
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../matplotlib/02_InteractiveBackends.html">
+     Backends
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/seaborn/8-AnalyzingBikeRentals.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/hossainlab/dataviz/"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/hossainlab/dataviz/master?urlpath=tree/book/seaborn/8-AnalyzingBikeRentals.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/hossainlab/dataviz/blob/master/book/seaborn/8-AnalyzingBikeRentals.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        <button type="button" class="btn btn-secondary topbarbtn"
+            onclick="initThebeSBT()" title="Launch Thebe" data-toggle="tooltip" data-placement="left"><i
+                class="fas fa-play"></i><span style="margin-left: .4em;">Live Code</span></button>
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   First, let’s get an idea of the demand for bike sharing.
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#let-us-try-to-see-how-the-number-of-bikes-rented-varies-with-every-day-of-the-year">
+   Let us try to see how the number of bikes rented varies with every day of the year.
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#let-us-now-try-to-see-how-the-demand-varies-across-the-week">
+   Let us now try to see how the demand varies across the week.
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#does-the-weather-condition-also-play-a-role-in-the-number-of-bike-rentals">
+   Does the weather condition also play a role in the number of bike rentals?
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We will now import a dataset from the UCI Machine Learning repository. The data is deals with bike rentals where people can pick up bikes from one location and drop them off at any other designated location, as convenient to them.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bike_data</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;datasets/day.csv&#39;</span><span class="p">,</span>
+                     <span class="n">sep</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;\s*,\s*&#39;</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s1">&#39;python&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bike_data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>instant</th>
+      <th>dteday</th>
+      <th>season</th>
+      <th>yr</th>
+      <th>mnth</th>
+      <th>holiday</th>
+      <th>weekday</th>
+      <th>workingday</th>
+      <th>weathersit</th>
+      <th>temp</th>
+      <th>atemp</th>
+      <th>hum</th>
+      <th>windspeed</th>
+      <th>casual</th>
+      <th>registered</th>
+      <th>cnt</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>2011-01-01</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>6</td>
+      <td>0</td>
+      <td>2</td>
+      <td>0.344167</td>
+      <td>0.363625</td>
+      <td>0.805833</td>
+      <td>0.160446</td>
+      <td>331</td>
+      <td>654</td>
+      <td>985</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>2011-01-02</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2</td>
+      <td>0.363478</td>
+      <td>0.353739</td>
+      <td>0.696087</td>
+      <td>0.248539</td>
+      <td>131</td>
+      <td>670</td>
+      <td>801</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>2011-01-03</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0.196364</td>
+      <td>0.189405</td>
+      <td>0.437273</td>
+      <td>0.248309</td>
+      <td>120</td>
+      <td>1229</td>
+      <td>1349</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>2011-01-04</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>2</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0.200000</td>
+      <td>0.212122</td>
+      <td>0.590435</td>
+      <td>0.160296</td>
+      <td>108</td>
+      <td>1454</td>
+      <td>1562</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>2011-01-05</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>3</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0.226957</td>
+      <td>0.229270</td>
+      <td>0.436957</td>
+      <td>0.186900</td>
+      <td>82</td>
+      <td>1518</td>
+      <td>1600</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>The data has the following fields</p>
+<ul class="simple">
+<li><p>instant: record index</p></li>
+<li><p>dteday : date</p></li>
+<li><p>season : season (1:springer, 2:summer, 3:fall, 4:winter)</p></li>
+<li><p>yr : year (0: 2011, 1:2012)</p></li>
+<li><p>mnth : month ( 1 to 12)</p></li>
+<li><p>hr : hour (0 to 23)</p></li>
+<li><p>holiday : weather day is holiday or not (extracted from [Web Link])</p></li>
+<li><p>weekday : day of the week</p></li>
+<li><p>workingday : if day is neither weekend nor holiday is 1, otherwise is 0.</p></li>
+</ul>
+<ul class="simple">
+<li><p>weathersit :</p></li>
+</ul>
+<ul class="simple">
+<li><p>1: Clear, Few clouds, Partly cloudy, Partly cloudy</p></li>
+<li><p>2: Mist + Cloudy, Mist + Broken clouds, Mist + Few clouds, Mist</p></li>
+<li><p>3: Light Snow, Light Rain + Thunderstorm + Scattered clouds, Light Rain + Scattered clouds</p></li>
+<li><p>4: Heavy Rain + Ice Pallets + Thunderstorm + Mist, Snow + Fog</p></li>
+<li><p>temp : Normalized temperature in Celsius. The values are derived via (t-t_min)/(t_max-t_min), t_min=-8, t_max=+39 (only in hourly scale)</p></li>
+<li><p>atemp: Normalized feeling temperature in Celsius. The values are derived via (t-t_min)/(t_max-t_min), t_min=-16, t_max=+50 (only in hourly scale)</p></li>
+<li><p>hum: Normalized humidity. The values are divided to 100 (max)</p></li>
+<li><p>windspeed: Normalized wind speed. The values are divided to 67 (max)</p></li>
+<li><p>casual: count of casual users</p></li>
+<li><p>registered: count of registered users</p></li>
+<li><p>cnt: count of total rental bikes including both casual and registered</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bike_data</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>instant</th>
+      <th>season</th>
+      <th>yr</th>
+      <th>mnth</th>
+      <th>holiday</th>
+      <th>weekday</th>
+      <th>workingday</th>
+      <th>weathersit</th>
+      <th>temp</th>
+      <th>atemp</th>
+      <th>hum</th>
+      <th>windspeed</th>
+      <th>casual</th>
+      <th>registered</th>
+      <th>cnt</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>731.000000</td>
+      <td>731.000000</td>
+      <td>731.000000</td>
+      <td>731.000000</td>
+      <td>731.000000</td>
+      <td>731.000000</td>
+      <td>731.000000</td>
+      <td>731.000000</td>
+      <td>731.000000</td>
+      <td>731.000000</td>
+      <td>731.000000</td>
+      <td>731.000000</td>
+      <td>731.000000</td>
+      <td>731.000000</td>
+      <td>731.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>366.000000</td>
+      <td>2.496580</td>
+      <td>0.500684</td>
+      <td>6.519836</td>
+      <td>0.028728</td>
+      <td>2.997264</td>
+      <td>0.683995</td>
+      <td>1.395349</td>
+      <td>0.495385</td>
+      <td>0.474354</td>
+      <td>0.627894</td>
+      <td>0.190486</td>
+      <td>848.176471</td>
+      <td>3656.172367</td>
+      <td>4504.348837</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>211.165812</td>
+      <td>1.110807</td>
+      <td>0.500342</td>
+      <td>3.451913</td>
+      <td>0.167155</td>
+      <td>2.004787</td>
+      <td>0.465233</td>
+      <td>0.544894</td>
+      <td>0.183051</td>
+      <td>0.162961</td>
+      <td>0.142429</td>
+      <td>0.077498</td>
+      <td>686.622488</td>
+      <td>1560.256377</td>
+      <td>1937.211452</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>0.000000</td>
+      <td>1.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>1.000000</td>
+      <td>0.059130</td>
+      <td>0.079070</td>
+      <td>0.000000</td>
+      <td>0.022392</td>
+      <td>2.000000</td>
+      <td>20.000000</td>
+      <td>22.000000</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>183.500000</td>
+      <td>2.000000</td>
+      <td>0.000000</td>
+      <td>4.000000</td>
+      <td>0.000000</td>
+      <td>1.000000</td>
+      <td>0.000000</td>
+      <td>1.000000</td>
+      <td>0.337083</td>
+      <td>0.337842</td>
+      <td>0.520000</td>
+      <td>0.134950</td>
+      <td>315.500000</td>
+      <td>2497.000000</td>
+      <td>3152.000000</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>366.000000</td>
+      <td>3.000000</td>
+      <td>1.000000</td>
+      <td>7.000000</td>
+      <td>0.000000</td>
+      <td>3.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>0.498333</td>
+      <td>0.486733</td>
+      <td>0.626667</td>
+      <td>0.180975</td>
+      <td>713.000000</td>
+      <td>3662.000000</td>
+      <td>4548.000000</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>548.500000</td>
+      <td>3.000000</td>
+      <td>1.000000</td>
+      <td>10.000000</td>
+      <td>0.000000</td>
+      <td>5.000000</td>
+      <td>1.000000</td>
+      <td>2.000000</td>
+      <td>0.655417</td>
+      <td>0.608602</td>
+      <td>0.730209</td>
+      <td>0.233214</td>
+      <td>1096.000000</td>
+      <td>4776.500000</td>
+      <td>5956.000000</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>731.000000</td>
+      <td>4.000000</td>
+      <td>1.000000</td>
+      <td>12.000000</td>
+      <td>1.000000</td>
+      <td>6.000000</td>
+      <td>1.000000</td>
+      <td>3.000000</td>
+      <td>0.861667</td>
+      <td>0.840896</td>
+      <td>0.972500</td>
+      <td>0.507463</td>
+      <td>3410.000000</td>
+      <td>6946.000000</td>
+      <td>8714.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>We want to study this data and predict the trends of shared bikes, and maybe provide a guide to tourists about when bikes would be easily available for rent. This is clearly a machine learning problem where we will first use a training dataset, figure out relationships and then apply the same algorithms on new data.</p>
+<p>Before we move on to our machine learning model, let us first quickly explore the dataset to see if any relationship exists using Seaborn.</p>
+<div class="section" id="first-let-s-get-an-idea-of-the-demand-for-bike-sharing">
+<h1>First, let’s get an idea of the demand for bike sharing.<a class="headerlink" href="#first-let-s-get-an-idea-of-the-demand-for-bike-sharing" title="Permalink to this headline">¶</a></h1>
+<p>From the data description we just saw above, the average number of bikes rented was around 4500 each day.
+Plotting a histogram with the number of bikes rented,</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">distplot</span><span class="p">(</span><span class="n">bike_data</span><span class="p">[</span><span class="s1">&#39;cnt&#39;</span><span class="p">],</span><span class="n">bins</span><span class="o">=</span><span class="mi">75</span><span class="p">,</span> <span class="n">kde</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">rug</span><span class="o">=</span><span class="kc">True</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/8-AnalyzingBikeRentals_9_0.png" src="../_images/8-AnalyzingBikeRentals_9_0.png" />
+</div>
+</div>
+<p>We see that the demand for bikes is mostly between the range of 4000-5000, with a peak of about 4600 from the graph. This matches with the average we observed. There are some days with demand as less as about a 100, while the max demand on any given day is about 8400.</p>
+</div>
+<div class="section" id="let-us-try-to-see-how-the-number-of-bikes-rented-varies-with-every-day-of-the-year">
+<h1>Let us try to see how the number of bikes rented varies with every day of the year.<a class="headerlink" href="#let-us-try-to-see-how-the-number-of-bikes-rented-varies-with-every-day-of-the-year" title="Permalink to this headline">¶</a></h1>
+<p>Our dataset has about 2 years worth of data. Lets plot a jointplot of the instant versus the bike count. The instant is a measure of</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">jointplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;instant&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;cnt&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">bike_data</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.JointGrid at 0x1a1f209e48&gt;
+</pre></div>
+</div>
+<img alt="../_images/8-AnalyzingBikeRentals_12_1.png" src="../_images/8-AnalyzingBikeRentals_12_1.png" />
+</div>
+</div>
+<p>We see that the demand for bikes starts with a small number, increases at about instant 200 that corresponds to mid year,and drops down towards the end of the year. The same pattern follow in the second year too, with a max at instant 600 range corresponding to mid second year. There is an extra peak in the second half of the second year.
+We can see that there is maximum demand for rental bikes during mid year and least during the start and end of the year. Let us confirm this by plotting the demand for the different months.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">jointplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;mnth&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;cnt&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">bike_data</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.JointGrid at 0x1a1f020e10&gt;
+</pre></div>
+</div>
+<img alt="../_images/8-AnalyzingBikeRentals_14_1.png" src="../_images/8-AnalyzingBikeRentals_14_1.png" />
+</div>
+</div>
+<p>Our analysis is perfectly correct. The maximum demand is in the months of 6-8, which is mid year, i.e. June-July. The peak seen in the second half of the second year falls in the 9th month, as is clear from the above plot.</p>
+</div>
+<div class="section" id="let-us-now-try-to-see-how-the-demand-varies-across-the-week">
+<h1>Let us now try to see how the demand varies across the week.<a class="headerlink" href="#let-us-now-try-to-see-how-the-demand-varies-across-the-week" title="Permalink to this headline">¶</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">pairplot</span><span class="p">(</span><span class="n">bike_data</span><span class="p">,</span> 
+             <span class="n">size</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">aspect</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span> 
+             <span class="n">x_vars</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;holiday&quot;</span><span class="p">,</span><span class="s2">&quot;weekday&quot;</span><span class="p">,</span><span class="s2">&quot;workingday&quot;</span><span class="p">],</span>
+             <span class="n">y_vars</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;cnt&quot;</span><span class="p">],</span>
+             <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;reg&quot;</span><span class="p">,</span>
+             <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;season&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.PairGrid at 0x1a197f65c0&gt;
+</pre></div>
+</div>
+<img alt="../_images/8-AnalyzingBikeRentals_17_1.png" src="../_images/8-AnalyzingBikeRentals_17_1.png" />
+</div>
+</div>
+<p>The above are three graphs of the bike count plotted versus whether the day is a holiday, weekday or working day respectively.</p>
+<ul class="simple">
+<li><p>From the second plot, the number of bikes hired seem to be almost the same on all days of the week.</p></li>
+<li><p>From the third plot, days weekdays seem to have more requests than weekends/holidays(workingday=1).</p></li>
+<li><p>The first plot clearly shows that the demand for bikes on rent is most during days that are not holidays.</p></li>
+<li><p>Comparing the above two points, it looks like the demand on weekends is also similar, but slightly lesser than other weekdays.</p></li>
+</ul>
+<p>From the above analysis, the dataset seems to point to the bikes rented by the working class to travel to and from the workplace, or subway stations. This explains why there is more demand during weekdays than on holidays.</p>
+<p>** What is very interesting to note here is that while we would have expected the number of bikes rented to be dependent on the day of the week, the regression line fits show that the demand is more dependent on the season of the year than on the day of the week. **</p>
+<ul class="simple">
+<li><p>The highest demand is in season 3, fall</p></li>
+<li><p>Next comes season 2, summer</p></li>
+<li><p>Followed by season 4, winter</p></li>
+<li><p>And the least demand is in season 1, spring</p></li>
+</ul>
+<p><em>To confirm our above observation, lets plot the count versus the season of the year</em></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">jointplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;season&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;cnt&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">bike_data</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.JointGrid at 0x1a1edac9b0&gt;
+</pre></div>
+</div>
+<img alt="../_images/8-AnalyzingBikeRentals_21_1.png" src="../_images/8-AnalyzingBikeRentals_21_1.png" />
+</div>
+</div>
+<p>We see that this perfectly matches our analysis from the previous graph.</p>
+</div>
+<div class="section" id="does-the-weather-condition-also-play-a-role-in-the-number-of-bike-rentals">
+<h1>Does the weather condition also play a role in the number of bike rentals?<a class="headerlink" href="#does-the-weather-condition-also-play-a-role-in-the-number-of-bike-rentals" title="Permalink to this headline">¶</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">pairplot</span><span class="p">(</span><span class="n">bike_data</span><span class="p">,</span> 
+             <span class="n">size</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">aspect</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span> 
+             <span class="n">x_vars</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;temp&quot;</span><span class="p">,</span><span class="s2">&quot;atemp&quot;</span><span class="p">,</span><span class="s2">&quot;hum&quot;</span><span class="p">,</span><span class="s2">&quot;windspeed&quot;</span><span class="p">],</span>
+             <span class="n">y_vars</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;cnt&quot;</span><span class="p">],</span>
+             <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;season&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.PairGrid at 0x1a1f2abfd0&gt;
+</pre></div>
+</div>
+<img alt="../_images/8-AnalyzingBikeRentals_23_1.png" src="../_images/8-AnalyzingBikeRentals_23_1.png" />
+</div>
+</div>
+<p>The first two plots are the number of bike rentals versus the temperature and the ‘feels-like’ temperature. These seem similar and we can say that there is not much change in rental pattern. More the temperature of the day, higher are the number of people choosing to hire a bike, there is a significant number of bike rentals even when temperatures are low.</p>
+<p>When the days are very dry, there are hardly any bike rentals. When the humidity crosses a limit of 0.4, bikes are in demand.</p>
+<p>The windspeed also influences bike rentals to an extent. Windspeeds of 0.1 to 0.3 have a high demand for bike rentals. As the speed becomes higher, it probably gets too cold to ride and the number of rentals reduces.</p>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "hossainlab/dataviz",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./seaborn"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            
+
+
+
+<div class='prev-next-bottom'>
+    
+
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Jubayer Hossain<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>

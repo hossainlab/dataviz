@@ -1,0 +1,877 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>VISUALISING DISTRIBUTIONS TO FIND PATTERNS WITHIN A DATASET &#8212; Data Visualization with Python</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet" />
+  <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.e8f53015daec13862f6db5e763c41738.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe,.cell"
+        const thebe_selector_input = "pre,.cell_input div.highlight"
+        const thebe_selector_output = ".output,.cell_output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="shortcut icon" href="../_static/logo.jpg"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      <img src="../_static/logo.jpg" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Data Visualization with Python</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <p class="caption">
+ <span class="caption-text">
+  Matplotlib
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../matplotlib/00-Intro%20to%20Data%20Visualization.html">
+   Intro to Data Visualization with Matplotlib
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../matplotlib/02_InteractiveBackends.html">
+     Backends
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/seaborn/2-VisualizingDistributionsToFindPatterns.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/hossainlab/dataviz/"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/hossainlab/dataviz/master?urlpath=tree/book/seaborn/2-VisualizingDistributionsToFindPatterns.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/hossainlab/dataviz/blob/master/book/seaborn/2-VisualizingDistributionsToFindPatterns.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        <button type="button" class="btn btn-secondary topbarbtn"
+            onclick="initThebeSBT()" title="Launch Thebe" data-toggle="tooltip" data-placement="left"><i
+                class="fas fa-play"></i><span style="margin-left: .4em;">Live Code</span></button>
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   VISUALISING DISTRIBUTIONS TO FIND PATTERNS WITHIN A DATASET
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#for-distributions-which-vary-randomnly-with-respect-to-one-variable-univariate-distribution">
+     For distributions which vary randomnly with respect to one variable - Univariate Distribution
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#to-get-just-a-histogram-from-the-above-graph-let-us-remove-the-kernel-density-estimation-curve">
+       To get just a histogram from the above graph, let us remove the Kernel density estimation curve
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#plotting-each-datapoint-as-a-stick-rugplot">
+       Plotting each datapoint as a stick - Rugplot
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#playing-around-with-the-histogram-for-better-analysis">
+       Playing around with the histogram for better analysis
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#to-get-just-the-kernel-density-estimation-which-gives-the-shape-of-the-distribution">
+       To get just the kernel density estimation, which gives the shape of the distribution
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#for-distributions-which-vary-randomly-in-two-variables-bivariate-distributions">
+   For distributions which vary randomly in two variables : BIVARIATE DISTRIBUTIONS
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#we-need-to-plot-two-variables-in-a-single-graph-we-can-use-the-jointplot-function">
+     We need to plot two variables in a single graph; we can use the jointplot() function.
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#how-about-kernel-density-estimation-for-bivariate-distributions-what-happens-to-the-curve">
+     How about Kernel density estimation for bivariate distributions? What happens to the curve?
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#customise-a-little">
+       Customise a little
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#we-have-seen-the-bivariate-histogram-as-layers-and-as-curves-what-if-we-want-to-view-it-as-a-single-continuous-region-with-different-colour-gradients">
+     We have seen the bivariate histogram as layers and as curves. What if we want to view it as a single continuous region with different colour gradients?
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#plotting-pairwise-relationships">
+     PLOTTING PAIRWISE RELATIONSHIPS
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#let-us-just-plot-the-relationship-between-fixed-acidity-volatile-acidity-citric-acid-residual-sugar">
+     Let us just plot the relationship between Fixed Acidity, Volatile Acidity, Citric Acid, Residual Sugar.
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#to-plot-the-same-graph-as-above-but-with-kde-in-the-principle-diagonal">
+     To plot the same graph as above but with KDE in the principle diagonal
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#plotting-regression-plots-on-the-off-diagonals">
+     Plotting regression plots on the off-diagonals
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#let-us-try-to-make-the-above-plot-interesting">
+     Let us try to make the above plot interesting
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="visualising-distributions-to-find-patterns-within-a-dataset">
+<h1>VISUALISING DISTRIBUTIONS TO FIND PATTERNS WITHIN A DATASET<a class="headerlink" href="#visualising-distributions-to-find-patterns-within-a-dataset" title="Permalink to this headline">¶</a></h1>
+<p>Let’s say you are having a get together with your friends, and you are responsible for bringing in the wine. You turn to a vendor and he suggest a set of wine variety which varies in taste and flavour. You now want to see if this mix of wines is fit for your party.
+How do you do it?</p>
+<p>Trying out samples of all categories would be too much for you. So, you decide to ask the bartender for an analysis of the wines, so you can maybe taste the extremes cases to see if they would work.</p>
+<p>The bartender has given you a sheet with details. How do you now figure out what the extremes are?
+You need to do some analyses, but too many numbers will only confuse you. You realise it is easier to see stuff happening, to visualise your samples. You decided to take the help of seaborn.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wine_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;datasets/winequality-white.csv&#39;</span><span class="p">,</span> 
+                        <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Fixed Acidity&quot;</span><span class="p">,</span> <span class="s2">&quot;Volatile Acidity&quot;</span><span class="p">,</span> <span class="s2">&quot;Citric Acid&quot;</span><span class="p">,</span> <span class="s2">&quot;Residual Sugar&quot;</span><span class="p">,</span>
+                                <span class="s2">&quot;Chlorides&quot;</span><span class="p">,</span> <span class="s2">&quot;Free Sulfur Dioxide&quot;</span><span class="p">,</span> <span class="s2">&quot;Total Sulfur Dioxide&quot;</span><span class="p">,</span> <span class="s2">&quot;Density&quot;</span><span class="p">,</span> 
+                                <span class="s2">&quot;pH&quot;</span><span class="p">,</span> <span class="s2">&quot;Sulphates&quot;</span><span class="p">,</span> <span class="s2">&quot;Alcohol&quot;</span><span class="p">,</span> <span class="s2">&quot;Quality&quot;</span><span class="p">],</span>
+                        <span class="n">skiprows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                        <span class="n">sep</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;\s*;\s*&#39;</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s1">&#39;python&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s begin with figuring out how much alcohol is present across the wine samples. We have to look at how the content of alcohol varies across samples.</p>
+<div class="section" id="for-distributions-which-vary-randomnly-with-respect-to-one-variable-univariate-distribution">
+<h2>For distributions which vary randomnly with respect to one variable - Univariate Distribution<a class="headerlink" href="#for-distributions-which-vary-randomnly-with-respect-to-one-variable-univariate-distribution" title="Permalink to this headline">¶</a></h2>
+<p>Plot univariate distribution of elements of a single column using distplot function. <br>
+It draws a histogram and fits a kernel density estimate</p>
+<p><em>The kernel density estimate is a non-parametric way to estimate the probability density function of a random variable. To draw this curve, each observation is replaced with a Gaussian curve centred at that value. Then all such curves are summed, the value of density at each point is computed and the resulting curve is normalized.</em></p>
+<p><em>A histogram is a diagram consisting of rectangles whose area is proportional to the frequency of a variable and whose width is equal to the class interval.</em></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">distplot</span><span class="p">(</span><span class="n">wine_data</span><span class="p">[</span><span class="s1">&#39;Alcohol&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x1a160f5cc0&gt;
+</pre></div>
+</div>
+<img alt="../_images/2-VisualizingDistributionsToFindPatterns_5_1.png" src="../_images/2-VisualizingDistributionsToFindPatterns_5_1.png" />
+</div>
+</div>
+<p><em>We want to see how the alcohol content varies across our samples, we can get it from studying the histogram.</em></p>
+<div class="section" id="to-get-just-a-histogram-from-the-above-graph-let-us-remove-the-kernel-density-estimation-curve">
+<h3>To get just a histogram from the above graph, let us remove the Kernel density estimation curve<a class="headerlink" href="#to-get-just-a-histogram-from-the-above-graph-let-us-remove-the-kernel-density-estimation-curve" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Let us set up the figure so the plot is clearly visible</span>
+<span class="c1">#The parameters inside the figsize denote the lengths of the box alloted for the plot</span>
+<span class="n">f</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">distplot</span><span class="p">(</span><span class="n">wine_data</span><span class="p">[</span><span class="s1">&#39;Alcohol&#39;</span><span class="p">],</span> <span class="n">kde</span><span class="o">=</span><span class="kc">False</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/2-VisualizingDistributionsToFindPatterns_7_0.png" src="../_images/2-VisualizingDistributionsToFindPatterns_7_0.png" />
+</div>
+</div>
+<p><em>From the graph, we see that most of our wine samples have between 9 and 11 percent alcohol content</em></p>
+</div>
+<div class="section" id="plotting-each-datapoint-as-a-stick-rugplot">
+<h3>Plotting each datapoint as a stick - Rugplot<a class="headerlink" href="#plotting-each-datapoint-as-a-stick-rugplot" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="p">,</span><span class="n">ax</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">distplot</span><span class="p">(</span><span class="n">wine_data</span><span class="p">[</span><span class="s1">&#39;Alcohol&#39;</span><span class="p">],</span> <span class="n">kde</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">rug</span><span class="o">=</span><span class="kc">True</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/2-VisualizingDistributionsToFindPatterns_10_0.png" src="../_images/2-VisualizingDistributionsToFindPatterns_10_0.png" />
+</div>
+</div>
+<p>To separately create a rugplot using rugplot function itself,</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="p">,</span><span class="n">ax</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">rugplot</span><span class="p">(</span><span class="n">wine_data</span><span class="p">[</span><span class="s1">&#39;Alcohol&#39;</span><span class="p">],</span> <span class="n">height</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x1a14f1ff98&gt;
+</pre></div>
+</div>
+<img alt="../_images/2-VisualizingDistributionsToFindPatterns_12_1.png" src="../_images/2-VisualizingDistributionsToFindPatterns_12_1.png" />
+</div>
+</div>
+<p><em>From the above, we know that there is a lot of variation in the wine samples, with respect to alcohol content. Between 11 percent and 12 percent content, there are very minute variation levels of alcohol content available in the given samples</em></p>
+</div>
+<div class="section" id="playing-around-with-the-histogram-for-better-analysis">
+<h3>Playing around with the histogram for better analysis<a class="headerlink" href="#playing-around-with-the-histogram-for-better-analysis" title="Permalink to this headline">¶</a></h3>
+<p>What if we want to minutely observe the number of wine samples with a certain alcohol content? How do we do this?</p>
+<p>Vary the number of bins in the histogram. The more you increase the number, the smaller is the width of each bin, and the more you know about individual data points.
+If not specified, Seaborn chooses the number of bins based on the Freedman-Diaconis rule.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="p">,</span><span class="n">ax</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">distplot</span><span class="p">(</span><span class="n">wine_data</span><span class="p">[</span><span class="s1">&#39;Alcohol&#39;</span><span class="p">],</span> <span class="n">bins</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">kde</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">rug</span><span class="o">=</span><span class="kc">True</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/2-VisualizingDistributionsToFindPatterns_16_0.png" src="../_images/2-VisualizingDistributionsToFindPatterns_16_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="p">,</span><span class="n">ax</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">distplot</span><span class="p">(</span><span class="n">wine_data</span><span class="p">[</span><span class="s1">&#39;Alcohol&#39;</span><span class="p">],</span> <span class="n">bins</span><span class="o">=</span><span class="mi">75</span><span class="p">,</span> <span class="n">kde</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">rug</span><span class="o">=</span><span class="kc">True</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/2-VisualizingDistributionsToFindPatterns_17_0.png" src="../_images/2-VisualizingDistributionsToFindPatterns_17_0.png" />
+</div>
+</div>
+<p>By increasing the number of bins, we realise that if you want a wine sample with an alcohol content of 9.9, we will not find it in the current sample mix. But, we can get 9.8 and 10.1.</p>
+</div>
+<div class="section" id="to-get-just-the-kernel-density-estimation-which-gives-the-shape-of-the-distribution">
+<h3>To get just the kernel density estimation, which gives the shape of the distribution<a class="headerlink" href="#to-get-just-the-kernel-density-estimation-which-gives-the-shape-of-the-distribution" title="Permalink to this headline">¶</a></h3>
+<p>This gives us the trend of alcohol levels in the wine samples available.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="p">,</span><span class="n">ax</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">distplot</span><span class="p">(</span><span class="n">wine_data</span><span class="p">[</span><span class="s1">&#39;Alcohol&#39;</span><span class="p">],</span> <span class="n">hist</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">rug</span><span class="o">=</span><span class="kc">True</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/2-VisualizingDistributionsToFindPatterns_21_0.png" src="../_images/2-VisualizingDistributionsToFindPatterns_21_0.png" />
+</div>
+</div>
+<p>Generating the same with the kernel deploy function directly,</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="p">,</span><span class="n">ax</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">color_codes</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">kdeplot</span><span class="p">(</span><span class="n">wine_data</span><span class="p">[</span><span class="s1">&#39;Alcohol&#39;</span><span class="p">],</span><span class="n">shade</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;r&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x1a347cdb70&gt;
+</pre></div>
+</div>
+<img alt="../_images/2-VisualizingDistributionsToFindPatterns_23_1.png" src="../_images/2-VisualizingDistributionsToFindPatterns_23_1.png" />
+</div>
+</div>
+<p><em>Note: Setting the parameter shade as true has highlighted the area under the kernel estimate curve. We used the color “r” that stands for red according to the default color code set by the tool. It is because of this that we first set the color_codes as true</em></p>
+<p>We know that the curve drawn from the points in a graph depends on</p>
+<ul class="simple">
+<li><p>the accuracy of the points in the plot</p></li>
+<li><p>the number of data points chosen</p></li>
+</ul>
+<p>Let us verify the same by plotting curves with different bandwidths controls</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="p">,</span><span class="n">ax</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+
+
+<span class="n">sns</span><span class="o">.</span><span class="n">kdeplot</span><span class="p">(</span><span class="n">wine_data</span><span class="p">[</span><span class="s1">&#39;Alcohol&#39;</span><span class="p">])</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">kdeplot</span><span class="p">(</span><span class="n">wine_data</span><span class="p">[</span><span class="s1">&#39;Alcohol&#39;</span><span class="p">],</span> <span class="n">bw</span><span class="o">=</span><span class="mf">.04</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;bw: 0.04&quot;</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">kdeplot</span><span class="p">(</span><span class="n">wine_data</span><span class="p">[</span><span class="s1">&#39;Alcohol&#39;</span><span class="p">],</span> <span class="n">bw</span><span class="o">=</span><span class="mf">.2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;bw: 0.2&quot;</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">kdeplot</span><span class="p">(</span><span class="n">wine_data</span><span class="p">[</span><span class="s1">&#39;Alcohol&#39;</span><span class="p">],</span> <span class="n">bw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;bw: 2&quot;</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">kdeplot</span><span class="p">(</span><span class="n">wine_data</span><span class="p">[</span><span class="s1">&#39;Alcohol&#39;</span><span class="p">],</span> <span class="n">bw</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;bw: 5&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x1a34209860&gt;
+</pre></div>
+</div>
+<img alt="../_images/2-VisualizingDistributionsToFindPatterns_26_1.png" src="../_images/2-VisualizingDistributionsToFindPatterns_26_1.png" />
+</div>
+</div>
+<p>We can make a few observations from the obtained plot.</p>
+<ul class="simple">
+<li><p>Smaller the bandwidth parameter, more accurate is the curve. But too small a bandwidth unnecessarily crowds the    datapoints</p></li>
+<li><p>When explicitly not specified, the tool automatically choses the bandwidth it thinks best describes the distribution, which, more often than not, turns out pretty close.</p></li>
+<li><p>While estimating to draw the curve, the path traces points that are beyond the range of the dataset.</p></li>
+<li><p>The bw parameter controls how tightly the estimation is fit to the data.</p></li>
+</ul>
+<p>The plot provides optional parameters to fit the curve within the dataset, within two given limits, plot the dense points vertically and so on.</p>
+<p>While trying to learn about the alcohol content, we learnt some interesting ways to observe trends in a given variable. Can we try the same with 2 variables?
+We have two columns in our dataset, with free sulfur diode and total sulfur dioxide. Let us try to observe the relation between the contents of these in our wine samples. These being preservatives, you could know how long after the party you can keep your wine;)</p>
+</div>
+</div>
+</div>
+<div class="section" id="for-distributions-which-vary-randomly-in-two-variables-bivariate-distributions">
+<h1>For distributions which vary randomly in two variables : BIVARIATE DISTRIBUTIONS<a class="headerlink" href="#for-distributions-which-vary-randomly-in-two-variables-bivariate-distributions" title="Permalink to this headline">¶</a></h1>
+<p>Let us study how the Free Sulfur Dioxide content affects the Total Sulfur Dioxide content in our wine samples.</p>
+<div class="section" id="we-need-to-plot-two-variables-in-a-single-graph-we-can-use-the-jointplot-function">
+<h2>We need to plot two variables in a single graph; we can use the jointplot() function.<a class="headerlink" href="#we-need-to-plot-two-variables-in-a-single-graph-we-can-use-the-jointplot-function" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">jointplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;Free Sulfur Dioxide&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Total Sulfur Dioxide&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">wine_data</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.JointGrid at 0x1049fac50&gt;
+</pre></div>
+</div>
+<img alt="../_images/2-VisualizingDistributionsToFindPatterns_33_1.png" src="../_images/2-VisualizingDistributionsToFindPatterns_33_1.png" />
+</div>
+</div>
+<p>The distribution of dioxide across the wine samples is a scatter plot with points depicted on the corresponding x-y positions.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Adding a x and y limit to the plot to see the scatter plot better</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">jointplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;Free Sulfur Dioxide&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Total Sulfur Dioxide&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">wine_data</span><span class="p">,</span>
+              <span class="n">xlim</span><span class="o">=</span><span class="p">{</span><span class="mi">0</span><span class="p">,</span><span class="mi">100</span><span class="p">},</span> <span class="n">ylim</span><span class="o">=</span><span class="p">{</span><span class="mi">0</span><span class="p">,</span><span class="mi">250</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.JointGrid at 0x1a36ee0e80&gt;
+</pre></div>
+</div>
+<img alt="../_images/2-VisualizingDistributionsToFindPatterns_35_1.png" src="../_images/2-VisualizingDistributionsToFindPatterns_35_1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Adding a hex type to the plot</span>
+<span class="k">with</span> <span class="n">sns</span><span class="o">.</span><span class="n">axes_style</span><span class="p">(</span><span class="s1">&#39;white&#39;</span><span class="p">):</span>
+    <span class="n">sns</span><span class="o">.</span><span class="n">jointplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;Free Sulfur Dioxide&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Total Sulfur Dioxide&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">wine_data</span><span class="p">,</span> 
+                  <span class="n">kind</span><span class="o">=</span><span class="s1">&#39;hex&#39;</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span>
+                  <span class="n">xlim</span><span class="o">=</span><span class="p">{</span><span class="mi">0</span><span class="p">,</span><span class="mi">120</span><span class="p">},</span> <span class="n">ylim</span><span class="o">=</span><span class="p">{</span><span class="mi">0</span><span class="p">,</span><span class="mi">250</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/2-VisualizingDistributionsToFindPatterns_36_0.png" src="../_images/2-VisualizingDistributionsToFindPatterns_36_0.png" />
+</div>
+</div>
+<p>The above is called a Hexbin plot, or in other words, the bivariate analogue of a histogram. The color ‘white’ is used to specify background colour, as hexbin plots look best in this contrast mode.</p>
+<p>We see the histograms of the individual plots on the right side and top side of the plot. Observing from that, the cross section where the peaks of the two histograms are present are the darkest regions of our hexbin plot.
+Many samples have a free sulfur dioxide content of about 34-40, and correspondingly, the total sulfur dioxide content is in the range of around 120.</p>
+</div>
+<div class="section" id="how-about-kernel-density-estimation-for-bivariate-distributions-what-happens-to-the-curve">
+<h2>How about Kernel density estimation for bivariate distributions? What happens to the curve?<a class="headerlink" href="#how-about-kernel-density-estimation-for-bivariate-distributions-what-happens-to-the-curve" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">jointplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;Free Sulfur Dioxide&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Total Sulfur Dioxide&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">wine_data</span><span class="p">,</span> 
+              <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;kde&quot;</span><span class="p">,</span>
+              <span class="n">xlim</span><span class="o">=</span><span class="p">{</span><span class="mi">0</span><span class="p">,</span><span class="mi">80</span><span class="p">},</span> <span class="n">ylim</span><span class="o">=</span><span class="p">{</span><span class="mi">0</span><span class="p">,</span><span class="mi">250</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.JointGrid at 0x11985b470&gt;
+</pre></div>
+</div>
+<img alt="../_images/2-VisualizingDistributionsToFindPatterns_41_1.png" src="../_images/2-VisualizingDistributionsToFindPatterns_41_1.png" />
+</div>
+</div>
+<p>The above graph shows the sulfur dioxide quantity distribution across the various wine samples. It is evident that the total quantity follows the pattern of the free dioxide quantity.
+The curves next to the main plot show where the quantity of dioxide peaks. Correspondingly, we see that the KDE curve is narrow where both the concentrations are maximum.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># The clip parameters clips the plot to the specified limits</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">kdeplot</span><span class="p">(</span><span class="n">wine_data</span><span class="p">[</span><span class="s1">&#39;Free Sulfur Dioxide&#39;</span><span class="p">],</span> <span class="n">wine_data</span><span class="p">[</span><span class="s1">&#39;Total Sulfur Dioxide&#39;</span><span class="p">],</span> <span class="n">clip</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">250</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x1a1aa3d7b8&gt;
+</pre></div>
+</div>
+<img alt="../_images/2-VisualizingDistributionsToFindPatterns_43_1.png" src="../_images/2-VisualizingDistributionsToFindPatterns_43_1.png" />
+</div>
+</div>
+<p>As expected, the graph is exactly the same as the previous, with just the outlines highlighted. These are the kernel density estimation curves. The color gradient differentiates the peaks of both the concentrations.</p>
+<p>We see that the graph occupies a very small area in our entire graph window. Let us now reduce the size of the complete graph.
+For this, we call the matplotlib function and set x and y limits for our plot, and then replot the curves.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">kdeplot</span><span class="p">(</span><span class="n">wine_data</span><span class="p">[</span><span class="s1">&#39;Free Sulfur Dioxide&#39;</span><span class="p">],</span> <span class="n">wine_data</span><span class="p">[</span><span class="s1">&#39;Total Sulfur Dioxide&#39;</span><span class="p">],</span> <span class="n">clip</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">250</span><span class="p">))</span>
+
+<span class="c1">#Setting limits to the x and y axes</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">250</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(0, 250)
+</pre></div>
+</div>
+<img alt="../_images/2-VisualizingDistributionsToFindPatterns_46_1.png" src="../_images/2-VisualizingDistributionsToFindPatterns_46_1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#setting the size for the plot</span>
+<span class="n">f</span><span class="p">,</span><span class="n">ax</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">kdeplot</span><span class="p">(</span><span class="n">wine_data</span><span class="p">[</span><span class="s1">&#39;Free Sulfur Dioxide&#39;</span><span class="p">],</span><span class="n">wine_data</span><span class="p">[</span><span class="s1">&#39;Total Sulfur Dioxide&#39;</span><span class="p">],</span> <span class="n">clip</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">250</span><span class="p">))</span>
+
+
+<span class="c1">#adding rug plots to the above</span>
+<span class="c1">#The vertical tag is used to plot the rug lines along x axis for Total Sulfur Dioxide</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">rugplot</span><span class="p">(</span><span class="n">wine_data</span><span class="p">[</span><span class="s1">&#39;Free Sulfur Dioxide&#39;</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;g&quot;</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mf">0.05</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">rugplot</span><span class="p">(</span><span class="n">wine_data</span><span class="p">[</span><span class="s1">&#39;Total Sulfur Dioxide&#39;</span><span class="p">],</span> <span class="n">vertical</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mf">0.05</span><span class="p">);</span>
+
+<span class="c1">#Setting limits to the x and y axes</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="o">-</span><span class="mi">20</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="o">-</span><span class="mi">50</span><span class="p">,</span><span class="mi">400</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(-50, 400)
+</pre></div>
+</div>
+<img alt="../_images/2-VisualizingDistributionsToFindPatterns_47_1.png" src="../_images/2-VisualizingDistributionsToFindPatterns_47_1.png" />
+</div>
+</div>
+<p><em>The green colour indicates higher concentration of free sulfur dioxide, as indicated in the rugplot command.</em></p>
+<div class="section" id="customise-a-little">
+<h3>Customise a little<a class="headerlink" href="#customise-a-little" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Increasing contour levels for closer lines</p></li>
+<li><p>Use a different colour pallete</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#setting the size for the plot</span>
+<span class="n">f</span><span class="p">,</span><span class="n">ax</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">kdeplot</span><span class="p">(</span><span class="n">wine_data</span><span class="p">[</span><span class="s1">&#39;Free Sulfur Dioxide&#39;</span><span class="p">],</span><span class="n">wine_data</span><span class="p">[</span><span class="s1">&#39;Total Sulfur Dioxide&#39;</span><span class="p">],</span><span class="n">clip</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">250</span><span class="p">),</span> 
+            <span class="n">n_levels</span><span class="o">=</span><span class="mi">30</span><span class="p">);</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">250</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(0, 250)
+</pre></div>
+</div>
+<img alt="../_images/2-VisualizingDistributionsToFindPatterns_51_1.png" src="../_images/2-VisualizingDistributionsToFindPatterns_51_1.png" />
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="we-have-seen-the-bivariate-histogram-as-layers-and-as-curves-what-if-we-want-to-view-it-as-a-single-continuous-region-with-different-colour-gradients">
+<h2>We have seen the bivariate histogram as layers and as curves. What if we want to view it as a single continuous region with different colour gradients?<a class="headerlink" href="#we-have-seen-the-bivariate-histogram-as-layers-and-as-curves-what-if-we-want-to-view-it-as-a-single-continuous-region-with-different-colour-gradients" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#setting the size for the plot</span>
+<span class="n">f</span><span class="p">,</span><span class="n">ax</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+
+<span class="n">cmap</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">cubehelix_palette</span><span class="p">(</span><span class="n">as_cmap</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">dark</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">light</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">kdeplot</span><span class="p">(</span><span class="n">wine_data</span><span class="p">[</span><span class="s1">&#39;Free Sulfur Dioxide&#39;</span><span class="p">],</span><span class="n">wine_data</span><span class="p">[</span><span class="s1">&#39;Total Sulfur Dioxide&#39;</span><span class="p">],</span><span class="n">clip</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">250</span><span class="p">),</span> 
+            <span class="n">cmap</span><span class="o">=</span><span class="n">cmap</span><span class="p">,</span> <span class="n">n_levels</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span> <span class="n">shade</span><span class="o">=</span><span class="kc">True</span><span class="p">);</span>
+<span class="c1">#The number of contour levels have been increased, and the cubehelix colour palette is used</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">250</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(0, 250)
+</pre></div>
+</div>
+<img alt="../_images/2-VisualizingDistributionsToFindPatterns_53_1.png" src="../_images/2-VisualizingDistributionsToFindPatterns_53_1.png" />
+</div>
+</div>
+<p>The regions with high concentration (=1) are marked as dark, while those with lesser concentration are marked as light. We get a single graph where the distinction between curves is not evident.</p>
+<p><strong>Note: You can use the jointgrid() function also (which is used by jointplot() to plot your graphs), to create further visual effects like adding markers, more layers, etc.</strong></p>
+<p>Let’s try to see what else we can find from the dataset.</p>
+</div>
+<div class="section" id="plotting-pairwise-relationships">
+<h2>PLOTTING PAIRWISE RELATIONSHIPS<a class="headerlink" href="#plotting-pairwise-relationships" title="Permalink to this headline">¶</a></h2>
+<p>Studying bivariate relationships between every two columns in a given dataset becomes a tedious job. Extending the idea of bivariate relationships, Seaborn provides a pairplot() function.
+This creates a matrix of axes and shows the relationship between every pair of columns in the dataframe.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">pairplot</span><span class="p">(</span><span class="n">wine_data</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.PairGrid at 0x1a16e1cc50&gt;
+</pre></div>
+</div>
+<img alt="../_images/2-VisualizingDistributionsToFindPatterns_59_1.png" src="../_images/2-VisualizingDistributionsToFindPatterns_59_1.png" />
+</div>
+</div>
+<p>We see that:</p>
+<ul class="simple">
+<li><p>A matrix of graphs is created</p></li>
+<li><p>All the column titles are the rows and columns of the matrix</p></li>
+<li><p>The graphs in the principal diagonal are plots of the same quantity on both X and Y axes, indicating a univariate distribution. Thus, we see a histogram.</p></li>
+<li><p>Rest of the entries have different quantities along the X and Y axes, creating scatter plots of the bivariate distribution.</p></li>
+</ul>
+<p>But this is a little complicated to understand. Let us break it down and analyse the aciditied of our wine samples.</p>
+</div>
+<div class="section" id="let-us-just-plot-the-relationship-between-fixed-acidity-volatile-acidity-citric-acid-residual-sugar">
+<h2>Let us just plot the relationship between Fixed Acidity, Volatile Acidity, Citric Acid, Residual Sugar.<a class="headerlink" href="#let-us-just-plot-the-relationship-between-fixed-acidity-volatile-acidity-citric-acid-residual-sugar" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">pairplot</span><span class="p">(</span><span class="n">wine_data</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> 
+             <span class="nb">vars</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Fixed Acidity&quot;</span><span class="p">,</span><span class="s2">&quot;Volatile Acidity&quot;</span><span class="p">,</span><span class="s2">&quot;Citric Acid&quot;</span><span class="p">,</span><span class="s2">&quot;Residual Sugar&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.PairGrid at 0x1a17eea518&gt;
+</pre></div>
+</div>
+<img alt="../_images/2-VisualizingDistributionsToFindPatterns_62_1.png" src="../_images/2-VisualizingDistributionsToFindPatterns_62_1.png" />
+</div>
+</div>
+</div>
+<div class="section" id="to-plot-the-same-graph-as-above-but-with-kde-in-the-principle-diagonal">
+<h2>To plot the same graph as above but with KDE in the principle diagonal<a class="headerlink" href="#to-plot-the-same-graph-as-above-but-with-kde-in-the-principle-diagonal" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">pairplot</span><span class="p">(</span><span class="n">wine_data</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> 
+             <span class="nb">vars</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Fixed Acidity&quot;</span><span class="p">,</span><span class="s2">&quot;Volatile Acidity&quot;</span><span class="p">,</span><span class="s2">&quot;Citric Acid&quot;</span><span class="p">,</span><span class="s2">&quot;Residual Sugar&quot;</span><span class="p">],</span>
+             <span class="n">diag_kind</span><span class="o">=</span><span class="s2">&quot;kde&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.PairGrid at 0x1a1a740d68&gt;
+</pre></div>
+</div>
+<img alt="../_images/2-VisualizingDistributionsToFindPatterns_64_1.png" src="../_images/2-VisualizingDistributionsToFindPatterns_64_1.png" />
+</div>
+</div>
+</div>
+<div class="section" id="plotting-regression-plots-on-the-off-diagonals">
+<h2>Plotting regression plots on the off-diagonals<a class="headerlink" href="#plotting-regression-plots-on-the-off-diagonals" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">pairplot</span><span class="p">(</span><span class="n">wine_data</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> 
+             <span class="nb">vars</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Fixed Acidity&quot;</span><span class="p">,</span><span class="s2">&quot;Volatile Acidity&quot;</span><span class="p">,</span><span class="s2">&quot;Citric Acid&quot;</span><span class="p">,</span><span class="s2">&quot;Residual Sugar&quot;</span><span class="p">],</span>
+             <span class="n">kind</span><span class="o">=</span><span class="s1">&#39;reg&#39;</span><span class="p">)</span>
+<span class="c1">#Making kind as reg (By default, it is scatter)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.PairGrid at 0x1a1f93d550&gt;
+</pre></div>
+</div>
+<img alt="../_images/2-VisualizingDistributionsToFindPatterns_66_1.png" src="../_images/2-VisualizingDistributionsToFindPatterns_66_1.png" />
+</div>
+</div>
+</div>
+<div class="section" id="let-us-try-to-make-the-above-plot-interesting">
+<h2>Let us try to make the above plot interesting<a class="headerlink" href="#let-us-try-to-make-the-above-plot-interesting" title="Permalink to this headline">¶</a></h2>
+<p>We have the plots of different acidity parameters. Let us classify them based on the wine quality’s pH content. We could then relate acidity to the pH factor of the wine sample.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">pairplot</span><span class="p">(</span><span class="n">wine_data</span><span class="p">,</span> 
+             <span class="nb">vars</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Fixed Acidity&quot;</span><span class="p">,</span><span class="s2">&quot;Volatile Acidity&quot;</span><span class="p">,</span><span class="s2">&quot;Citric Acid&quot;</span><span class="p">,</span><span class="s2">&quot;Residual Sugar&quot;</span><span class="p">],</span>
+             <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;pH&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.PairGrid at 0x1a26631b38&gt;
+</pre></div>
+</div>
+<img alt="../_images/2-VisualizingDistributionsToFindPatterns_68_1.png" src="../_images/2-VisualizingDistributionsToFindPatterns_68_1.png" />
+</div>
+</div>
+<p><em>A general trend we can easily observe from the bright pink spots in the graphs is that pH is large when acidities are very low. Intuitively, this is in accordance with our logic - More the pH, more basic is the sample in question.</em></p>
+<p><strong>Food for thought: Can we plot a heatmap with Seaborn?</strong><br>
+<strong>Hint:</strong> <em>Use the seaborn.heatmap() function. You may first need to find the correlation between variables using data.corr() and then pass it into the heatmap function.</em></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">corrmat</span> <span class="o">=</span> <span class="n">wine_data</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span>
+<span class="n">f</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">corrmat</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mf">.8</span><span class="p">,</span> <span class="n">square</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;.2f&#39;</span><span class="p">,</span> <span class="n">cmap</span> <span class="o">=</span> <span class="s2">&quot;summer&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/2-VisualizingDistributionsToFindPatterns_72_0.png" src="../_images/2-VisualizingDistributionsToFindPatterns_72_0.png" />
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "hossainlab/dataviz",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./seaborn"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            
+
+
+
+<div class='prev-next-bottom'>
+    
+
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Jubayer Hossain<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>

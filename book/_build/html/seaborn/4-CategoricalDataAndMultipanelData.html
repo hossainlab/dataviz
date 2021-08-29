@@ -1,0 +1,802 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Plotting categorical data &#8212; Data Visualization with Python</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet" />
+  <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.e8f53015daec13862f6db5e763c41738.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe,.cell"
+        const thebe_selector_input = "pre,.cell_input div.highlight"
+        const thebe_selector_output = ".output,.cell_output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="shortcut icon" href="../_static/logo.jpg"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      <img src="../_static/logo.jpg" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Data Visualization with Python</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <p class="caption">
+ <span class="caption-text">
+  Matplotlib
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../matplotlib/00-Intro%20to%20Data%20Visualization.html">
+   Intro to Data Visualization with Matplotlib
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../matplotlib/02_InteractiveBackends.html">
+     Backends
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/seaborn/4-CategoricalDataAndMultipanelData.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/hossainlab/dataviz/"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/hossainlab/dataviz/master?urlpath=tree/book/seaborn/4-CategoricalDataAndMultipanelData.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/hossainlab/dataviz/blob/master/book/seaborn/4-CategoricalDataAndMultipanelData.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        <button type="button" class="btn btn-secondary topbarbtn"
+            onclick="initThebeSBT()" title="Launch Thebe" data-toggle="tooltip" data-placement="left"><i
+                class="fas fa-play"></i><span style="margin-left: .4em;">Live Code</span></button>
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Plotting categorical data
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#let-s-consider-the-same-quality-alcohol-content-example">
+     Let’s consider the same Quality-Alcohol content example.
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#could-we-use-the-hue-plot-to-add-some-additional-details-in-the-plot-like-in-previous-graphs">
+     Could we use the hue plot to add some additional details in the plot, like in previous graphs?
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#can-we-plot-the-graph-horizontally-instead">
+     Can we plot the graph horizontally instead?
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#how-do-we-get-more-information-about-the-distribution-values-within-each-category">
+   How do we get more information about the distribution values within each category?
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-box-plot">
+     The Box Plot
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-violin-plot">
+     The Violin Plot
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#adding-individual-observations-inside-the-violin-plots">
+     Adding individual observations inside the violin plots
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#combining-plots">
+     Combining plots
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#statistical-estimation-within-categories">
+     Statistical estimation within categories
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#to-show-the-number-of-variables-in-each-category-countplot">
+       To show the number of variables in each category - countplot()
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#plotting-wide-form-data">
+       Plotting wide-form data
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#drawing-multi-panel-categorical-plots">
+   Drawing multi-panel categorical plots
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#let-us-now-try-to-expoit-the-factor-plot-to-see-if-we-can-generate-some-interesting-patterns">
+     Let us now try to expoit the factor plot to see if we can generate some interesting patterns
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="plotting-categorical-data">
+<h1>Plotting categorical data<a class="headerlink" href="#plotting-categorical-data" title="Permalink to this headline">¶</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Importing the dataset in dataframe format</span>
+<span class="n">wine_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;datasets/winequality-white.csv&#39;</span><span class="p">,</span> 
+                        <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Fixed Acidity&quot;</span><span class="p">,</span> <span class="s2">&quot;Volatile Acidity&quot;</span><span class="p">,</span> <span class="s2">&quot;Citric Acid&quot;</span><span class="p">,</span> <span class="s2">&quot;Residual Sugar&quot;</span><span class="p">,</span>
+                                <span class="s2">&quot;Chlorides&quot;</span><span class="p">,</span> <span class="s2">&quot;Free Sulfur Dioxide&quot;</span><span class="p">,</span> <span class="s2">&quot;Total Sulfur Dioxide&quot;</span><span class="p">,</span> <span class="s2">&quot;Density&quot;</span><span class="p">,</span> 
+                                <span class="s2">&quot;pH&quot;</span><span class="p">,</span> <span class="s2">&quot;Sulphates&quot;</span><span class="p">,</span> <span class="s2">&quot;Alcohol&quot;</span><span class="p">,</span> <span class="s2">&quot;Quality&quot;</span><span class="p">],</span>
+                        <span class="n">skiprows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                        <span class="n">sep</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;\s*;\s*&#39;</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s1">&#39;python&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#setting style for seaborn for better viewability</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s2">&quot;whitegrid&quot;</span><span class="p">,</span> <span class="n">color_codes</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1">#set up for statistical analysis</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">ord</span><span class="p">,</span> <span class="s2">&quot;categorical&quot;</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>While dealing with linear relationships, we plotted the relationship between alcohol content and quality of the wine samples. We noted that since the Quality values had discrete numbers, our graph had samples spread vertically along discrete intervals. We tried to analyse the plot by adding some jitter, and adopting the central tendency approach. But it still did not provide too many details about the distribution under study.</strong></p>
+<p>Such plots, where one of the variables of interest is categorical, are best approached by methods specific to categorical plots. Seaborn provides many functions to anayse such data:</p>
+<ul class="simple">
+<li><p>swarmplot() and stripplot() for plots that show each observation at each level of the categorical variable</p></li>
+<li><p>boxplot() and violinplot() for abstract representations of each distribution of observations</p></li>
+<li><p>barplot() and pointplot() for those that apply statistical estimation to show a measure of central tendency and confidence interval.</p></li>
+<li><p>factorplot(), that takes the help of FacetGrid and allows the user to plot across a grid of figure panels, unlike the rest that plot onto a specific matplotlib axis</p></li>
+</ul>
+<div class="section" id="let-s-consider-the-same-quality-alcohol-content-example">
+<h2>Let’s consider the same Quality-Alcohol content example.<a class="headerlink" href="#let-s-consider-the-same-quality-alcohol-content-example" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="p">,</span><span class="n">ax</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">stripplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;Quality&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Alcohol&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">wine_data</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x1a0b17d828&gt;
+</pre></div>
+</div>
+<img alt="../_images/4-CategoricalDataAndMultipanelData_7_1.png" src="../_images/4-CategoricalDataAndMultipanelData_7_1.png" />
+</div>
+</div>
+<p><em>We see that stripplot is basically a scatterplot to the case where one variable is categorical. It is clear that points overlap though.</em> <br>
+Let us try to adjust the data points along the categorical axis.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="p">,</span><span class="n">ax</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">stripplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;Quality&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Alcohol&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">wine_data</span><span class="p">,</span> <span class="n">jitter</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x1a0b4f4710&gt;
+</pre></div>
+</div>
+<img alt="../_images/4-CategoricalDataAndMultipanelData_9_1.png" src="../_images/4-CategoricalDataAndMultipanelData_9_1.png" />
+</div>
+</div>
+<p>The other way to do this is invoke the swarmplot().</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="p">,</span><span class="n">ax</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">swarmplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;Quality&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Alcohol&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">wine_data</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x1a0b40a4e0&gt;
+</pre></div>
+</div>
+<img alt="../_images/4-CategoricalDataAndMultipanelData_11_1.png" src="../_images/4-CategoricalDataAndMultipanelData_11_1.png" />
+</div>
+</div>
+<p><em>The swarm plot output is spread out such that overlap is minimum. This is clear when comparing the stripplot with jitter and the swarm plot; the number of points seen is way more in the swarmplot, and is a true measure of the number of samples being considered. The algorithm behind swarm plot is built to function this way.</em></p>
+<p>Two things are can be understood:</p>
+<ul class="simple">
+<li><p>Colours in the above plot are random</p></li>
+<li><p>In a categorical distribution, the categorical values are arranged in ascending order along the axis. If the data is in string format, the values appear in the order specified in the dataframe.</p>
+<ul>
+<li><p>If working with pandas, one could set a default order of categoried from there before importing.</p></li>
+</ul>
+</li>
+</ul>
+<p>From the above plots, it is clear that from the wine samples, there are many with different quantities of alcohol, but they all fall into a set of categories when it comes to quality. The thick lines in the first stripplot show the sheer number of wine samples that are of quality rating 6 and 7. The same point is validated by spreading out the points and observing the amount of points available.</p>
+<p>If a party member randomly picked a glass from the wine samples, the probability of it being one of quality between 5 and 8 is highest.</p>
+</div>
+<div class="section" id="could-we-use-the-hue-plot-to-add-some-additional-details-in-the-plot-like-in-previous-graphs">
+<h2>Could we use the hue plot to add some additional details in the plot, like in previous graphs?<a class="headerlink" href="#could-we-use-the-hue-plot-to-add-some-additional-details-in-the-plot-like-in-previous-graphs" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="p">,</span><span class="n">ax</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">swarmplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;Quality&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Alcohol&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">wine_data</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;pH&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x1a0b3c24a8&gt;
+</pre></div>
+</div>
+<img alt="../_images/4-CategoricalDataAndMultipanelData_15_1.png" src="../_images/4-CategoricalDataAndMultipanelData_15_1.png" />
+</div>
+</div>
+<p><em>We have basically added a nested categorical variable</em> <br>
+It is evident that most samples are in the pH range of 3plus. <br>
+We can also see that few samples range from a pH of 2.7 to about 3.82 also.</p>
+</div>
+<div class="section" id="can-we-plot-the-graph-horizontally-instead">
+<h2>Can we plot the graph horizontally instead?<a class="headerlink" href="#can-we-plot-the-graph-horizontally-instead" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+
+<span class="c1">#The axes have been interchanged</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">swarmplot</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="s1">&#39;Quality&#39;</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;Alcohol&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">wine_data</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x104cad390&gt;
+</pre></div>
+</div>
+<img alt="../_images/4-CategoricalDataAndMultipanelData_18_1.png" src="../_images/4-CategoricalDataAndMultipanelData_18_1.png" />
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="how-do-we-get-more-information-about-the-distribution-values-within-each-category">
+<h1>How do we get more information about the distribution values within each category?<a class="headerlink" href="#how-do-we-get-more-information-about-the-distribution-values-within-each-category" title="Permalink to this headline">¶</a></h1>
+<p>Some of your guests are specific about wine quality. How do you know how many samples of each quality you have? Will it be sufficient for everyone present? Let’s try different plots to see what helps us get an idea about each category of wine.</p>
+<div class="section" id="the-box-plot">
+<h2>The Box Plot<a class="headerlink" href="#the-box-plot" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#setting the size for the plot</span>
+<span class="n">f</span><span class="p">,</span><span class="n">ax</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;Quality&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Alcohol&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">wine_data</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x1a348ca7b8&gt;
+</pre></div>
+</div>
+<img alt="../_images/4-CategoricalDataAndMultipanelData_23_1.png" src="../_images/4-CategoricalDataAndMultipanelData_23_1.png" />
+</div>
+</div>
+<p>By comparing this graph with the initial stripplot, we can observe the following:</p>
+<ul class="simple">
+<li><p>The boxes are placed where the number of wine samples with alcohol concentration is highest - Ideally, this correcponds to three quartile of the values in the distribution</p></li>
+<li><p>There are lines extending on either side of the box plot on either side. Along categories where some data exist that are a little off from the max concentration, some data points are visible.
+In boxplot terms, the whiskers extend to points that lie within 1.5 times the interquartile range of the lower and upper quartile. Observations falling outside this margin are displayed independently.</p></li>
+</ul>
+</div>
+<div class="section" id="the-violin-plot">
+<h2>The Violin Plot<a class="headerlink" href="#the-violin-plot" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#setting the size for the plot</span>
+<span class="n">f</span><span class="p">,</span><span class="n">ax</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">violinplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;Quality&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Alcohol&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">wine_data</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x1a3432f9b0&gt;
+</pre></div>
+</div>
+<img alt="../_images/4-CategoricalDataAndMultipanelData_29_1.png" src="../_images/4-CategoricalDataAndMultipanelData_29_1.png" />
+</div>
+</div>
+<ul class="simple">
+<li><p>The name comes from the shape of the graph plotted. We see that this is similar to the box plot, except that the shaded region is enclosed between curves.</p></li>
+<li><p>The representation provides a better description of the values of the distribution.</p></li>
+<li><p>Linking this to what we observed while analysing univariate distributions, we see that these curve boundaries correspond to the kernel density estimate</p></li>
+<li><p>The quartile and whisker values are part of the violin itself.</p></li>
+</ul>
+<p>Adding a few parameters to tweak the KDE curve,</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="p">,</span><span class="n">ax</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">violinplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;Quality&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Alcohol&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">wine_data</span><span class="p">,</span>
+               <span class="n">bw</span><span class="o">=</span><span class="mf">.1</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="s2">&quot;count&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x1a34a28be0&gt;
+</pre></div>
+</div>
+<img alt="../_images/4-CategoricalDataAndMultipanelData_32_1.png" src="../_images/4-CategoricalDataAndMultipanelData_32_1.png" />
+</div>
+</div>
+<p><em>Setting the scale as count scales the width of the violins to the number of observations in that bin.</em>
+This is in line with our observations so far. There are more wine samples that are of quality 6.</p>
+</div>
+<div class="section" id="adding-individual-observations-inside-the-violin-plots">
+<h2>Adding individual observations inside the violin plots<a class="headerlink" href="#adding-individual-observations-inside-the-violin-plots" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="p">,</span><span class="n">ax</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">violinplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;Quality&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Alcohol&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">wine_data</span><span class="p">,</span> <span class="n">inner</span><span class="o">=</span><span class="s2">&quot;stick&quot;</span><span class="p">,</span> <span class="n">palette</span><span class="o">=</span><span class="s2">&quot;Set3&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x1a14f299e8&gt;
+</pre></div>
+</div>
+<img alt="../_images/4-CategoricalDataAndMultipanelData_35_1.png" src="../_images/4-CategoricalDataAndMultipanelData_35_1.png" />
+</div>
+</div>
+<ul class="simple">
+<li><p>There are more wine samples of quality 6, which can be seen comparing areas of the violin plots.</p></li>
+<li><p>More wine samples with same alcohol content have a quality of 5, while the variation of alcohol levels of quality 6 is high.</p></li>
+</ul>
+<p>*Note: If the hue parameter has just two levels, the violinplot provides a split keyword that vertically divides the violin into two halves and displays data corresponding to the hues on either side.</p>
+</div>
+<div class="section" id="combining-plots">
+<h2>Combining plots<a class="headerlink" href="#combining-plots" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#setting the size for the plot</span>
+<span class="n">f</span><span class="p">,</span><span class="n">ax</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+
+<span class="c1">#A combination of different plots on the same graph sometimes provides more information than individually </span>
+<span class="c1">#analysing different plots.</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">violinplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;Quality&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Alcohol&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">wine_data</span><span class="p">,</span> <span class="n">inner</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">swarmplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;Quality&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Alcohol&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">wine_data</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x1a4446a7b8&gt;
+</pre></div>
+</div>
+<img alt="../_images/4-CategoricalDataAndMultipanelData_39_1.png" src="../_images/4-CategoricalDataAndMultipanelData_39_1.png" />
+</div>
+</div>
+<p>The observations we made are clearer still in the above plot, with the swarm plot’s points depicted in the violin plot area.</p>
+</div>
+<div class="section" id="statistical-estimation-within-categories">
+<h2>Statistical estimation within categories<a class="headerlink" href="#statistical-estimation-within-categories" title="Permalink to this headline">¶</a></h2>
+<p><strong>Plots to show the central tendency of the values in the distribution</strong></p>
+<p>Let us perform some complex analysis. We seriously get down to business trying to satisfy everyone with respect to the required quality and alcohol content. <br>
+How do we find this relation along with the acidity of the wines?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="p">,</span><span class="n">ax</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;Quality&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;pH&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">wine_data</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;Alcohol&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x1a18398ac8&gt;
+</pre></div>
+</div>
+<img alt="../_images/4-CategoricalDataAndMultipanelData_42_1.png" src="../_images/4-CategoricalDataAndMultipanelData_42_1.png" />
+</div>
+</div>
+<p>We see a bar plot that has taken into account the alcohol content, quality and fixed acidity of every wine sample under consideration.
+For every quality of wine, we see a set of bar plots that correspond to different acidity levels, all drawn with height represented by pH levels.
+Judging by the colours we see in our plot, we have a good mix of wine samples with alcohol content ranging between 8 and 14, with more in the quality range of 4 to 8. We are in safe hands as this satisfies the requirement of our party members.</p>
+<div class="section" id="to-show-the-number-of-variables-in-each-category-countplot">
+<h3>To show the number of variables in each category - countplot()<a class="headerlink" href="#to-show-the-number-of-variables-in-each-category-countplot" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="p">,</span><span class="n">ax</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">countplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;Alcohol&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">wine_data</span><span class="p">,</span> <span class="n">palette</span><span class="o">=</span><span class="s2">&quot;Greens_d&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">90</span><span class="p">)</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(array([  0,   1,   2,   3,   4,   5,   6,   7,   8,   9,  10,  11,  12,
+         13,  14,  15,  16,  17,  18,  19,  20,  21,  22,  23,  24,  25,
+         26,  27,  28,  29,  30,  31,  32,  33,  34,  35,  36,  37,  38,
+         39,  40,  41,  42,  43,  44,  45,  46,  47,  48,  49,  50,  51,
+         52,  53,  54,  55,  56,  57,  58,  59,  60,  61,  62,  63,  64,
+         65,  66,  67,  68,  69,  70,  71,  72,  73,  74,  75,  76,  77,
+         78,  79,  80,  81,  82,  83,  84,  85,  86,  87,  88,  89,  90,
+         91,  92,  93,  94,  95,  96,  97,  98,  99, 100, 101, 102]),
+ &lt;a list of 103 Text xticklabel objects&gt;)
+</pre></div>
+</div>
+<img alt="../_images/4-CategoricalDataAndMultipanelData_45_1.png" src="../_images/4-CategoricalDataAndMultipanelData_45_1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="p">,</span><span class="n">ax</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">pointplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;Quality&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;pH&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">wine_data</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x1a19680978&gt;
+</pre></div>
+</div>
+<img alt="../_images/4-CategoricalDataAndMultipanelData_46_1.png" src="../_images/4-CategoricalDataAndMultipanelData_46_1.png" />
+</div>
+</div>
+<p>We see that the plot is a set of point estimates and confidence intervals. It is clear the variation of pH in wine samples of quality 3 is very large when compared to quality 6. Introducing another dimension to it via the hue parameter, we get the below:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="p">,</span><span class="n">ax</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">pointplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;Quality&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;pH&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">wine_data</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;Alcohol&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x1a19cc9b38&gt;
+</pre></div>
+</div>
+<img alt="../_images/4-CategoricalDataAndMultipanelData_48_1.png" src="../_images/4-CategoricalDataAndMultipanelData_48_1.png" />
+</div>
+</div>
+<p><em>Although the above graph is too complicated to understand, we notice that pointplot connects points from the same hue category. This feature can be used to study how the main relationship is changing as a function of a second variable.</em></p>
+</div>
+<div class="section" id="plotting-wide-form-data">
+<h3>Plotting wide-form data<a class="headerlink" href="#plotting-wide-form-data" title="Permalink to this headline">¶</a></h3>
+<p>In the wide format, a subject’s repeated responses will be in a single row, and each response is a separate column. Tidy or Long format has every row following one time point per subject principle. Each subject will have multiple rows, where entries can be repeated.</p>
+<p>The wide-form data can be in a variety of formats, including pandas DataFrames or two-dimensional numpy arrays.</p>
+<p><em>Passing in the complete dataframe to the data object,</em></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="p">,</span><span class="n">ax</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">7</span><span class="p">))</span>
+
+
+<span class="n">sns</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">wine_data</span><span class="p">,</span> <span class="n">orient</span><span class="o">=</span><span class="s2">&quot;h&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x1a1aa9f630&gt;
+</pre></div>
+</div>
+<img alt="../_images/4-CategoricalDataAndMultipanelData_51_1.png" src="../_images/4-CategoricalDataAndMultipanelData_51_1.png" />
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="drawing-multi-panel-categorical-plots">
+<h1>Drawing multi-panel categorical plots<a class="headerlink" href="#drawing-multi-panel-categorical-plots" title="Permalink to this headline">¶</a></h1>
+<p>Multi-panel data involves multi-dimensional data that is varying with time.</p>
+<p>Just like how we combined regression plots with bivariate distribution analyses, we now try the factorplot() which combines the functions used so far along with FacetGrid, adding the ability to examine additional categories through the larger structure of the figure</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">factorplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;Quality&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;pH&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">wine_data</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;Alcohol&quot;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">aspect</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x1a19c171d0&gt;
+</pre></div>
+</div>
+<img alt="../_images/4-CategoricalDataAndMultipanelData_53_1.png" src="../_images/4-CategoricalDataAndMultipanelData_53_1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">factorplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;Quality&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;pH&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">wine_data</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;Alcohol&quot;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">aspect</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+               <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;bar&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x1a1a883a90&gt;
+</pre></div>
+</div>
+<img alt="../_images/4-CategoricalDataAndMultipanelData_54_1.png" src="../_images/4-CategoricalDataAndMultipanelData_54_1.png" />
+</div>
+</div>
+<p>The above plots are exactly the same as the bar and point plots we created earlier with an added hue parameter.</p>
+<div class="section" id="let-us-now-try-to-expoit-the-factor-plot-to-see-if-we-can-generate-some-interesting-patterns">
+<h2>Let us now try to expoit the factor plot to see if we can generate some interesting patterns<a class="headerlink" href="#let-us-now-try-to-expoit-the-factor-plot-to-see-if-we-can-generate-some-interesting-patterns" title="Permalink to this headline">¶</a></h2>
+<p>We use the factorplot to split the plot based on categorical variables, and use this to study relationships. We get a configurable matrix of plots, where we have flexibility with the axis parameters and the way we visualise other dimensions to the plot.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">factorplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;Fixed Acidity&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;pH&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">wine_data</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">aspect</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+               <span class="n">col</span><span class="o">=</span><span class="s2">&quot;Quality&quot;</span><span class="p">,</span><span class="n">kind</span><span class="o">=</span><span class="s2">&quot;box&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x1a1d4fbf60&gt;
+</pre></div>
+</div>
+<img alt="../_images/4-CategoricalDataAndMultipanelData_56_1.png" src="../_images/4-CategoricalDataAndMultipanelData_56_1.png" />
+</div>
+</div>
+<p>We have a set of graphs showing the relationship between Fixed Acidity and pH in our wine samples. The factorplot has generated one for each quality value.</p>
+<p>Let us generate the same with swarm plots</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">factorplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;Fixed Acidity&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;pH&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">wine_data</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">aspect</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+               <span class="n">col</span><span class="o">=</span><span class="s2">&quot;Quality&quot;</span><span class="p">,</span><span class="n">kind</span><span class="o">=</span><span class="s2">&quot;swarm&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x1a1eff36a0&gt;
+</pre></div>
+</div>
+<img alt="../_images/4-CategoricalDataAndMultipanelData_58_1.png" src="../_images/4-CategoricalDataAndMultipanelData_58_1.png" />
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "hossainlab/dataviz",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./seaborn"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            
+
+
+
+<div class='prev-next-bottom'>
+    
+
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Jubayer Hossain<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>

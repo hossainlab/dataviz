@@ -1,0 +1,601 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>We produce 5 sets of values &#8212; Data Visualization with Python</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet" />
+  <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.e8f53015daec13862f6db5e763c41738.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe,.cell"
+        const thebe_selector_input = "pre,.cell_input div.highlight"
+        const thebe_selector_output = ".output,.cell_output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="shortcut icon" href="../_static/logo.jpg"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      <img src="../_static/logo.jpg" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Data Visualization with Python</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <p class="caption">
+ <span class="caption-text">
+  Matplotlib
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../matplotlib/00-Intro%20to%20Data%20Visualization.html">
+   Intro to Data Visualization with Matplotlib
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../matplotlib/02_InteractiveBackends.html">
+     Backends
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/plotly/ScatterPlot.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/hossainlab/dataviz/"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/hossainlab/dataviz/master?urlpath=tree/book/plotly/ScatterPlot.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/hossainlab/dataviz/blob/master/book/plotly/ScatterPlot.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        <button type="button" class="btn btn-secondary topbarbtn"
+            onclick="initThebeSBT()" title="Launch Thebe" data-toggle="tooltip" data-placement="left"><i
+                class="fas fa-play"></i><span style="margin-left: .4em;">Live Code</span></button>
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   We produce 5 sets of values
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#generate-a-3d-scatter-trace-using-the-5-dimensions">
+   Generate a 3D scatter trace using the 5 dimensions
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#d-bubble-chart-to-plot-real-data">
+   3D Bubble chart to plot real data
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#define-colors-to-represent-each-planet">
+     Define colors to represent each planet
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#define-the-3d-scatter-plot">
+     Define the 3D scatter plot
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#define-the-layout">
+     Define the layout
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#plot-the-figure">
+     Plot the figure
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">plotly.plotly</span> <span class="k">as</span> <span class="nn">py</span>
+<span class="kn">import</span> <span class="nn">plotly.graph_objs</span> <span class="k">as</span> <span class="nn">go</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">plotly.offline</span> <span class="k">as</span> <span class="nn">offline</span>
+
+<span class="n">offline</span><span class="o">.</span><span class="n">init_notebook_mode</span><span class="p">(</span><span class="n">connected</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><script>requirejs.config({paths: { 'plotly': ['https://cdn.plot.ly/plotly-latest.min']},});if(!window.Plotly) {{require(['plotly'],function(plotly) {window.Plotly=plotly;});}}</script></div></div>
+</div>
+<div class="section" id="we-produce-5-sets-of-values">
+<h1>We produce 5 sets of values<a class="headerlink" href="#we-produce-5-sets-of-values" title="Permalink to this headline">¶</a></h1>
+<p>A 3D bubble chart can be used to represent multiple dimensions of data. Aside from the 3 spatial dimensions, markers can represent more information from their size and color giving a total of 5 features which can be represented</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">50</span>
+
+<span class="n">random_x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+
+<span class="n">random_y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+
+<span class="n">random_z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+
+<span class="n">random_a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+
+<span class="n">random_b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="generate-a-3d-scatter-trace-using-the-5-dimensions">
+<h1>Generate a 3D scatter trace using the 5 dimensions<a class="headerlink" href="#generate-a-3d-scatter-trace-using-the-5-dimensions" title="Permalink to this headline">¶</a></h1>
+<p>We use a color scale to pick the bubble colors. The random_b list needs to be multiplied by 1000 to appear clearly in the plot</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">trace</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Scatter3d</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">random_x</span><span class="p">,</span>
+                     <span class="n">y</span> <span class="o">=</span> <span class="n">random_y</span><span class="p">,</span>
+                     <span class="n">z</span> <span class="o">=</span> <span class="n">random_z</span><span class="p">,</span>
+                   
+                     <span class="n">mode</span> <span class="o">=</span> <span class="s1">&#39;markers&#39;</span><span class="p">,</span>
+                     
+                     <span class="n">marker</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">color</span> <span class="o">=</span> <span class="n">random_a</span><span class="p">,</span>
+                                   <span class="n">colorscale</span> <span class="o">=</span> <span class="s1">&#39;Rainbow&#39;</span><span class="p">,</span>
+                                          
+                                   <span class="n">sizemode</span> <span class="o">=</span> <span class="s1">&#39;area&#39;</span><span class="p">,</span>
+                                   <span class="n">size</span> <span class="o">=</span> <span class="mi">1000</span><span class="o">*</span><span class="n">random_b</span>
+                                   <span class="p">)</span>
+                    <span class="p">)</span>
+<span class="n">data</span><span class="o">=</span><span class="p">[</span><span class="n">trace</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">offline</span><span class="o">.</span><span class="n">iplot</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div id="acea0c14-aa3f-493e-99e9-39314a6f2c6c" style="height: 525px; width: 100%;" class="plotly-graph-div"></div><script type="text/javascript">require(["plotly"], function(Plotly) { window.PLOTLYENV=window.PLOTLYENV || {};window.PLOTLYENV.BASE_URL="https://plot.ly";Plotly.newPlot("acea0c14-aa3f-493e-99e9-39314a6f2c6c", [{"type": "scatter3d", "x": [0.12081768521325775, 0.6701774327447151, -0.39446085997819846, 0.34161792267257673, 0.898177964344483, -0.16298344422710953, -0.9872056684764425, 0.7199414702127821, -1.0949821340245196, -1.3297579500118983, 0.4847174008250156, -0.7111365529460248, 0.28742258781186525, 0.07629192635935743, 0.36306434576983526, 0.3136991586873592, -1.4034759167895383, -0.045438305749219574, 0.5121363926498835, -1.5723677518035006, -0.3779106278359706, 0.2614384305184494, -1.19506923322286, 0.602210849338995, 0.9363275606770012, -0.9630449565285524, 0.2965561485095508, -2.346060702729119, -0.0770159763169612, 0.24669293980364662, 0.5505176449706336, 1.7392797095133725, -1.3873690456175356, 0.30543705566297785, 0.5876084505749092, 0.8805475801072659, -1.0624748335128404, -0.38186419649936587, -1.178523452001859, 0.3144842331233086, 0.659029154713647, 1.4459750684569166, 0.03633639706523434, -1.4127368441646326, -0.4881565828559593, -0.424359844186831, -0.15932069277296293, 1.8675609409919292, 0.07767857439427815, 0.2458698300013824], "y": [1.4566223187552687, 0.526769194767183, -0.11459886086716968, -0.4138479167583334, -0.6929319846235419, -0.6472054073433638, -1.736776400337314, -2.8293842086122045, -0.14747656286244484, -0.5843186979804672, 0.9825633239767817, -1.0475396278028384, -0.2606196923655158, -1.5378877098027408, 0.8380417457469939, 0.7375206170458477, -0.8310005155938376, -0.3256060395224332, 1.5063814140698752, 0.3130621870114189, -0.6386340888916711, 0.38745952621119856, -0.3458470999897388, -0.8147161461882282, -0.6528372713769823, 1.8917740273549095, -1.0516612537300594, 0.6756050334003831, 1.3656011384341544, 0.11183726916379748, -1.4485454046377142, -0.2167206224945314, -0.5999470733247831, 0.1550878047422684, -0.7525149036676482, -0.8559673304547271, 0.15595056744166372, 0.9038258700926156, -1.2079600496169542, -0.7252241566347547, 0.7204791530551966, 1.4826819279292989, -0.24967271712237132, 0.8802869324716623, -0.6686108989129878, 0.8367854958444136, 1.1145170816816277, -2.5721013140458537, 2.314947949344062, 0.4391467406354109], "z": [0.35511166268547684, 0.6855901907849342, 0.038106934471361556, -1.2165181233969768, -0.1790654485883318, -0.641175084478257, 0.42843000409666465, -0.9600475177339173, 0.7397003337656398, 1.0362879781862442, 0.3276804324112337, -1.8999478547417437, -0.7592868090797316, 1.215972190429857, 1.5871100484747673, -0.6401978445109614, 0.056371851940111996, 2.0105803348722477, -0.8872976646116137, 0.5265900830294138, -0.5027851498385784, 0.7835315302934991, 0.9541127991432093, -0.8313136548213061, -0.6727746745116244, 0.5958521764670998, 0.9131569000151037, 1.4451521041384428, -1.458010729957365, 0.27724386616989916, -0.885898469403718, 0.14889245843687365, 2.1405392193999906, -1.5299242513756177, 0.503364097364138, -0.7475888234260966, 0.5743473946433598, -1.021990721774397, -0.6624853417389702, 0.2533637691621476, 0.38962899479465724, -0.8289992986460044, -0.2887495367050303, 0.10089716213648052, -2.087770418742616, 0.9862877090036278, 0.3169763805891635, -0.03555062763673042, -0.6167471146223779, -0.7311577709615843], "mode": "markers", "marker": {"color": [-0.044698155218532765, -0.3095418902879437, -1.1758088627123457, -0.3418964979393638, 0.8690454535888701, -0.8206869477046311, 0.3002555395487073, -1.4944337731964108, 1.7377323285097777, 0.5992440900492481, 1.75810850849368, -0.6636401104388145, -0.19057090661419987, 0.10818115245707872, -0.01899254561760872, 1.6692335915114607, -0.5200455743275925, -1.2099223887606445, 0.9208363383079642, -0.027599742857194937, -0.8560415138082116, -0.16153247237166599, -1.3862164694629016, -0.27797734891238834, -1.30762626457317, -0.09146307887007833, 0.6950194909129538, 0.3351617591204957, -0.08410220788323436, 0.04033164884149992, 0.6299750561235301, 0.04577290635105364, 0.5566339919074468, -0.7328861738399669, 1.5543165220299684, 1.5134448630443558, 1.9882073204922166, 0.7953199751727814, -0.5679662515245191, -0.32128387692420735, -1.1363227239479647, -0.1705674776945326, 0.09994956157900967, -0.9539161513903109, -0.1677404678442169, 0.6901056033769506, -2.7255531994084246, 0.7720450108443215, -1.2663522314903544, -0.5958217922855137], "colorscale": "Rainbow", "sizemode": "area", "size": [1691.1478778361052, 1683.1576458972827, -2313.2971418419247, 466.87510615006903, -529.1763843266259, 58.995097623340904, 963.9453339599321, -544.9545728764496, -174.98840212587896, 1079.9670249356623, 306.0934647316115, 1515.3093272555534, 155.47218993590826, 828.6625631645069, -1808.4346888997266, 1162.682249531697, 276.8891790883216, 1428.6937834714627, 1984.1591216651937, 1051.6641189424379, -1347.0023684608304, -1037.6767070094504, 274.9210487670741, 323.2907326307242, 338.49673664774093, -290.76185282578797, -455.6252385859748, 949.7297839056217, -1665.8397640200253, -233.69751199711675, -695.9778520060806, 2157.182979571377, -1117.147115934673, 1029.03600622561, -265.18600886720276, -31.2907089400834, 913.522266149302, 208.43473289850226, -874.9960244721696, 1128.741835310977, 786.0682724051513, -325.969263788076, 1193.4988173865092, -196.60023172197344, 1170.8549680343858, 693.28791557199, 572.8749771311275, -47.00548600454139, 787.3336235691706, 448.8574458811668]}}], {}, {"showLink": true, "linkText": "Export to plot.ly"})});</script></div></div>
+</div>
+</div>
+<div class="section" id="d-bubble-chart-to-plot-real-data">
+<h1>3D Bubble chart to plot real data<a class="headerlink" href="#d-bubble-chart-to-plot-real-data" title="Permalink to this headline">¶</a></h1>
+<p>This is the same dataset we had used for the 2D bubble chart. This data has been compiled using publicly available information</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">planets</span><span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./datasets/planets.csv&#39;</span><span class="p">)</span>
+<span class="n">planets</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>planet</th>
+      <th>no_of_moons</th>
+      <th>distance_from_sun</th>
+      <th>period_of_revolution_around_sun</th>
+      <th>planet_diameter</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Mercury</td>
+      <td>0</td>
+      <td>57.9</td>
+      <td>87.96</td>
+      <td>4879</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Venus</td>
+      <td>0</td>
+      <td>108.2</td>
+      <td>224.68</td>
+      <td>12104</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Earth</td>
+      <td>1</td>
+      <td>149.6</td>
+      <td>365.26</td>
+      <td>12756</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Mars</td>
+      <td>2</td>
+      <td>227.9</td>
+      <td>686.98</td>
+      <td>6792</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Jupiter</td>
+      <td>67</td>
+      <td>778.6</td>
+      <td>4332.70</td>
+      <td>142984</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Saturn</td>
+      <td>62</td>
+      <td>1433.5</td>
+      <td>10759.09</td>
+      <td>120536</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>Uranus</td>
+      <td>27</td>
+      <td>2872.5</td>
+      <td>30707.40</td>
+      <td>51118</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>Neptune</td>
+      <td>14</td>
+      <td>4495.1</td>
+      <td>60198.50</td>
+      <td>49528</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>Pluto</td>
+      <td>5</td>
+      <td>5906.4</td>
+      <td>90474.90</td>
+      <td>2370</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="section" id="define-colors-to-represent-each-planet">
+<h2>Define colors to represent each planet<a class="headerlink" href="#define-colors-to-represent-each-planet" title="Permalink to this headline">¶</a></h2>
+<p>This list of colors represents the primary color of the respective planets. Source is: <a class="reference external" href="https://colorhunt.co/blog/solar-system-stars-color-palettes/">https://colorhunt.co/blog/solar-system-stars-color-palettes/</a></p>
+<p>We will be conveying the color of the planet using this color list</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;#D5D2D1&#39;</span><span class="p">,</span> 
+          <span class="s1">&#39;#F8B581&#39;</span><span class="p">,</span> 
+          <span class="s1">&#39;#182A61&#39;</span><span class="p">,</span> 
+          <span class="s1">&#39;#B53B03&#39;</span><span class="p">,</span> 
+          <span class="s1">&#39;#B9CBD5&#39;</span><span class="p">,</span> 
+          <span class="s1">&#39;#E0CDAD&#39;</span><span class="p">,</span> 
+          <span class="s1">&#39;#D3F9FA&#39;</span><span class="p">,</span>
+          <span class="s1">&#39;#3454DF&#39;</span><span class="p">,</span> 
+          <span class="s1">&#39;#E9E8D2&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="define-the-3d-scatter-plot">
+<h2>Define the 3D scatter plot<a class="headerlink" href="#define-the-3d-scatter-plot" title="Permalink to this headline">¶</a></h2>
+<p>We convey the following information in the plot:</p>
+<ul class="simple">
+<li><p><b>x-axis</b> represents the distance from the Sun</p></li>
+<li><p><b>y-axis</b> denotes the time taken (in Earth days) for the planet to revolve around the Sun</p></li>
+<li><p><b>z-axis</b> conveys the number of moons for the planet</p></li>
+<li><p><b>marker size</b> portrays the size of the planet (diameter)</p></li>
+<li><p><b>marker colors</b> represent the color of the planet</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">trace</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Scatter3d</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">planets</span><span class="p">[</span><span class="s1">&#39;distance_from_sun&#39;</span><span class="p">],</span>
+                     <span class="n">y</span> <span class="o">=</span> <span class="n">planets</span><span class="p">[</span><span class="s1">&#39;period_of_revolution_around_sun&#39;</span><span class="p">],</span>
+                     <span class="n">z</span> <span class="o">=</span> <span class="n">planets</span><span class="p">[</span><span class="s1">&#39;no_of_moons&#39;</span><span class="p">],</span>
+                     
+                     <span class="n">text</span><span class="o">=</span><span class="n">planets</span><span class="p">[</span><span class="s1">&#39;planet&#39;</span><span class="p">],</span>
+                     
+                     <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;markers&#39;</span><span class="p">,</span>
+                     <span class="n">marker</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">sizemode</span><span class="o">=</span><span class="s1">&#39;diameter&#39;</span><span class="p">,</span>
+                                 <span class="n">sizeref</span><span class="o">=</span><span class="mi">750</span><span class="p">,</span>
+                                 <span class="n">size</span><span class="o">=</span><span class="n">planets</span><span class="p">[</span><span class="s1">&#39;planet_diameter&#39;</span><span class="p">],</span>
+                                 <span class="n">color</span> <span class="o">=</span> <span class="n">colors</span>
+                                 <span class="p">)</span>
+                    <span class="p">)</span>
+<span class="n">data</span><span class="o">=</span><span class="p">[</span><span class="n">trace</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="define-the-layout">
+<h2>Define the layout<a class="headerlink" href="#define-the-layout" title="Permalink to this headline">¶</a></h2>
+<p>Aside from the figure dimensions, we specify the appearance of the axes. Since we have picked a dark background color, we will use light colors for the axes lines and text.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">layout</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Layout</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mi">800</span><span class="p">,</span> 
+                   <span class="n">height</span><span class="o">=</span><span class="mi">800</span><span class="p">,</span> 
+                   <span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;Planets of our Solar System&#39;</span><span class="p">,</span>
+                   
+                   <span class="n">scene</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">xaxis</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;Distance from Sun&#39;</span><span class="p">,</span>
+                                           <span class="n">color</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span>
+                                           <span class="n">titlefont</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;yellow&#39;</span><span class="p">)</span>
+                                          <span class="p">),</span>
+                                
+                                <span class="n">yaxis</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;Revolution Period (Earth days)&#39;</span><span class="p">,</span>
+                                           <span class="n">color</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span>
+                                           <span class="n">titlefont</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;yellow&#39;</span><span class="p">)</span>
+                                          <span class="p">),</span>
+                                
+                                <span class="n">zaxis</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;Moon Count&#39;</span><span class="p">,</span>
+                                           <span class="n">color</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span>
+                                           <span class="n">titlefont</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;yellow&#39;</span><span class="p">)),</span>
+                                
+                                <span class="n">bgcolor</span> <span class="o">=</span> <span class="s1">&#39;#141836&#39;</span>
+                               <span class="p">)</span>
+                  <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="plot-the-figure">
+<h2>Plot the figure<a class="headerlink" href="#plot-the-figure" title="Permalink to this headline">¶</a></h2>
+<p>The large planets are quite prominent, and we need to zoom in to view the smaller ones.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="o">=</span><span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> 
+              <span class="n">layout</span><span class="o">=</span><span class="n">layout</span><span class="p">)</span>
+
+<span class="n">offline</span><span class="o">.</span><span class="n">iplot</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div id="cc4ef9a1-7081-4a19-ad2a-b756f3441377" style="height: 800px; width: 800px;" class="plotly-graph-div"></div><script type="text/javascript">require(["plotly"], function(Plotly) { window.PLOTLYENV=window.PLOTLYENV || {};window.PLOTLYENV.BASE_URL="https://plot.ly";Plotly.newPlot("cc4ef9a1-7081-4a19-ad2a-b756f3441377", [{"type": "scatter3d", "x": [57.9, 108.2, 149.6, 227.9, 778.6, 1433.5, 2872.5, 4495.1, 5906.4], "y": [87.96, 224.68, 365.26, 686.98, 4332.7, 10759.09, 30707.4, 60198.5, 90474.9], "z": [0, 0, 1, 2, 67, 62, 27, 14, 5], "text": ["Mercury", "Venus", "Earth", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune", "Pluto"], "mode": "markers", "marker": {"sizemode": "diameter", "sizeref": 750, "size": [4879, 12104, 12756, 6792, 142984, 120536, 51118, 49528, 2370], "color": ["#D5D2D1", "#F8B581", "#182A61", "#B53B03", "#B9CBD5", "#E0CDAD", "#D3F9FA", "#3454DF", "#E9E8D2"]}}], {"width": 800, "height": 800, "title": "Planets of our Solar System", "scene": {"xaxis": {"title": "Distance from Sun", "color": "white", "titlefont": {"color": "yellow"}}, "yaxis": {"title": "Revolution Period (Earth days)", "color": "white", "titlefont": {"color": "yellow"}}, "zaxis": {"title": "Moon Count", "color": "white", "titlefont": {"color": "yellow"}}, "bgcolor": "#141836"}}, {"showLink": true, "linkText": "Export to plot.ly"})});</script></div></div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "hossainlab/dataviz",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./plotly"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            
+
+
+
+<div class='prev-next-bottom'>
+    
+
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Jubayer Hossain<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>

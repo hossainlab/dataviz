@@ -1,0 +1,670 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Create a list of 200 random numbers &#8212; Data Visualization with Python</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet" />
+  <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.e8f53015daec13862f6db5e763c41738.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe,.cell"
+        const thebe_selector_input = "pre,.cell_input div.highlight"
+        const thebe_selector_output = ".output,.cell_output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="shortcut icon" href="../_static/logo.jpg"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      <img src="../_static/logo.jpg" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Data Visualization with Python</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <p class="caption">
+ <span class="caption-text">
+  Matplotlib
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../matplotlib/00-Intro%20to%20Data%20Visualization.html">
+   Intro to Data Visualization with Matplotlib
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../matplotlib/02_InteractiveBackends.html">
+     Backends
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/plotly/3.Histogram.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/hossainlab/dataviz/"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/hossainlab/dataviz/master?urlpath=tree/book/plotly/3.Histogram.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/hossainlab/dataviz/blob/master/book/plotly/3.Histogram.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        <button type="button" class="btn btn-secondary topbarbtn"
+            onclick="initThebeSBT()" title="Launch Thebe" data-toggle="tooltip" data-placement="left"><i
+                class="fas fa-play"></i><span style="margin-left: .4em;">Live Code</span></button>
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Create a list of 200 random numbers
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#produce-a-histogram-to-plot-the-distribution-of-these-numbers">
+   Produce a histogram to plot the distribution of these numbers
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#generate-the-histogram-plot">
+   Generate the histogram plot
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#normalized-histogram">
+   Normalized Histogram
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#plotting-a-cumulative-histogram">
+   Plotting a cumulative histogram
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#horizontal-histogram">
+   Horizontal Histogram
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#overlaid-histogram">
+   Overlaid Histogram
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#our-first-histogram">
+     Our first histogram
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-second-histogram">
+     The second histogram
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#set-the-data-and-layout-for-the-plot">
+     Set the data and layout for the plot
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#plot-the-histograms">
+     Plot the histograms
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#stacked-histograms">
+     Stacked histograms
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#styled-histogram">
+   Styled Histogram
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#define-the-first-histogram-in-our-plot">
+     Define the first histogram in our plot
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#define-the-second-histogram">
+     Define the second histogram
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#define-the-layout">
+     Define the layout
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">plotly.plotly</span> <span class="k">as</span> <span class="nn">py</span>
+<span class="kn">import</span> <span class="nn">plotly.graph_objs</span> <span class="k">as</span> <span class="nn">go</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">plotly.offline</span> <span class="k">as</span> <span class="nn">offline</span>
+
+<span class="n">offline</span><span class="o">.</span><span class="n">init_notebook_mode</span><span class="p">(</span><span class="n">connected</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><script>requirejs.config({paths: { 'plotly': ['https://cdn.plot.ly/plotly-latest.min']},});if(!window.Plotly) {{require(['plotly'],function(plotly) {window.Plotly=plotly;});}}</script></div></div>
+</div>
+<div class="section" id="create-a-list-of-200-random-numbers">
+<h1>Create a list of 200 random numbers<a class="headerlink" href="#create-a-list-of-200-random-numbers" title="Permalink to this headline">¶</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">random_numbers</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="produce-a-histogram-to-plot-the-distribution-of-these-numbers">
+<h1>Produce a histogram to plot the distribution of these numbers<a class="headerlink" href="#produce-a-histogram-to-plot-the-distribution-of-these-numbers" title="Permalink to this headline">¶</a></h1>
+<p>We assign this list to the axis on which we want the bars to be placed. The frequency will be displayed on the other axis.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hist</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Histogram</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">random_numbers</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="generate-the-histogram-plot">
+<h1>Generate the histogram plot<a class="headerlink" href="#generate-the-histogram-plot" title="Permalink to this headline">¶</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="n">hist</span><span class="p">]</span>
+
+<span class="n">offline</span><span class="o">.</span><span class="n">iplot</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div id="d8eee7f5-27a5-4861-9436-ebefc0032242" style="height: 525px; width: 100%;" class="plotly-graph-div"></div><script type="text/javascript">require(["plotly"], function(Plotly) { window.PLOTLYENV=window.PLOTLYENV || {};window.PLOTLYENV.BASE_URL="https://plot.ly";Plotly.newPlot("d8eee7f5-27a5-4861-9436-ebefc0032242", [{"type": "histogram", "x": [2.4038421198930036, -0.24107196324836527, -0.9286364418092511, -0.07300693486056854, -1.4452314955951044, -0.9261114713874508, 0.34866096088580545, -1.0579776810420491, -0.26612511552233303, -0.33479496411905124, -0.5275962843435882, 0.9999978995354313, 0.15395231847977747, -0.1791871745601427, 2.351210357543019, 0.20408080567530568, 0.7246221472660979, -1.34259638815543, 0.21708703450252503, -0.5410499660254849, -0.4548367942747751, 0.6218910757273961, 0.4604507946927371, 0.9263521130034563, 1.4047133754211134, 1.2161225892508394, 1.115424194795594, -0.3938927386175407, 1.2774568159849067, -1.9004428980329113, -0.470073085741979, -1.438575150075206, 0.7910345601505122, 1.6028786459468227, 0.6391794096349859, 1.9936041895124976, 0.08531744093173295, 1.6746112262600767, 1.82815094365676, 1.897211873412801, -0.6285279791099759, 0.6822031160244268, -2.5086792419542383, -1.3426110584133373, 1.3888329326027569, 0.2886960796253767, 1.275403911464203, -0.040861438354845826, -0.23380760701981118, 0.8911703964439595, -1.5353704787636515, 0.0777610580605937, -1.0817828471457507, -1.1577481657079636, 1.9654706098388546, 0.30375943328428895, 0.27280756438130294, -0.8375372982057483, -0.1698245026843311, 0.9112325595749339, -0.25980924041956827, 0.7311983440457238, 0.08163283035599822, 0.5644789908836676, 0.39693577738285357, -0.9704399246177713, 0.516063440331893, -0.585059291547371, 0.022865612999686608, -0.1832133035666581, -0.9972758750800539, -0.35379931362413347, -1.6175851663482448, 2.2645126083490235, 2.210946960216811, 0.21289577474916827, 0.5286645037191154, 1.1936740467365292, 1.5216754150285183, 0.4378613841088419, -0.0715610784751842, 0.03730499278092871, 0.6255871480262895, 0.386936395430087, 0.4934012792440433, 0.7074582273609529, -0.6076581559403652, -1.3676091500373837, 0.5993974960599713, -1.6671449600245756, -0.957964537894687, 2.1970058653875366, 2.455163229595661, -1.8552972432780803, 0.28706752288211235, 2.0586841878467017, 0.37484556598968183, 0.13032489083944468, -0.3603392792254045, -0.4765325026755457, -0.06630791485480388, 1.2007550392029975, 1.270140405001024, -0.37386177739431126, -1.7812167591626054, 0.5527794345636188, 0.03456426017565183, 0.693519721380441, 0.09294937696513927, 1.3762581143315067, 1.166252862572194, -0.05145517492894526, 1.1838257525950555, 0.8269427184840841, 1.9628284940557341, -1.705681682487703, 0.043316222511061195, -0.35755343352072655, -1.344693498563909, -2.11486372007683, -1.188950515907461, 2.3294156736755007, 0.7162188489175088, -0.7557432487581558, 0.8074735847626022, 0.11676572271523755, 1.0209677364809757, 2.0864512199075165, 0.25091737163035455, -1.30891213878901, 0.12796206222010303, 0.29593480841041087, 0.9806292179952862, -1.853663929111481, 1.2336115487565682, 0.19930816825913986, -0.02278447747933726, 0.18415638134152235, 0.04244586534463102, -0.825225621840069, -0.1269660586923417, -1.0137251680036043, 0.5753173359493945, -1.1030213210657176, 0.3371229041093294, -1.5005160152760282, 0.8427944549736139, 0.47096906005330796, -0.007367272217829482, -1.2629797512460967, 0.8605562756024401, -0.8750173456961837, -0.18649695996095178, -1.7069140883025846, -1.1655545712638782, 0.5031807780667786, -1.380167251672184, -0.39720977502636323, 0.7640020349886831, -2.5245339842395405, -0.8137008635977134, 0.7299538453069289, 0.0638254682591419, -0.47404210267535557, 0.3448805575358074, -0.6381097824619499, -0.3227198523830505, -0.8992669403989326, -1.6936686696601457, 0.41457271598037715, 1.425641661967531, -1.2837537089041149, -1.2762457313890923, 0.8085331198618815, 0.27237604538084514, -0.035862443191365785, 0.9485273619165108, -0.10447698336877274, 1.050079799301339, 0.12428131188755835, -1.0371136006881367, -2.0212178611727847, 0.5303680892862463, 0.679794940351031, -0.9610655322831267, 0.24622907280205977, -1.1956386299421022, 0.8233759514568599, -0.007682516248649783, 0.1716232842689457, -1.2417302331385003, 0.6391479840745791, -0.5030678621760288, -0.2834403910547294, -1.662992959352576, -0.608336917303551, 0.504506175168541, 1.3749643647753331, -2.6645164608536294, 0.3071139871077483]}], {}, {"showLink": true, "linkText": "Export to plot.ly"})});</script></div></div>
+</div>
+</div>
+<div class="section" id="normalized-histogram">
+<h1>Normalized Histogram<a class="headerlink" href="#normalized-histogram" title="Permalink to this headline">¶</a></h1>
+<p>Rather than raw numbers, this will display the probability of the occurence of a value in a bin. The shape will be exactly the same as the previous histogram, but the Y axis will denote the probability rather than the raw frequency.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hist</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Histogram</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">random_numbers</span><span class="p">,</span>
+                     <span class="n">histnorm</span> <span class="o">=</span> <span class="s1">&#39;probability&#39;</span>
+                    <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="n">hist</span><span class="p">]</span>
+
+<span class="n">offline</span><span class="o">.</span><span class="n">iplot</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div id="0e272bbb-6650-4d58-ac0a-4f7bed8ef874" style="height: 525px; width: 100%;" class="plotly-graph-div"></div><script type="text/javascript">require(["plotly"], function(Plotly) { window.PLOTLYENV=window.PLOTLYENV || {};window.PLOTLYENV.BASE_URL="https://plot.ly";Plotly.newPlot("0e272bbb-6650-4d58-ac0a-4f7bed8ef874", [{"type": "histogram", "x": [2.4038421198930036, -0.24107196324836527, -0.9286364418092511, -0.07300693486056854, -1.4452314955951044, -0.9261114713874508, 0.34866096088580545, -1.0579776810420491, -0.26612511552233303, -0.33479496411905124, -0.5275962843435882, 0.9999978995354313, 0.15395231847977747, -0.1791871745601427, 2.351210357543019, 0.20408080567530568, 0.7246221472660979, -1.34259638815543, 0.21708703450252503, -0.5410499660254849, -0.4548367942747751, 0.6218910757273961, 0.4604507946927371, 0.9263521130034563, 1.4047133754211134, 1.2161225892508394, 1.115424194795594, -0.3938927386175407, 1.2774568159849067, -1.9004428980329113, -0.470073085741979, -1.438575150075206, 0.7910345601505122, 1.6028786459468227, 0.6391794096349859, 1.9936041895124976, 0.08531744093173295, 1.6746112262600767, 1.82815094365676, 1.897211873412801, -0.6285279791099759, 0.6822031160244268, -2.5086792419542383, -1.3426110584133373, 1.3888329326027569, 0.2886960796253767, 1.275403911464203, -0.040861438354845826, -0.23380760701981118, 0.8911703964439595, -1.5353704787636515, 0.0777610580605937, -1.0817828471457507, -1.1577481657079636, 1.9654706098388546, 0.30375943328428895, 0.27280756438130294, -0.8375372982057483, -0.1698245026843311, 0.9112325595749339, -0.25980924041956827, 0.7311983440457238, 0.08163283035599822, 0.5644789908836676, 0.39693577738285357, -0.9704399246177713, 0.516063440331893, -0.585059291547371, 0.022865612999686608, -0.1832133035666581, -0.9972758750800539, -0.35379931362413347, -1.6175851663482448, 2.2645126083490235, 2.210946960216811, 0.21289577474916827, 0.5286645037191154, 1.1936740467365292, 1.5216754150285183, 0.4378613841088419, -0.0715610784751842, 0.03730499278092871, 0.6255871480262895, 0.386936395430087, 0.4934012792440433, 0.7074582273609529, -0.6076581559403652, -1.3676091500373837, 0.5993974960599713, -1.6671449600245756, -0.957964537894687, 2.1970058653875366, 2.455163229595661, -1.8552972432780803, 0.28706752288211235, 2.0586841878467017, 0.37484556598968183, 0.13032489083944468, -0.3603392792254045, -0.4765325026755457, -0.06630791485480388, 1.2007550392029975, 1.270140405001024, -0.37386177739431126, -1.7812167591626054, 0.5527794345636188, 0.03456426017565183, 0.693519721380441, 0.09294937696513927, 1.3762581143315067, 1.166252862572194, -0.05145517492894526, 1.1838257525950555, 0.8269427184840841, 1.9628284940557341, -1.705681682487703, 0.043316222511061195, -0.35755343352072655, -1.344693498563909, -2.11486372007683, -1.188950515907461, 2.3294156736755007, 0.7162188489175088, -0.7557432487581558, 0.8074735847626022, 0.11676572271523755, 1.0209677364809757, 2.0864512199075165, 0.25091737163035455, -1.30891213878901, 0.12796206222010303, 0.29593480841041087, 0.9806292179952862, -1.853663929111481, 1.2336115487565682, 0.19930816825913986, -0.02278447747933726, 0.18415638134152235, 0.04244586534463102, -0.825225621840069, -0.1269660586923417, -1.0137251680036043, 0.5753173359493945, -1.1030213210657176, 0.3371229041093294, -1.5005160152760282, 0.8427944549736139, 0.47096906005330796, -0.007367272217829482, -1.2629797512460967, 0.8605562756024401, -0.8750173456961837, -0.18649695996095178, -1.7069140883025846, -1.1655545712638782, 0.5031807780667786, -1.380167251672184, -0.39720977502636323, 0.7640020349886831, -2.5245339842395405, -0.8137008635977134, 0.7299538453069289, 0.0638254682591419, -0.47404210267535557, 0.3448805575358074, -0.6381097824619499, -0.3227198523830505, -0.8992669403989326, -1.6936686696601457, 0.41457271598037715, 1.425641661967531, -1.2837537089041149, -1.2762457313890923, 0.8085331198618815, 0.27237604538084514, -0.035862443191365785, 0.9485273619165108, -0.10447698336877274, 1.050079799301339, 0.12428131188755835, -1.0371136006881367, -2.0212178611727847, 0.5303680892862463, 0.679794940351031, -0.9610655322831267, 0.24622907280205977, -1.1956386299421022, 0.8233759514568599, -0.007682516248649783, 0.1716232842689457, -1.2417302331385003, 0.6391479840745791, -0.5030678621760288, -0.2834403910547294, -1.662992959352576, -0.608336917303551, 0.504506175168541, 1.3749643647753331, -2.6645164608536294, 0.3071139871077483], "histnorm": "probability"}], {}, {"showLink": true, "linkText": "Export to plot.ly"})});</script></div></div>
+</div>
+</div>
+<div class="section" id="plotting-a-cumulative-histogram">
+<h1>Plotting a cumulative histogram<a class="headerlink" href="#plotting-a-cumulative-histogram" title="Permalink to this headline">¶</a></h1>
+<p>In such a histogram, a bin gives not just the counts for a single bin, but rather gives the counts for that bin plus all bins for smaller values of the response variable.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hist</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Histogram</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">random_numbers</span><span class="p">,</span>
+                    
+                    <span class="n">cumulative</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">enabled</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                    <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="n">hist</span><span class="p">]</span>
+
+<span class="n">offline</span><span class="o">.</span><span class="n">iplot</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div id="83de2e1c-80a1-4dd7-ba90-82513dacc8d5" style="height: 525px; width: 100%;" class="plotly-graph-div"></div><script type="text/javascript">require(["plotly"], function(Plotly) { window.PLOTLYENV=window.PLOTLYENV || {};window.PLOTLYENV.BASE_URL="https://plot.ly";Plotly.newPlot("83de2e1c-80a1-4dd7-ba90-82513dacc8d5", [{"type": "histogram", "x": [2.4038421198930036, -0.24107196324836527, -0.9286364418092511, -0.07300693486056854, -1.4452314955951044, -0.9261114713874508, 0.34866096088580545, -1.0579776810420491, -0.26612511552233303, -0.33479496411905124, -0.5275962843435882, 0.9999978995354313, 0.15395231847977747, -0.1791871745601427, 2.351210357543019, 0.20408080567530568, 0.7246221472660979, -1.34259638815543, 0.21708703450252503, -0.5410499660254849, -0.4548367942747751, 0.6218910757273961, 0.4604507946927371, 0.9263521130034563, 1.4047133754211134, 1.2161225892508394, 1.115424194795594, -0.3938927386175407, 1.2774568159849067, -1.9004428980329113, -0.470073085741979, -1.438575150075206, 0.7910345601505122, 1.6028786459468227, 0.6391794096349859, 1.9936041895124976, 0.08531744093173295, 1.6746112262600767, 1.82815094365676, 1.897211873412801, -0.6285279791099759, 0.6822031160244268, -2.5086792419542383, -1.3426110584133373, 1.3888329326027569, 0.2886960796253767, 1.275403911464203, -0.040861438354845826, -0.23380760701981118, 0.8911703964439595, -1.5353704787636515, 0.0777610580605937, -1.0817828471457507, -1.1577481657079636, 1.9654706098388546, 0.30375943328428895, 0.27280756438130294, -0.8375372982057483, -0.1698245026843311, 0.9112325595749339, -0.25980924041956827, 0.7311983440457238, 0.08163283035599822, 0.5644789908836676, 0.39693577738285357, -0.9704399246177713, 0.516063440331893, -0.585059291547371, 0.022865612999686608, -0.1832133035666581, -0.9972758750800539, -0.35379931362413347, -1.6175851663482448, 2.2645126083490235, 2.210946960216811, 0.21289577474916827, 0.5286645037191154, 1.1936740467365292, 1.5216754150285183, 0.4378613841088419, -0.0715610784751842, 0.03730499278092871, 0.6255871480262895, 0.386936395430087, 0.4934012792440433, 0.7074582273609529, -0.6076581559403652, -1.3676091500373837, 0.5993974960599713, -1.6671449600245756, -0.957964537894687, 2.1970058653875366, 2.455163229595661, -1.8552972432780803, 0.28706752288211235, 2.0586841878467017, 0.37484556598968183, 0.13032489083944468, -0.3603392792254045, -0.4765325026755457, -0.06630791485480388, 1.2007550392029975, 1.270140405001024, -0.37386177739431126, -1.7812167591626054, 0.5527794345636188, 0.03456426017565183, 0.693519721380441, 0.09294937696513927, 1.3762581143315067, 1.166252862572194, -0.05145517492894526, 1.1838257525950555, 0.8269427184840841, 1.9628284940557341, -1.705681682487703, 0.043316222511061195, -0.35755343352072655, -1.344693498563909, -2.11486372007683, -1.188950515907461, 2.3294156736755007, 0.7162188489175088, -0.7557432487581558, 0.8074735847626022, 0.11676572271523755, 1.0209677364809757, 2.0864512199075165, 0.25091737163035455, -1.30891213878901, 0.12796206222010303, 0.29593480841041087, 0.9806292179952862, -1.853663929111481, 1.2336115487565682, 0.19930816825913986, -0.02278447747933726, 0.18415638134152235, 0.04244586534463102, -0.825225621840069, -0.1269660586923417, -1.0137251680036043, 0.5753173359493945, -1.1030213210657176, 0.3371229041093294, -1.5005160152760282, 0.8427944549736139, 0.47096906005330796, -0.007367272217829482, -1.2629797512460967, 0.8605562756024401, -0.8750173456961837, -0.18649695996095178, -1.7069140883025846, -1.1655545712638782, 0.5031807780667786, -1.380167251672184, -0.39720977502636323, 0.7640020349886831, -2.5245339842395405, -0.8137008635977134, 0.7299538453069289, 0.0638254682591419, -0.47404210267535557, 0.3448805575358074, -0.6381097824619499, -0.3227198523830505, -0.8992669403989326, -1.6936686696601457, 0.41457271598037715, 1.425641661967531, -1.2837537089041149, -1.2762457313890923, 0.8085331198618815, 0.27237604538084514, -0.035862443191365785, 0.9485273619165108, -0.10447698336877274, 1.050079799301339, 0.12428131188755835, -1.0371136006881367, -2.0212178611727847, 0.5303680892862463, 0.679794940351031, -0.9610655322831267, 0.24622907280205977, -1.1956386299421022, 0.8233759514568599, -0.007682516248649783, 0.1716232842689457, -1.2417302331385003, 0.6391479840745791, -0.5030678621760288, -0.2834403910547294, -1.662992959352576, -0.608336917303551, 0.504506175168541, 1.3749643647753331, -2.6645164608536294, 0.3071139871077483], "cumulative": {"enabled": true}}], {}, {"showLink": true, "linkText": "Export to plot.ly"})});</script></div></div>
+</div>
+</div>
+<div class="section" id="horizontal-histogram">
+<h1>Horizontal Histogram<a class="headerlink" href="#horizontal-histogram" title="Permalink to this headline">¶</a></h1>
+<p>A histogram can also be oriented horizontally. This is done by merely flipping the axis along which the bins should be rooted.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hist</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Histogram</span><span class="p">(</span><span class="n">y</span> <span class="o">=</span> <span class="n">random_numbers</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="n">hist</span><span class="p">]</span>
+
+<span class="n">offline</span><span class="o">.</span><span class="n">iplot</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div id="711f6002-f909-4f42-bf51-e7101ceb05a1" style="height: 525px; width: 100%;" class="plotly-graph-div"></div><script type="text/javascript">require(["plotly"], function(Plotly) { window.PLOTLYENV=window.PLOTLYENV || {};window.PLOTLYENV.BASE_URL="https://plot.ly";Plotly.newPlot("711f6002-f909-4f42-bf51-e7101ceb05a1", [{"type": "histogram", "y": [2.4038421198930036, -0.24107196324836527, -0.9286364418092511, -0.07300693486056854, -1.4452314955951044, -0.9261114713874508, 0.34866096088580545, -1.0579776810420491, -0.26612511552233303, -0.33479496411905124, -0.5275962843435882, 0.9999978995354313, 0.15395231847977747, -0.1791871745601427, 2.351210357543019, 0.20408080567530568, 0.7246221472660979, -1.34259638815543, 0.21708703450252503, -0.5410499660254849, -0.4548367942747751, 0.6218910757273961, 0.4604507946927371, 0.9263521130034563, 1.4047133754211134, 1.2161225892508394, 1.115424194795594, -0.3938927386175407, 1.2774568159849067, -1.9004428980329113, -0.470073085741979, -1.438575150075206, 0.7910345601505122, 1.6028786459468227, 0.6391794096349859, 1.9936041895124976, 0.08531744093173295, 1.6746112262600767, 1.82815094365676, 1.897211873412801, -0.6285279791099759, 0.6822031160244268, -2.5086792419542383, -1.3426110584133373, 1.3888329326027569, 0.2886960796253767, 1.275403911464203, -0.040861438354845826, -0.23380760701981118, 0.8911703964439595, -1.5353704787636515, 0.0777610580605937, -1.0817828471457507, -1.1577481657079636, 1.9654706098388546, 0.30375943328428895, 0.27280756438130294, -0.8375372982057483, -0.1698245026843311, 0.9112325595749339, -0.25980924041956827, 0.7311983440457238, 0.08163283035599822, 0.5644789908836676, 0.39693577738285357, -0.9704399246177713, 0.516063440331893, -0.585059291547371, 0.022865612999686608, -0.1832133035666581, -0.9972758750800539, -0.35379931362413347, -1.6175851663482448, 2.2645126083490235, 2.210946960216811, 0.21289577474916827, 0.5286645037191154, 1.1936740467365292, 1.5216754150285183, 0.4378613841088419, -0.0715610784751842, 0.03730499278092871, 0.6255871480262895, 0.386936395430087, 0.4934012792440433, 0.7074582273609529, -0.6076581559403652, -1.3676091500373837, 0.5993974960599713, -1.6671449600245756, -0.957964537894687, 2.1970058653875366, 2.455163229595661, -1.8552972432780803, 0.28706752288211235, 2.0586841878467017, 0.37484556598968183, 0.13032489083944468, -0.3603392792254045, -0.4765325026755457, -0.06630791485480388, 1.2007550392029975, 1.270140405001024, -0.37386177739431126, -1.7812167591626054, 0.5527794345636188, 0.03456426017565183, 0.693519721380441, 0.09294937696513927, 1.3762581143315067, 1.166252862572194, -0.05145517492894526, 1.1838257525950555, 0.8269427184840841, 1.9628284940557341, -1.705681682487703, 0.043316222511061195, -0.35755343352072655, -1.344693498563909, -2.11486372007683, -1.188950515907461, 2.3294156736755007, 0.7162188489175088, -0.7557432487581558, 0.8074735847626022, 0.11676572271523755, 1.0209677364809757, 2.0864512199075165, 0.25091737163035455, -1.30891213878901, 0.12796206222010303, 0.29593480841041087, 0.9806292179952862, -1.853663929111481, 1.2336115487565682, 0.19930816825913986, -0.02278447747933726, 0.18415638134152235, 0.04244586534463102, -0.825225621840069, -0.1269660586923417, -1.0137251680036043, 0.5753173359493945, -1.1030213210657176, 0.3371229041093294, -1.5005160152760282, 0.8427944549736139, 0.47096906005330796, -0.007367272217829482, -1.2629797512460967, 0.8605562756024401, -0.8750173456961837, -0.18649695996095178, -1.7069140883025846, -1.1655545712638782, 0.5031807780667786, -1.380167251672184, -0.39720977502636323, 0.7640020349886831, -2.5245339842395405, -0.8137008635977134, 0.7299538453069289, 0.0638254682591419, -0.47404210267535557, 0.3448805575358074, -0.6381097824619499, -0.3227198523830505, -0.8992669403989326, -1.6936686696601457, 0.41457271598037715, 1.425641661967531, -1.2837537089041149, -1.2762457313890923, 0.8085331198618815, 0.27237604538084514, -0.035862443191365785, 0.9485273619165108, -0.10447698336877274, 1.050079799301339, 0.12428131188755835, -1.0371136006881367, -2.0212178611727847, 0.5303680892862463, 0.679794940351031, -0.9610655322831267, 0.24622907280205977, -1.1956386299421022, 0.8233759514568599, -0.007682516248649783, 0.1716232842689457, -1.2417302331385003, 0.6391479840745791, -0.5030678621760288, -0.2834403910547294, -1.662992959352576, -0.608336917303551, 0.504506175168541, 1.3749643647753331, -2.6645164608536294, 0.3071139871077483]}], {}, {"showLink": true, "linkText": "Export to plot.ly"})});</script></div></div>
+</div>
+</div>
+<div class="section" id="overlaid-histogram">
+<h1>Overlaid Histogram<a class="headerlink" href="#overlaid-histogram" title="Permalink to this headline">¶</a></h1>
+<p>We can plot histograms for multiple variables in a single plot. One way to view multiple histograms is to overlay them.</p>
+<p>To start off, we create another series of data which we will use along with the previous one. This one has fewer elements and we generate an offset of 1 so that the bins of this series does not fully overlap with those of the previous series.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">more_random_numbers</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="our-first-histogram">
+<h2>Our first histogram<a class="headerlink" href="#our-first-histogram" title="Permalink to this headline">¶</a></h2>
+<p>This one uses the first random_number series. We set an opacity level for the histogram plot.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">trace0</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Histogram</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">random_numbers</span><span class="p">,</span> 
+                      <span class="n">opacity</span><span class="o">=</span><span class="mf">0.9</span>
+                     <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="the-second-histogram">
+<h2>The second histogram<a class="headerlink" href="#the-second-histogram" title="Permalink to this headline">¶</a></h2>
+<p>THis uses the newly created series, and has a lower opacity.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">trace1</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Histogram</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">more_random_numbers</span><span class="p">,</span> 
+                      <span class="n">opacity</span><span class="o">=</span><span class="mf">0.5</span>
+                     <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="set-the-data-and-layout-for-the-plot">
+<h2>Set the data and layout for the plot<a class="headerlink" href="#set-the-data-and-layout-for-the-plot" title="Permalink to this headline">¶</a></h2>
+<p>In the layout, we specify the barmode attribute to be ‘overlay’</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="n">trace0</span><span class="p">,</span> <span class="n">trace1</span><span class="p">]</span>
+
+<span class="n">layout</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Layout</span><span class="p">(</span><span class="n">barmode</span> <span class="o">=</span> <span class="s1">&#39;overlay&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="plot-the-histograms">
+<h2>Plot the histograms<a class="headerlink" href="#plot-the-histograms" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> 
+                <span class="n">layout</span><span class="o">=</span><span class="n">layout</span><span class="p">)</span>
+
+<span class="n">offline</span><span class="o">.</span><span class="n">iplot</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div id="19f36240-be01-463f-b176-8d3db865728b" style="height: 525px; width: 100%;" class="plotly-graph-div"></div><script type="text/javascript">require(["plotly"], function(Plotly) { window.PLOTLYENV=window.PLOTLYENV || {};window.PLOTLYENV.BASE_URL="https://plot.ly";Plotly.newPlot("19f36240-be01-463f-b176-8d3db865728b", [{"type": "histogram", "x": [2.4038421198930036, -0.24107196324836527, -0.9286364418092511, -0.07300693486056854, -1.4452314955951044, -0.9261114713874508, 0.34866096088580545, -1.0579776810420491, -0.26612511552233303, -0.33479496411905124, -0.5275962843435882, 0.9999978995354313, 0.15395231847977747, -0.1791871745601427, 2.351210357543019, 0.20408080567530568, 0.7246221472660979, -1.34259638815543, 0.21708703450252503, -0.5410499660254849, -0.4548367942747751, 0.6218910757273961, 0.4604507946927371, 0.9263521130034563, 1.4047133754211134, 1.2161225892508394, 1.115424194795594, -0.3938927386175407, 1.2774568159849067, -1.9004428980329113, -0.470073085741979, -1.438575150075206, 0.7910345601505122, 1.6028786459468227, 0.6391794096349859, 1.9936041895124976, 0.08531744093173295, 1.6746112262600767, 1.82815094365676, 1.897211873412801, -0.6285279791099759, 0.6822031160244268, -2.5086792419542383, -1.3426110584133373, 1.3888329326027569, 0.2886960796253767, 1.275403911464203, -0.040861438354845826, -0.23380760701981118, 0.8911703964439595, -1.5353704787636515, 0.0777610580605937, -1.0817828471457507, -1.1577481657079636, 1.9654706098388546, 0.30375943328428895, 0.27280756438130294, -0.8375372982057483, -0.1698245026843311, 0.9112325595749339, -0.25980924041956827, 0.7311983440457238, 0.08163283035599822, 0.5644789908836676, 0.39693577738285357, -0.9704399246177713, 0.516063440331893, -0.585059291547371, 0.022865612999686608, -0.1832133035666581, -0.9972758750800539, -0.35379931362413347, -1.6175851663482448, 2.2645126083490235, 2.210946960216811, 0.21289577474916827, 0.5286645037191154, 1.1936740467365292, 1.5216754150285183, 0.4378613841088419, -0.0715610784751842, 0.03730499278092871, 0.6255871480262895, 0.386936395430087, 0.4934012792440433, 0.7074582273609529, -0.6076581559403652, -1.3676091500373837, 0.5993974960599713, -1.6671449600245756, -0.957964537894687, 2.1970058653875366, 2.455163229595661, -1.8552972432780803, 0.28706752288211235, 2.0586841878467017, 0.37484556598968183, 0.13032489083944468, -0.3603392792254045, -0.4765325026755457, -0.06630791485480388, 1.2007550392029975, 1.270140405001024, -0.37386177739431126, -1.7812167591626054, 0.5527794345636188, 0.03456426017565183, 0.693519721380441, 0.09294937696513927, 1.3762581143315067, 1.166252862572194, -0.05145517492894526, 1.1838257525950555, 0.8269427184840841, 1.9628284940557341, -1.705681682487703, 0.043316222511061195, -0.35755343352072655, -1.344693498563909, -2.11486372007683, -1.188950515907461, 2.3294156736755007, 0.7162188489175088, -0.7557432487581558, 0.8074735847626022, 0.11676572271523755, 1.0209677364809757, 2.0864512199075165, 0.25091737163035455, -1.30891213878901, 0.12796206222010303, 0.29593480841041087, 0.9806292179952862, -1.853663929111481, 1.2336115487565682, 0.19930816825913986, -0.02278447747933726, 0.18415638134152235, 0.04244586534463102, -0.825225621840069, -0.1269660586923417, -1.0137251680036043, 0.5753173359493945, -1.1030213210657176, 0.3371229041093294, -1.5005160152760282, 0.8427944549736139, 0.47096906005330796, -0.007367272217829482, -1.2629797512460967, 0.8605562756024401, -0.8750173456961837, -0.18649695996095178, -1.7069140883025846, -1.1655545712638782, 0.5031807780667786, -1.380167251672184, -0.39720977502636323, 0.7640020349886831, -2.5245339842395405, -0.8137008635977134, 0.7299538453069289, 0.0638254682591419, -0.47404210267535557, 0.3448805575358074, -0.6381097824619499, -0.3227198523830505, -0.8992669403989326, -1.6936686696601457, 0.41457271598037715, 1.425641661967531, -1.2837537089041149, -1.2762457313890923, 0.8085331198618815, 0.27237604538084514, -0.035862443191365785, 0.9485273619165108, -0.10447698336877274, 1.050079799301339, 0.12428131188755835, -1.0371136006881367, -2.0212178611727847, 0.5303680892862463, 0.679794940351031, -0.9610655322831267, 0.24622907280205977, -1.1956386299421022, 0.8233759514568599, -0.007682516248649783, 0.1716232842689457, -1.2417302331385003, 0.6391479840745791, -0.5030678621760288, -0.2834403910547294, -1.662992959352576, -0.608336917303551, 0.504506175168541, 1.3749643647753331, -2.6645164608536294, 0.3071139871077483], "opacity": 0.9}, {"type": "histogram", "x": [-0.31402672638027673, 1.7074858271465216, 2.8001704546370556, 2.4204903753439115, 2.357815114477787, 2.2479449133900387, 2.557123867405971, 2.255982027501024, 1.1313166131124808, -0.06433788063954249, -0.15417532457963867, 1.846145199369038, 0.38587364318111406, 0.7315998178275454, 1.0846035482832366, -0.19737180382907948, 1.1641168373630346, 3.0128737748300995, -0.9996298007681375, 1.3350866023185615, 1.23297911135865, -0.5720341580789952, 1.4893815784439646, 2.698541033655263, -0.6572146501437486, 0.8171625498140549, 1.297279116915333, 0.8547488463649462, 1.6715505547643992, 1.8171279188460712, -0.2801466966888415, -0.23352993625682905, 2.402882410336372, 0.7592810142743995, -0.9948801940240466, -0.16348097897807712, 0.3775715555029501, 1.7816155845666275, 0.44775223249159535, 1.2745880664440046, 1.0289995746529277, -0.2551054925730549, -0.03487439901239786, 2.7461346565537035, 1.2548417356371493, 2.1662733443823825, -0.06349761182742708, 0.3225921450173832, -0.3438212782073107, 0.5216475505390776, 1.0314148906586356, 2.042159161206147, -0.33913193688878374, -0.2705157113647785, -0.34454902812184507, -0.04334901113697964, 2.507969388965476, -0.3451317581845659, 0.9526874621059369, 0.9337820932161267, 1.5334743941316413, -0.6472126065734234, 1.4930895858311566, 0.7259372459598348, 1.0776091429398147, 2.617305316083987, 1.800057815964712, 1.6669115390491105, 1.0725709214199148, 3.0369443852604614, 1.6707989749010377, 1.1502086705906007, 0.6575223671872281, 1.1328796393247575, 1.7054639621186594, 1.1962549991978895, 0.7896331308483608, 1.1261105104895495, -0.35290514292635167, 0.9185440925900296, 1.150701576623866, 0.6572543186184959, -0.26844765020529837, 2.3167240595358924, 1.309165724798898, 0.22087674630868281, 1.572551810398254, 1.9835424798954961, -0.02243098865326898, 0.3178734501063031, 1.6313762325391772, 0.2296481020347032, 3.317640769490511, 1.6185878371238451, -0.5889993091114822, 1.3048839953475606, 0.3374990829891098, 0.8714719815712199, 1.146236808871999, 0.31626422327786785], "opacity": 0.5}], {"barmode": "overlay"}, {"showLink": true, "linkText": "Export to plot.ly"})});</script></div></div>
+</div>
+</div>
+<div class="section" id="stacked-histograms">
+<h2>Stacked histograms<a class="headerlink" href="#stacked-histograms" title="Permalink to this headline">¶</a></h2>
+<p>If wish to the combined distribution of two series, we can stack their histograms. For that we set the barmode to ‘stack’.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">layout</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Layout</span><span class="p">(</span><span class="n">barmode</span> <span class="o">=</span> <span class="s1">&#39;stack&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> 
+                <span class="n">layout</span><span class="o">=</span><span class="n">layout</span><span class="p">)</span>
+
+<span class="n">offline</span><span class="o">.</span><span class="n">iplot</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div id="946748a8-a483-4e96-aa5c-9287999d2edf" style="height: 525px; width: 100%;" class="plotly-graph-div"></div><script type="text/javascript">require(["plotly"], function(Plotly) { window.PLOTLYENV=window.PLOTLYENV || {};window.PLOTLYENV.BASE_URL="https://plot.ly";Plotly.newPlot("946748a8-a483-4e96-aa5c-9287999d2edf", [{"type": "histogram", "x": [2.4038421198930036, -0.24107196324836527, -0.9286364418092511, -0.07300693486056854, -1.4452314955951044, -0.9261114713874508, 0.34866096088580545, -1.0579776810420491, -0.26612511552233303, -0.33479496411905124, -0.5275962843435882, 0.9999978995354313, 0.15395231847977747, -0.1791871745601427, 2.351210357543019, 0.20408080567530568, 0.7246221472660979, -1.34259638815543, 0.21708703450252503, -0.5410499660254849, -0.4548367942747751, 0.6218910757273961, 0.4604507946927371, 0.9263521130034563, 1.4047133754211134, 1.2161225892508394, 1.115424194795594, -0.3938927386175407, 1.2774568159849067, -1.9004428980329113, -0.470073085741979, -1.438575150075206, 0.7910345601505122, 1.6028786459468227, 0.6391794096349859, 1.9936041895124976, 0.08531744093173295, 1.6746112262600767, 1.82815094365676, 1.897211873412801, -0.6285279791099759, 0.6822031160244268, -2.5086792419542383, -1.3426110584133373, 1.3888329326027569, 0.2886960796253767, 1.275403911464203, -0.040861438354845826, -0.23380760701981118, 0.8911703964439595, -1.5353704787636515, 0.0777610580605937, -1.0817828471457507, -1.1577481657079636, 1.9654706098388546, 0.30375943328428895, 0.27280756438130294, -0.8375372982057483, -0.1698245026843311, 0.9112325595749339, -0.25980924041956827, 0.7311983440457238, 0.08163283035599822, 0.5644789908836676, 0.39693577738285357, -0.9704399246177713, 0.516063440331893, -0.585059291547371, 0.022865612999686608, -0.1832133035666581, -0.9972758750800539, -0.35379931362413347, -1.6175851663482448, 2.2645126083490235, 2.210946960216811, 0.21289577474916827, 0.5286645037191154, 1.1936740467365292, 1.5216754150285183, 0.4378613841088419, -0.0715610784751842, 0.03730499278092871, 0.6255871480262895, 0.386936395430087, 0.4934012792440433, 0.7074582273609529, -0.6076581559403652, -1.3676091500373837, 0.5993974960599713, -1.6671449600245756, -0.957964537894687, 2.1970058653875366, 2.455163229595661, -1.8552972432780803, 0.28706752288211235, 2.0586841878467017, 0.37484556598968183, 0.13032489083944468, -0.3603392792254045, -0.4765325026755457, -0.06630791485480388, 1.2007550392029975, 1.270140405001024, -0.37386177739431126, -1.7812167591626054, 0.5527794345636188, 0.03456426017565183, 0.693519721380441, 0.09294937696513927, 1.3762581143315067, 1.166252862572194, -0.05145517492894526, 1.1838257525950555, 0.8269427184840841, 1.9628284940557341, -1.705681682487703, 0.043316222511061195, -0.35755343352072655, -1.344693498563909, -2.11486372007683, -1.188950515907461, 2.3294156736755007, 0.7162188489175088, -0.7557432487581558, 0.8074735847626022, 0.11676572271523755, 1.0209677364809757, 2.0864512199075165, 0.25091737163035455, -1.30891213878901, 0.12796206222010303, 0.29593480841041087, 0.9806292179952862, -1.853663929111481, 1.2336115487565682, 0.19930816825913986, -0.02278447747933726, 0.18415638134152235, 0.04244586534463102, -0.825225621840069, -0.1269660586923417, -1.0137251680036043, 0.5753173359493945, -1.1030213210657176, 0.3371229041093294, -1.5005160152760282, 0.8427944549736139, 0.47096906005330796, -0.007367272217829482, -1.2629797512460967, 0.8605562756024401, -0.8750173456961837, -0.18649695996095178, -1.7069140883025846, -1.1655545712638782, 0.5031807780667786, -1.380167251672184, -0.39720977502636323, 0.7640020349886831, -2.5245339842395405, -0.8137008635977134, 0.7299538453069289, 0.0638254682591419, -0.47404210267535557, 0.3448805575358074, -0.6381097824619499, -0.3227198523830505, -0.8992669403989326, -1.6936686696601457, 0.41457271598037715, 1.425641661967531, -1.2837537089041149, -1.2762457313890923, 0.8085331198618815, 0.27237604538084514, -0.035862443191365785, 0.9485273619165108, -0.10447698336877274, 1.050079799301339, 0.12428131188755835, -1.0371136006881367, -2.0212178611727847, 0.5303680892862463, 0.679794940351031, -0.9610655322831267, 0.24622907280205977, -1.1956386299421022, 0.8233759514568599, -0.007682516248649783, 0.1716232842689457, -1.2417302331385003, 0.6391479840745791, -0.5030678621760288, -0.2834403910547294, -1.662992959352576, -0.608336917303551, 0.504506175168541, 1.3749643647753331, -2.6645164608536294, 0.3071139871077483], "opacity": 0.9}, {"type": "histogram", "x": [-0.31402672638027673, 1.7074858271465216, 2.8001704546370556, 2.4204903753439115, 2.357815114477787, 2.2479449133900387, 2.557123867405971, 2.255982027501024, 1.1313166131124808, -0.06433788063954249, -0.15417532457963867, 1.846145199369038, 0.38587364318111406, 0.7315998178275454, 1.0846035482832366, -0.19737180382907948, 1.1641168373630346, 3.0128737748300995, -0.9996298007681375, 1.3350866023185615, 1.23297911135865, -0.5720341580789952, 1.4893815784439646, 2.698541033655263, -0.6572146501437486, 0.8171625498140549, 1.297279116915333, 0.8547488463649462, 1.6715505547643992, 1.8171279188460712, -0.2801466966888415, -0.23352993625682905, 2.402882410336372, 0.7592810142743995, -0.9948801940240466, -0.16348097897807712, 0.3775715555029501, 1.7816155845666275, 0.44775223249159535, 1.2745880664440046, 1.0289995746529277, -0.2551054925730549, -0.03487439901239786, 2.7461346565537035, 1.2548417356371493, 2.1662733443823825, -0.06349761182742708, 0.3225921450173832, -0.3438212782073107, 0.5216475505390776, 1.0314148906586356, 2.042159161206147, -0.33913193688878374, -0.2705157113647785, -0.34454902812184507, -0.04334901113697964, 2.507969388965476, -0.3451317581845659, 0.9526874621059369, 0.9337820932161267, 1.5334743941316413, -0.6472126065734234, 1.4930895858311566, 0.7259372459598348, 1.0776091429398147, 2.617305316083987, 1.800057815964712, 1.6669115390491105, 1.0725709214199148, 3.0369443852604614, 1.6707989749010377, 1.1502086705906007, 0.6575223671872281, 1.1328796393247575, 1.7054639621186594, 1.1962549991978895, 0.7896331308483608, 1.1261105104895495, -0.35290514292635167, 0.9185440925900296, 1.150701576623866, 0.6572543186184959, -0.26844765020529837, 2.3167240595358924, 1.309165724798898, 0.22087674630868281, 1.572551810398254, 1.9835424798954961, -0.02243098865326898, 0.3178734501063031, 1.6313762325391772, 0.2296481020347032, 3.317640769490511, 1.6185878371238451, -0.5889993091114822, 1.3048839953475606, 0.3374990829891098, 0.8714719815712199, 1.146236808871999, 0.31626422327786785], "opacity": 0.5}], {"barmode": "stack"}, {"showLink": true, "linkText": "Export to plot.ly"})});</script></div></div>
+</div>
+</div>
+</div>
+<div class="section" id="styled-histogram">
+<h1>Styled Histogram<a class="headerlink" href="#styled-histogram" title="Permalink to this headline">¶</a></h1>
+<p>We can apply a number of styling properties to histograms. We explore some of them here.</p>
+<div class="section" id="define-the-first-histogram-in-our-plot">
+<h2>Define the first histogram in our plot<a class="headerlink" href="#define-the-first-histogram-in-our-plot" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>xbins: start and end set the range for the entire histogram plot. Size sets the width of each bin</p></li>
+<li><p>marker: this is used to configure the histogram bins</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">trace0</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Histogram</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">random_numbers</span><span class="p">,</span>
+                      
+                      <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;Series 1&#39;</span><span class="p">,</span>
+                      
+                      <span class="n">xbins</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">start</span> <span class="o">=</span> <span class="o">-</span><span class="mi">4</span><span class="p">,</span>
+                                   <span class="n">end</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span>
+                                   <span class="n">size</span> <span class="o">=</span> <span class="mf">0.5</span>
+                                  <span class="p">),</span>
+                      
+                      <span class="n">marker</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;#D67D93&#39;</span><span class="p">),</span>
+                      
+                      <span class="n">opacity</span> <span class="o">=</span> <span class="mf">0.75</span>
+                     <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="define-the-second-histogram">
+<h2>Define the second histogram<a class="headerlink" href="#define-the-second-histogram" title="Permalink to this headline">¶</a></h2>
+<p>We use the same bin size as the previous histogram to make it easier for comparison. However, it is not required to have the same bin size - but the histogram bars will be unevenly spaced in the plot</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">trace1</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Histogram</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">more_random_numbers</span><span class="p">,</span>
+                      
+                      <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;Series 2&#39;</span><span class="p">,</span>
+                      
+                      <span class="n">xbins</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">start</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+                                   <span class="n">end</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span>
+                                   <span class="n">size</span> <span class="o">=</span> <span class="mf">0.5</span>
+                                  <span class="p">),</span>
+                      
+                      <span class="n">marker</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;#7DAED6&#39;</span><span class="p">),</span>
+                      
+                      <span class="n">opacity</span> <span class="o">=</span> <span class="mf">0.75</span>
+                     <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="n">trace0</span><span class="p">,</span> <span class="n">trace1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="define-the-layout">
+<h2>Define the layout<a class="headerlink" href="#define-the-layout" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>bargap sets the distance (in plot units) between bars of adjacent location coordinates (i.e. adjacent x value here)</p></li>
+<li><p>bargroupgap sets the distance between bars in the same group (i.e. same x value)</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">layout</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Layout</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;Styled histograms&#39;</span><span class="p">,</span>
+                   
+                   <span class="n">xaxis</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;Value&#39;</span><span class="p">),</span>
+                   <span class="n">yaxis</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;Count&#39;</span><span class="p">),</span>
+                   
+                   <span class="n">bargap</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span>
+                   
+                   <span class="n">bargroupgap</span><span class="o">=</span><span class="mf">0.1</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> 
+                <span class="n">layout</span><span class="o">=</span><span class="n">layout</span><span class="p">)</span>
+
+<span class="n">offline</span><span class="o">.</span><span class="n">iplot</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div id="176d67e2-7034-471a-8fe4-a4062f99198d" style="height: 525px; width: 100%;" class="plotly-graph-div"></div><script type="text/javascript">require(["plotly"], function(Plotly) { window.PLOTLYENV=window.PLOTLYENV || {};window.PLOTLYENV.BASE_URL="https://plot.ly";Plotly.newPlot("176d67e2-7034-471a-8fe4-a4062f99198d", [{"type": "histogram", "x": [2.4038421198930036, -0.24107196324836527, -0.9286364418092511, -0.07300693486056854, -1.4452314955951044, -0.9261114713874508, 0.34866096088580545, -1.0579776810420491, -0.26612511552233303, -0.33479496411905124, -0.5275962843435882, 0.9999978995354313, 0.15395231847977747, -0.1791871745601427, 2.351210357543019, 0.20408080567530568, 0.7246221472660979, -1.34259638815543, 0.21708703450252503, -0.5410499660254849, -0.4548367942747751, 0.6218910757273961, 0.4604507946927371, 0.9263521130034563, 1.4047133754211134, 1.2161225892508394, 1.115424194795594, -0.3938927386175407, 1.2774568159849067, -1.9004428980329113, -0.470073085741979, -1.438575150075206, 0.7910345601505122, 1.6028786459468227, 0.6391794096349859, 1.9936041895124976, 0.08531744093173295, 1.6746112262600767, 1.82815094365676, 1.897211873412801, -0.6285279791099759, 0.6822031160244268, -2.5086792419542383, -1.3426110584133373, 1.3888329326027569, 0.2886960796253767, 1.275403911464203, -0.040861438354845826, -0.23380760701981118, 0.8911703964439595, -1.5353704787636515, 0.0777610580605937, -1.0817828471457507, -1.1577481657079636, 1.9654706098388546, 0.30375943328428895, 0.27280756438130294, -0.8375372982057483, -0.1698245026843311, 0.9112325595749339, -0.25980924041956827, 0.7311983440457238, 0.08163283035599822, 0.5644789908836676, 0.39693577738285357, -0.9704399246177713, 0.516063440331893, -0.585059291547371, 0.022865612999686608, -0.1832133035666581, -0.9972758750800539, -0.35379931362413347, -1.6175851663482448, 2.2645126083490235, 2.210946960216811, 0.21289577474916827, 0.5286645037191154, 1.1936740467365292, 1.5216754150285183, 0.4378613841088419, -0.0715610784751842, 0.03730499278092871, 0.6255871480262895, 0.386936395430087, 0.4934012792440433, 0.7074582273609529, -0.6076581559403652, -1.3676091500373837, 0.5993974960599713, -1.6671449600245756, -0.957964537894687, 2.1970058653875366, 2.455163229595661, -1.8552972432780803, 0.28706752288211235, 2.0586841878467017, 0.37484556598968183, 0.13032489083944468, -0.3603392792254045, -0.4765325026755457, -0.06630791485480388, 1.2007550392029975, 1.270140405001024, -0.37386177739431126, -1.7812167591626054, 0.5527794345636188, 0.03456426017565183, 0.693519721380441, 0.09294937696513927, 1.3762581143315067, 1.166252862572194, -0.05145517492894526, 1.1838257525950555, 0.8269427184840841, 1.9628284940557341, -1.705681682487703, 0.043316222511061195, -0.35755343352072655, -1.344693498563909, -2.11486372007683, -1.188950515907461, 2.3294156736755007, 0.7162188489175088, -0.7557432487581558, 0.8074735847626022, 0.11676572271523755, 1.0209677364809757, 2.0864512199075165, 0.25091737163035455, -1.30891213878901, 0.12796206222010303, 0.29593480841041087, 0.9806292179952862, -1.853663929111481, 1.2336115487565682, 0.19930816825913986, -0.02278447747933726, 0.18415638134152235, 0.04244586534463102, -0.825225621840069, -0.1269660586923417, -1.0137251680036043, 0.5753173359493945, -1.1030213210657176, 0.3371229041093294, -1.5005160152760282, 0.8427944549736139, 0.47096906005330796, -0.007367272217829482, -1.2629797512460967, 0.8605562756024401, -0.8750173456961837, -0.18649695996095178, -1.7069140883025846, -1.1655545712638782, 0.5031807780667786, -1.380167251672184, -0.39720977502636323, 0.7640020349886831, -2.5245339842395405, -0.8137008635977134, 0.7299538453069289, 0.0638254682591419, -0.47404210267535557, 0.3448805575358074, -0.6381097824619499, -0.3227198523830505, -0.8992669403989326, -1.6936686696601457, 0.41457271598037715, 1.425641661967531, -1.2837537089041149, -1.2762457313890923, 0.8085331198618815, 0.27237604538084514, -0.035862443191365785, 0.9485273619165108, -0.10447698336877274, 1.050079799301339, 0.12428131188755835, -1.0371136006881367, -2.0212178611727847, 0.5303680892862463, 0.679794940351031, -0.9610655322831267, 0.24622907280205977, -1.1956386299421022, 0.8233759514568599, -0.007682516248649783, 0.1716232842689457, -1.2417302331385003, 0.6391479840745791, -0.5030678621760288, -0.2834403910547294, -1.662992959352576, -0.608336917303551, 0.504506175168541, 1.3749643647753331, -2.6645164608536294, 0.3071139871077483], "name": "Series 1", "xbins": {"start": -4, "end": 4, "size": 0.5}, "marker": {"color": "#D67D93"}, "opacity": 0.75}, {"type": "histogram", "x": [-0.31402672638027673, 1.7074858271465216, 2.8001704546370556, 2.4204903753439115, 2.357815114477787, 2.2479449133900387, 2.557123867405971, 2.255982027501024, 1.1313166131124808, -0.06433788063954249, -0.15417532457963867, 1.846145199369038, 0.38587364318111406, 0.7315998178275454, 1.0846035482832366, -0.19737180382907948, 1.1641168373630346, 3.0128737748300995, -0.9996298007681375, 1.3350866023185615, 1.23297911135865, -0.5720341580789952, 1.4893815784439646, 2.698541033655263, -0.6572146501437486, 0.8171625498140549, 1.297279116915333, 0.8547488463649462, 1.6715505547643992, 1.8171279188460712, -0.2801466966888415, -0.23352993625682905, 2.402882410336372, 0.7592810142743995, -0.9948801940240466, -0.16348097897807712, 0.3775715555029501, 1.7816155845666275, 0.44775223249159535, 1.2745880664440046, 1.0289995746529277, -0.2551054925730549, -0.03487439901239786, 2.7461346565537035, 1.2548417356371493, 2.1662733443823825, -0.06349761182742708, 0.3225921450173832, -0.3438212782073107, 0.5216475505390776, 1.0314148906586356, 2.042159161206147, -0.33913193688878374, -0.2705157113647785, -0.34454902812184507, -0.04334901113697964, 2.507969388965476, -0.3451317581845659, 0.9526874621059369, 0.9337820932161267, 1.5334743941316413, -0.6472126065734234, 1.4930895858311566, 0.7259372459598348, 1.0776091429398147, 2.617305316083987, 1.800057815964712, 1.6669115390491105, 1.0725709214199148, 3.0369443852604614, 1.6707989749010377, 1.1502086705906007, 0.6575223671872281, 1.1328796393247575, 1.7054639621186594, 1.1962549991978895, 0.7896331308483608, 1.1261105104895495, -0.35290514292635167, 0.9185440925900296, 1.150701576623866, 0.6572543186184959, -0.26844765020529837, 2.3167240595358924, 1.309165724798898, 0.22087674630868281, 1.572551810398254, 1.9835424798954961, -0.02243098865326898, 0.3178734501063031, 1.6313762325391772, 0.2296481020347032, 3.317640769490511, 1.6185878371238451, -0.5889993091114822, 1.3048839953475606, 0.3374990829891098, 0.8714719815712199, 1.146236808871999, 0.31626422327786785], "name": "Series 2", "xbins": {"start": 0, "end": 4, "size": 0.5}, "marker": {"color": "#7DAED6"}, "opacity": 0.75}], {"title": "Styled histograms", "xaxis": {"title": "Value"}, "yaxis": {"title": "Count"}, "bargap": 0.2, "bargroupgap": 0.1}, {"showLink": true, "linkText": "Export to plot.ly"})});</script></div></div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "hossainlab/dataviz",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./plotly"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            
+
+
+
+<div class='prev-next-bottom'>
+    
+
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Jubayer Hossain<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>

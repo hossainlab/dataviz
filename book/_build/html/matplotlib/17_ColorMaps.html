@@ -1,0 +1,871 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The default color cycle &#8212; Data Visualization with Python</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet" />
+  <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.e8f53015daec13862f6db5e763c41738.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe,.cell"
+        const thebe_selector_input = "pre,.cell_input div.highlight"
+        const thebe_selector_output = ".output,.cell_output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="shortcut icon" href="../_static/logo.jpg"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      <img src="../_static/logo.jpg" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Data Visualization with Python</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <p class="caption">
+ <span class="caption-text">
+  Matplotlib
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="00-Intro%20to%20Data%20Visualization.html">
+   Intro to Data Visualization with Matplotlib
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="02_InteractiveBackends.html">
+     Backends
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/matplotlib/17_ColorMaps.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/hossainlab/dataviz/"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/hossainlab/dataviz/master?urlpath=tree/book/matplotlib/17_ColorMaps.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/hossainlab/dataviz/blob/master/book/matplotlib/17_ColorMaps.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        <button type="button" class="btn btn-secondary topbarbtn"
+            onclick="initThebeSBT()" title="Launch Thebe" data-toggle="tooltip" data-placement="left"><i
+                class="fas fa-play"></i><span style="margin-left: .4em;">Live Code</span></button>
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   The default color cycle
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#define-our-own-colormap">
+   Define our own colormap
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#create-the-figure-and-axis">
+     Create the figure and axis
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-colors-are-picked-in-a-cycle">
+     The colors are picked in a cycle
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#matplotlib-s-built-in-colormaps">
+   Matplotlib’s built-in colormaps
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-stackplot-is-really-a-list-of-polycollection-objects">
+     The Stackplot is really a list of PolyCollection objects
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#use-the-get-cmap-function-to-get-a-distribution-of-colors-on-the-colormap">
+     Use the get_cmap() function to get a distribution of colors on the colormap
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#we-set-colors-for-each-polycollection-in-the-stackplot">
+     We set colors for each PolyCollection in the stackplot
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-stackplot-contains-the-rainbow-colors">
+     The stackplot contains the rainbow colors
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-rainbow-cmap-only-contains-3-distinct-colors">
+     The rainbow_cmap only contains 3 distinct colors
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#some-matplotlib-plots-use-colormaps-by-default">
+   Some Matplotlib plots use colormaps by default
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#create-a-scatterplot-with-100-markers">
+     Create a Scatterplot with 100 markers
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#plot-the-scatterplot-by-specifying-the-sequence-of-colors">
+     Plot the scatterplot by specifying the sequence of colors
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#specify-the-colormap-to-use">
+     Specify the colormap to use
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#colormap-normalization">
+   Colormap normalization
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#define-a-non-linear-distribution">
+     Define a non-linear distribution
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#plotting-the-distribution-shows-very-similar-colors-for-the-initial-values">
+     Plotting the distribution shows very similar colors for the initial values
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#specify-a-logarithmic-distribution-for-the-colormap">
+     Specify a logarithmic distribution for the colormap
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#to-emphasize-this-we-create-a-larger-distribution-with-100-values">
+     To emphasize this, we create a larger distribution with 100 values
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#nearly-all-the-values-seem-to-have-the-same-violent-color">
+     Nearly all the values seem to have the same violent color
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#normalizing-the-colormap-results-in-a-better-color-distribution">
+     Normalizing the colormap results in a better color distribution
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#other-normalizing-functions-available">
+     Other normalizing functions available
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="n">matplotlib</span><span class="o">.</span><span class="n">interactive</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ion</span><span class="p">()</span>
+<span class="n">matplotlib</span><span class="o">.</span><span class="n">is_interactive</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np_data</span><span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;datasets/national_parks.csv&#39;</span><span class="p">)</span>
+<span class="n">np_data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Year</th>
+      <th>Badlands</th>
+      <th>GrandCanyon</th>
+      <th>BryceCanyon</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1961</td>
+      <td>833300</td>
+      <td>1253000</td>
+      <td>264800</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1962</td>
+      <td>1044800</td>
+      <td>1447400</td>
+      <td>251000</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1963</td>
+      <td>1074000</td>
+      <td>1539500</td>
+      <td>289500</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1964</td>
+      <td>1079800</td>
+      <td>1576600</td>
+      <td>300300</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1965</td>
+      <td>1091300</td>
+      <td>1689200</td>
+      <td>366800</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np_data</span><span class="p">[</span><span class="s1">&#39;Year&#39;</span><span class="p">]</span>
+
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span><span class="n">np_data</span><span class="p">[</span><span class="s1">&#39;Badlands&#39;</span><span class="p">],</span> 
+               <span class="n">np_data</span><span class="p">[</span><span class="s1">&#39;GrandCanyon&#39;</span><span class="p">],</span> 
+               <span class="n">np_data</span><span class="p">[</span><span class="s1">&#39;BryceCanyon&#39;</span><span class="p">]])</span>
+
+<span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Badlands&#39;</span><span class="p">,</span> 
+          <span class="s1">&#39;GrandCanyon&#39;</span><span class="p">,</span> 
+          <span class="s1">&#39;BryceCanyon&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="the-default-color-cycle">
+<h1>The default color cycle<a class="headerlink" href="#the-default-color-cycle" title="Permalink to this headline">¶</a></h1>
+<p>Matplotlib has a default colormap whose colors it cycles through when plotting multiple objects on the same plot. In our plot below, the colors chosen are blue, orange, green in that order</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">stackplot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> 
+             <span class="n">labels</span><span class="o">=</span><span class="n">labels</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper left&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/17_ColorMaps_4_0.png" src="../_images/17_ColorMaps_4_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="define-our-own-colormap">
+<h1>Define our own colormap<a class="headerlink" href="#define-our-own-colormap" title="Permalink to this headline">¶</a></h1>
+<p>We define a new set of colors to cycle through</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">colormap</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;cyan&#39;</span><span class="p">,</span> <span class="s1">&#39;magenta&#39;</span><span class="p">,</span> <span class="s1">&#39;yellow&#39;</span><span class="p">,</span> <span class="s1">&#39;grey&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="create-the-figure-and-axis">
+<h2>Create the figure and axis<a class="headerlink" href="#create-the-figure-and-axis" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_prop_cycle</span><span class="p">(</span><span class="s1">&#39;color&#39;</span><span class="p">,</span> <span class="n">colormap</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">stackplot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> 
+             <span class="n">labels</span><span class="o">=</span><span class="n">labels</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper left&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/17_ColorMaps_8_0.png" src="../_images/17_ColorMaps_8_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="the-colors-are-picked-in-a-cycle">
+<h2>The colors are picked in a cycle<a class="headerlink" href="#the-colors-are-picked-in-a-cycle" title="Permalink to this headline">¶</a></h2>
+<p>Once the colormap has run out of colors, Matplotlib will go to the beginning of the colormap to pick the next color. Here, the cyan color is used twice - when the first and third objects of the stack are plotted</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">colormap</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;cyan&#39;</span><span class="p">,</span> <span class="s1">&#39;magenta&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_prop_cycle</span><span class="p">(</span><span class="s1">&#39;color&#39;</span><span class="p">,</span> <span class="n">colormap</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">stackplot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> 
+             <span class="n">labels</span><span class="o">=</span><span class="n">labels</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper left&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/17_ColorMaps_11_0.png" src="../_images/17_ColorMaps_11_0.png" />
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="matplotlib-s-built-in-colormaps">
+<h1>Matplotlib’s built-in colormaps<a class="headerlink" href="#matplotlib-s-built-in-colormaps" title="Permalink to this headline">¶</a></h1>
+<p>There are a number of built-in colormaps which can also be used in our plots. These contain a range of values to choose from. The list of colormaps is here:
+<a class="reference external" href="https://matplotlib.org/examples/color/colormaps_reference.html">https://matplotlib.org/examples/color/colormaps_reference.html</a></p>
+<div class="section" id="the-stackplot-is-really-a-list-of-polycollection-objects">
+<h2>The Stackplot is really a list of PolyCollection objects<a class="headerlink" href="#the-stackplot-is-really-a-list-of-polycollection-objects" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+
+<span class="n">sp</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">stackplot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> 
+             <span class="n">labels</span><span class="o">=</span><span class="n">labels</span><span class="p">)</span>
+
+<span class="n">sp</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.collections.PolyCollection at 0x1175a6898&gt;,
+ &lt;matplotlib.collections.PolyCollection at 0x1175c54a8&gt;,
+ &lt;matplotlib.collections.PolyCollection at 0x1175c5470&gt;]
+</pre></div>
+</div>
+<img alt="../_images/17_ColorMaps_14_1.png" src="../_images/17_ColorMaps_14_1.png" />
+</div>
+</div>
+</div>
+<div class="section" id="use-the-get-cmap-function-to-get-a-distribution-of-colors-on-the-colormap">
+<h2>Use the get_cmap() function to get a distribution of colors on the colormap<a class="headerlink" href="#use-the-get-cmap-function-to-get-a-distribution-of-colors-on-the-colormap" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>The function takes the name of the colormap and number of distinct colors required from it</p></li>
+<li><p>It returns a LinearSegmentedColormap object which can be used to pick a color obtained from the colormap</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rainbow_cmap</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">get_cmap</span><span class="p">(</span><span class="s1">&#39;rainbow&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">sp</span><span class="p">))</span>
+<span class="n">rainbow_cmap</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.colors.LinearSegmentedColormap at 0x1175cd400&gt;
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="we-set-colors-for-each-polycollection-in-the-stackplot">
+<h2>We set colors for each PolyCollection in the stackplot<a class="headerlink" href="#we-set-colors-for-each-polycollection-in-the-stackplot" title="Permalink to this headline">¶</a></h2>
+<p>For this, we use the ColorMap we just created</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+
+<span class="n">sp</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">stackplot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> 
+             <span class="n">labels</span><span class="o">=</span><span class="n">labels</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">sp</span><span class="p">)):</span>
+    <span class="n">sp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="n">rainbow_cmap</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/17_ColorMaps_18_0.png" src="../_images/17_ColorMaps_18_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="the-stackplot-contains-the-rainbow-colors">
+<h2>The stackplot contains the rainbow colors<a class="headerlink" href="#the-stackplot-contains-the-rainbow-colors" title="Permalink to this headline">¶</a></h2>
+<p>Remember VIBGYOR. The first color should be violet, the middle one green and the 3rd one red</p>
+</div>
+<div class="section" id="the-rainbow-cmap-only-contains-3-distinct-colors">
+<h2>The rainbow_cmap only contains 3 distinct colors<a class="headerlink" href="#the-rainbow-cmap-only-contains-3-distinct-colors" title="Permalink to this headline">¶</a></h2>
+<p>Though we can get colors for higher index values, they’re all the same as the 3rd color</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">rainbow_cmap</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(0.5, 0.0, 1.0, 1.0)
+(0.5, 1.0, 0.7071067811865476, 1.0)
+(1.0, 1.2246467991473532e-16, 6.123233995736766e-17, 1.0)
+(1.0, 1.2246467991473532e-16, 6.123233995736766e-17, 1.0)
+(1.0, 1.2246467991473532e-16, 6.123233995736766e-17, 1.0)
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="some-matplotlib-plots-use-colormaps-by-default">
+<h1>Some Matplotlib plots use colormaps by default<a class="headerlink" href="#some-matplotlib-plots-use-colormaps-by-default" title="Permalink to this headline">¶</a></h1>
+<p>For example, a scatterplot or pcolormesh. Stackplots and lines don’t support it by default - which is why we explicity had to set the colors for each PolyCollection in the scatterplot</p>
+<div class="section" id="create-a-scatterplot-with-100-markers">
+<h2>Create a Scatterplot with 100 markers<a class="headerlink" href="#create-a-scatterplot-with-100-markers" title="Permalink to this headline">¶</a></h2>
+<p>For simplicity, we just plot a straight line</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+
+<span class="n">y</span> <span class="o">=</span> <span class="n">x</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="plot-the-scatterplot-by-specifying-the-sequence-of-colors">
+<h2>Plot the scatterplot by specifying the sequence of colors<a class="headerlink" href="#plot-the-scatterplot-by-specifying-the-sequence-of-colors" title="Permalink to this headline">¶</a></h2>
+<p>c is a sequence which will be used to get evenly spaced values from the colormap. So the distribution of colors from the colormap will reflect the distribution of y.</p>
+<p>Here we don’t specify a colormap, so the default one will be used.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> 
+           <span class="n">c</span><span class="o">=</span><span class="n">y</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/17_ColorMaps_26_0.png" src="../_images/17_ColorMaps_26_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="specify-the-colormap-to-use">
+<h2>Specify the colormap to use<a class="headerlink" href="#specify-the-colormap-to-use" title="Permalink to this headline">¶</a></h2>
+<p>We use the rainbow colormap again</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> 
+           <span class="n">c</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> 
+           <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;rainbow&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/17_ColorMaps_28_0.png" src="../_images/17_ColorMaps_28_0.png" />
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="colormap-normalization">
+<h1>Colormap normalization<a class="headerlink" href="#colormap-normalization" title="Permalink to this headline">¶</a></h1>
+<p>By default, the color distribution in your colormap is linear. However, if the relationship between the X and Y values in your distribution is not linear, then your plot may not contain a good distribution of colors picked from the colormap.</p>
+<p>This is where the colors need to be Normalized to fit your distribution.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.colors</span> <span class="k">as</span> <span class="nn">colors</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="define-a-non-linear-distribution">
+<h2>Define a non-linear distribution<a class="headerlink" href="#define-a-non-linear-distribution" title="Permalink to this headline">¶</a></h2>
+<p>Here y = 2<sup>x</sup></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp2</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="plotting-the-distribution-shows-very-similar-colors-for-the-initial-values">
+<h2>Plotting the distribution shows very similar colors for the initial values<a class="headerlink" href="#plotting-the-distribution-shows-very-similar-colors-for-the-initial-values" title="Permalink to this headline">¶</a></h2>
+<p>This is because the Y-values are very closely bunched up for the lower values, and increases exponentially</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> 
+           <span class="n">c</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> 
+           <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;rainbow&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/17_ColorMaps_34_0.png" src="../_images/17_ColorMaps_34_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="specify-a-logarithmic-distribution-for-the-colormap">
+<h2>Specify a logarithmic distribution for the colormap<a class="headerlink" href="#specify-a-logarithmic-distribution-for-the-colormap" title="Permalink to this headline">¶</a></h2>
+<p>Since the relationship between y and x is exponential, the color distribution should be logarithmic. This will ensure that the color variation will be widely distributed at lower values and will vary more slowly for higher values - the inverse of our distribution.</p>
+<p>We notice that the colors for the lower x values are now more varied</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> 
+           <span class="n">c</span><span class="o">=</span><span class="n">y</span><span class="p">,</span>
+           <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;rainbow&#39;</span><span class="p">,</span>
+           <span class="n">norm</span><span class="o">=</span><span class="n">colors</span><span class="o">.</span><span class="n">LogNorm</span><span class="p">())</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/17_ColorMaps_36_0.png" src="../_images/17_ColorMaps_36_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="to-emphasize-this-we-create-a-larger-distribution-with-100-values">
+<h2>To emphasize this, we create a larger distribution with 100 values<a class="headerlink" href="#to-emphasize-this-we-create-a-larger-distribution-with-100-values" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp2</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="nearly-all-the-values-seem-to-have-the-same-violent-color">
+<h2>Nearly all the values seem to have the same violent color<a class="headerlink" href="#nearly-all-the-values-seem-to-have-the-same-violent-color" title="Permalink to this headline">¶</a></h2>
+<p>We also use a logarithmic scale on the Y axis, so the graph looks linear</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> 
+           <span class="n">c</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> 
+           <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;rainbow&#39;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_yscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/17_ColorMaps_40_0.png" src="../_images/17_ColorMaps_40_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="normalizing-the-colormap-results-in-a-better-color-distribution">
+<h2>Normalizing the colormap results in a better color distribution<a class="headerlink" href="#normalizing-the-colormap-results-in-a-better-color-distribution" title="Permalink to this headline">¶</a></h2>
+<p>Using log normalization for an exponential relationship pretty much creates a linear colormap for our distribution</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> 
+           <span class="n">c</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> 
+           <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;rainbow&#39;</span><span class="p">,</span>
+           <span class="n">norm</span><span class="o">=</span><span class="n">colors</span><span class="o">.</span><span class="n">LogNorm</span><span class="p">())</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_yscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/17_ColorMaps_42_0.png" src="../_images/17_ColorMaps_42_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="other-normalizing-functions-available">
+<h2>Other normalizing functions available<a class="headerlink" href="#other-normalizing-functions-available" title="Permalink to this headline">¶</a></h2>
+<p>Other than LogNorm(), Matplotlib also gives us:</p>
+<ul class="simple">
+<li><p><b>SymLogNorm() </b> is meant for logarithmic scaling to be applied even when negative values are present in the distribution</p></li>
+<li><p><b>PowerNorm() </b> lets you define a power relationship between x and y such that y = x<sup>γ</sup> where you will specify PowerNorm(gamma=γ)</p></li>
+</ul>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "hossainlab/dataviz",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./matplotlib"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            
+
+
+
+<div class='prev-next-bottom'>
+    
+
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Jubayer Hossain<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>

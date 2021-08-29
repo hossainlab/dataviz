@@ -1,30 +1,67 @@
-- file: index
+format: jb-book
+root: index
+parts:
+  - caption: Matplotlib 
+    chapters:
+    - file:  matplotlib/00-Intro to Data Visualization
+      sections:
+      - file: matplotlib/02_InteractiveBackends
 
-# Matplotlib notebooks
-- part: Matplotlib
-  chapters:
-  - file: notebooks/MPL00-Introduction
-  - file: notebooks/MPL01-Intro to Data Visualization
-  - file: notebooks/MPL02-Data Visualization with Pandas and Matplotlib
 
-# Seaborn notebooks
-- part: Seaborn
-  chapters:
-  - file: notebooks/SB00-Introduction
-  - file: notebooks/SB01-Distribution Plots
-  - file: notebooks/SB02-Categorical Plots
-  - file: notebooks/SB03-Matrix Plots
-  - file: notebooks/SB04-Grids
-  - file: notebooks/SB05-Regression Plots
-  - file: notebooks/SB06-Style and Color
+# # Matplotlib notebooks
+# - part: Introduction
+#   chapters:
+#   - file: intro/01_Introduction
 
-# Plotly notebooks
-- part: Plotly
-  chapters:
-  - file: notebooks/P00-Plotly Basic Overview
-  - file: notebooks/P01-Intro to Plotly Express
 
-# Cufflinks notebooks
-- part: Cufflinks
-  chapters:
-  - file: notebooks/CF00-Introduction
+# # Matplotlib notebooks
+# - part: Matplotlib
+#   chapters:
+#   - file: matplotlib/00-Intro to Data Visualization
+#   - file: matplotlib/01_NonInteractiveMode
+#   - file: matplotlib/02_InteractiveBackends
+#   - file: matplotlib/03_Annotations
+#   - file: matplotlib/03_GettingStarted
+#   - file: matplotlib/04_LinesAndMarkers
+#   - file: matplotlib/05_Figures
+#   - file: matplotlib/06_Watermarks
+#   - file: matplotlib/07_PuttingItTogether
+#   - file: matplotlib/08_Shapes
+#   - file: matplotlib/09_Curves
+#   - file: matplotlib/10_Scales
+#   - file: matplotlib/11_TwinAxis
+#   - file: matplotlib/12_Boxplots_Violinplots
+#   - file: matplotlib/13_Histograms
+#   - file: matplotlib/14_PieChart
+#   - file: matplotlib/15_Autocorrelation
+#   - file: matplotlib/16_StackedPlots
+#   - file: matplotlib/17_ColorMaps
+
+
+# # Seaborn notebooks
+# - part: Seaborn
+#   chapters:
+#   - file: seaborn/1-InstallingSeabornAndExploringTheWineDataset
+#   - file: seaborn/2-VisualizingDistributionsToFindPatterns
+#   - file: seaborn/3-VisualizingLinearRelationships
+#   - file: seaborn/4-CategoricalDataAndMultipanelData
+#   - file: seaborn/5-DataSubsetsUsingTheFacetGrid
+#   - file: seaborn/6-CustomizingTheFacetGrid
+#   - file: seaborn/7-DataSubsetsUsingThePairGrid
+#   - file: seaborn/8-AnalyzingBikeRentals
+#   - file: seaborn/9-DemandForecasting
+#   - file: seaborn/10-ThemesAndFigureStyles
+#   - file: seaborn/11-ColorPalettes
+#   - file: seaborn/12-FigureAesthetics
+
+# # Plotly notebooks
+# - part: Plotly
+#   chapters:
+#   - file: plotly/1.BarCharts
+#   - file: plotly/2.BoxPlot
+
+
+# # Cufflinks notebooks
+# - part: Cufflinks
+#   chapters:
+#   - file: notebooks/CF00-Introduction

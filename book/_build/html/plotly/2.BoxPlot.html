@@ -1,0 +1,758 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Download the Automobile dataset &#8212; Data Visualization with Python</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet" />
+  <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.e8f53015daec13862f6db5e763c41738.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe,.cell"
+        const thebe_selector_input = "pre,.cell_input div.highlight"
+        const thebe_selector_output = ".output,.cell_output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="shortcut icon" href="../_static/logo.jpg"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      <img src="../_static/logo.jpg" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Data Visualization with Python</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <p class="caption">
+ <span class="caption-text">
+  Matplotlib
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../matplotlib/00-Intro%20to%20Data%20Visualization.html">
+   Intro to Data Visualization with Matplotlib
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../matplotlib/02_InteractiveBackends.html">
+     Backends
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/plotly/2.BoxPlot.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/hossainlab/dataviz/"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/hossainlab/dataviz/master?urlpath=tree/book/plotly/2.BoxPlot.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/hossainlab/dataviz/blob/master/book/plotly/2.BoxPlot.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        <button type="button" class="btn btn-secondary topbarbtn"
+            onclick="initThebeSBT()" title="Launch Thebe" data-toggle="tooltip" data-placement="left"><i
+                class="fas fa-play"></i><span style="margin-left: .4em;">Live Code</span></button>
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Download the Automobile dataset
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#examine-the-two-fields-we-will-use-in-our-plots">
+   Examine the two fields we will use in our plots
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-first-boxplot-will-model-the-city-mpg">
+   The first boxplot will model the City MPG
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-second-boxplot-will-model-the-highway-mpg">
+   The second boxplot will model the Highway MPG
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#plot-the-data">
+   Plot the data
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#styling-outliers">
+   Styling Outliers
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#define-the-first-boxplot">
+     Define the first boxplot
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#define-the-second-boxplot">
+     Define the second boxplot
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#more-styling">
+     More styling
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#style-the-first-boxplot">
+       Style the first boxplot
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#style-the-second-boxplot">
+       Style the second boxplot
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <p>create traces</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">plotly.plotly</span> <span class="k">as</span> <span class="nn">py</span>
+<span class="kn">import</span> <span class="nn">plotly.graph_objs</span> <span class="k">as</span> <span class="nn">go</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">plotly.offline</span> <span class="k">as</span> <span class="nn">offline</span>
+
+<span class="n">offline</span><span class="o">.</span><span class="n">init_notebook_mode</span><span class="p">(</span><span class="n">connected</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><script>requirejs.config({paths: { 'plotly': ['https://cdn.plot.ly/plotly-latest.min']},});if(!window.Plotly) {{require(['plotly'],function(plotly) {window.Plotly=plotly;});}}</script></div></div>
+</div>
+<div class="section" id="download-the-automobile-dataset">
+<h1>Download the Automobile dataset<a class="headerlink" href="#download-the-automobile-dataset" title="Permalink to this headline">¶</a></h1>
+<p>Dataset location: <a class="reference external" href="https://www.kaggle.com/toramky/automobile-dataset">https://www.kaggle.com/toramky/automobile-dataset</a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="n">auto_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;datasets/Automobile_data.csv&#39;</span><span class="p">)</span>
+<span class="n">auto_data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>symboling</th>
+      <th>normalized-losses</th>
+      <th>make</th>
+      <th>fuel-type</th>
+      <th>aspiration</th>
+      <th>num-of-doors</th>
+      <th>body-style</th>
+      <th>drive-wheels</th>
+      <th>engine-location</th>
+      <th>wheel-base</th>
+      <th>...</th>
+      <th>engine-size</th>
+      <th>fuel-system</th>
+      <th>bore</th>
+      <th>stroke</th>
+      <th>compression-ratio</th>
+      <th>horsepower</th>
+      <th>peak-rpm</th>
+      <th>city-mpg</th>
+      <th>highway-mpg</th>
+      <th>price</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>3</td>
+      <td>?</td>
+      <td>alfa-romero</td>
+      <td>gas</td>
+      <td>std</td>
+      <td>two</td>
+      <td>convertible</td>
+      <td>rwd</td>
+      <td>front</td>
+      <td>88.6</td>
+      <td>...</td>
+      <td>130</td>
+      <td>mpfi</td>
+      <td>3.47</td>
+      <td>2.68</td>
+      <td>9.0</td>
+      <td>111</td>
+      <td>5000</td>
+      <td>21</td>
+      <td>27</td>
+      <td>13495</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>3</td>
+      <td>?</td>
+      <td>alfa-romero</td>
+      <td>gas</td>
+      <td>std</td>
+      <td>two</td>
+      <td>convertible</td>
+      <td>rwd</td>
+      <td>front</td>
+      <td>88.6</td>
+      <td>...</td>
+      <td>130</td>
+      <td>mpfi</td>
+      <td>3.47</td>
+      <td>2.68</td>
+      <td>9.0</td>
+      <td>111</td>
+      <td>5000</td>
+      <td>21</td>
+      <td>27</td>
+      <td>16500</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1</td>
+      <td>?</td>
+      <td>alfa-romero</td>
+      <td>gas</td>
+      <td>std</td>
+      <td>two</td>
+      <td>hatchback</td>
+      <td>rwd</td>
+      <td>front</td>
+      <td>94.5</td>
+      <td>...</td>
+      <td>152</td>
+      <td>mpfi</td>
+      <td>2.68</td>
+      <td>3.47</td>
+      <td>9.0</td>
+      <td>154</td>
+      <td>5000</td>
+      <td>19</td>
+      <td>26</td>
+      <td>16500</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2</td>
+      <td>164</td>
+      <td>audi</td>
+      <td>gas</td>
+      <td>std</td>
+      <td>four</td>
+      <td>sedan</td>
+      <td>fwd</td>
+      <td>front</td>
+      <td>99.8</td>
+      <td>...</td>
+      <td>109</td>
+      <td>mpfi</td>
+      <td>3.19</td>
+      <td>3.4</td>
+      <td>10.0</td>
+      <td>102</td>
+      <td>5500</td>
+      <td>24</td>
+      <td>30</td>
+      <td>13950</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2</td>
+      <td>164</td>
+      <td>audi</td>
+      <td>gas</td>
+      <td>std</td>
+      <td>four</td>
+      <td>sedan</td>
+      <td>4wd</td>
+      <td>front</td>
+      <td>99.4</td>
+      <td>...</td>
+      <td>136</td>
+      <td>mpfi</td>
+      <td>3.19</td>
+      <td>3.4</td>
+      <td>8.0</td>
+      <td>115</td>
+      <td>5500</td>
+      <td>18</td>
+      <td>22</td>
+      <td>17450</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 26 columns</p>
+</div></div></div>
+</div>
+</div>
+<div class="section" id="examine-the-two-fields-we-will-use-in-our-plots">
+<h1>Examine the two fields we will use in our plots<a class="headerlink" href="#examine-the-two-fields-we-will-use-in-our-plots" title="Permalink to this headline">¶</a></h1>
+<p>View the distribution of values for these columns. The box plot will help us visualize this data</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">auto_data</span><span class="p">[[</span><span class="s1">&#39;city-mpg&#39;</span><span class="p">,</span> <span class="s1">&#39;highway-mpg&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>city-mpg</th>
+      <th>highway-mpg</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>205.000000</td>
+      <td>205.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>25.219512</td>
+      <td>30.751220</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>6.542142</td>
+      <td>6.886443</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>13.000000</td>
+      <td>16.000000</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>19.000000</td>
+      <td>25.000000</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>24.000000</td>
+      <td>30.000000</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>30.000000</td>
+      <td>34.000000</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>49.000000</td>
+      <td>54.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</div>
+<div class="section" id="the-first-boxplot-will-model-the-city-mpg">
+<h1>The first boxplot will model the City MPG<a class="headerlink" href="#the-first-boxplot-will-model-the-city-mpg" title="Permalink to this headline">¶</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">trace0</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Box</span><span class="p">(</span><span class="n">y</span> <span class="o">=</span> <span class="n">auto_data</span><span class="p">[</span><span class="s1">&#39;city-mpg&#39;</span><span class="p">],</span> 
+                <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;City MPG&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="the-second-boxplot-will-model-the-highway-mpg">
+<h1>The second boxplot will model the Highway MPG<a class="headerlink" href="#the-second-boxplot-will-model-the-highway-mpg" title="Permalink to this headline">¶</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">trace1</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Box</span><span class="p">(</span><span class="n">y</span> <span class="o">=</span> <span class="n">auto_data</span><span class="p">[</span><span class="s1">&#39;highway-mpg&#39;</span><span class="p">],</span> 
+                <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;Highway MPG&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="plot-the-data">
+<h1>Plot the data<a class="headerlink" href="#plot-the-data" title="Permalink to this headline">¶</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="n">trace0</span><span class="p">,</span> <span class="n">trace1</span><span class="p">]</span>
+
+<span class="n">offline</span><span class="o">.</span><span class="n">iplot</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div id="3477563c-21fd-4e1e-be8d-40f39567d30d" style="height: 525px; width: 100%;" class="plotly-graph-div"></div><script type="text/javascript">require(["plotly"], function(Plotly) { window.PLOTLYENV=window.PLOTLYENV || {};window.PLOTLYENV.BASE_URL="https://plot.ly";Plotly.newPlot("3477563c-21fd-4e1e-be8d-40f39567d30d", [{"type": "box", "y": [21, 21, 19, 24, 18, 19, 19, 19, 17, 16, 23, 23, 21, 21, 20, 16, 16, 15, 47, 38, 38, 37, 31, 24, 31, 31, 31, 24, 24, 19, 49, 31, 38, 30, 30, 30, 30, 27, 27, 27, 27, 24, 25, 24, 38, 38, 24, 15, 15, 13, 30, 31, 31, 31, 31, 17, 17, 17, 16, 26, 26, 26, 26, 36, 26, 19, 31, 22, 22, 22, 22, 16, 16, 14, 14, 19, 37, 31, 31, 24, 23, 25, 19, 19, 19, 25, 25, 23, 23, 31, 45, 31, 31, 31, 31, 31, 31, 31, 31, 27, 27, 17, 17, 19, 19, 17, 19, 19, 28, 19, 25, 19, 28, 19, 25, 19, 28, 18, 37, 24, 31, 31, 31, 24, 19, 19, 17, 17, 17, 17, 23, 23, 21, 21, 21, 21, 19, 19, 31, 26, 26, 32, 28, 26, 24, 24, 28, 25, 23, 23, 35, 31, 31, 31, 27, 27, 30, 30, 34, 38, 38, 28, 28, 29, 29, 26, 26, 24, 24, 24, 24, 24, 24, 29, 30, 27, 27, 27, 20, 19, 20, 19, 37, 27, 37, 27, 27, 37, 26, 24, 24, 19, 33, 25, 23, 23, 24, 24, 17, 17, 23, 19, 18, 26, 19], "name": "City MPG"}, {"type": "box", "y": [27, 27, 26, 30, 22, 25, 25, 25, 20, 22, 29, 29, 28, 28, 25, 22, 22, 20, 53, 43, 43, 41, 38, 30, 38, 38, 38, 30, 30, 24, 54, 38, 42, 34, 34, 34, 34, 33, 33, 33, 33, 28, 31, 29, 43, 43, 29, 19, 19, 17, 31, 38, 38, 38, 38, 23, 23, 23, 23, 32, 32, 32, 32, 42, 32, 27, 39, 25, 25, 25, 25, 18, 18, 16, 16, 24, 41, 38, 38, 30, 30, 32, 24, 24, 24, 32, 32, 30, 30, 37, 50, 37, 37, 37, 37, 37, 37, 37, 37, 34, 34, 22, 22, 25, 25, 23, 25, 24, 33, 24, 25, 24, 33, 24, 25, 24, 33, 24, 41, 30, 38, 38, 38, 30, 24, 27, 25, 25, 25, 28, 31, 31, 28, 28, 28, 28, 26, 26, 36, 31, 31, 37, 33, 32, 25, 29, 32, 31, 29, 23, 39, 38, 38, 37, 32, 32, 37, 37, 36, 47, 47, 34, 34, 34, 34, 29, 29, 30, 30, 30, 30, 30, 30, 34, 33, 32, 32, 32, 24, 24, 24, 24, 46, 34, 46, 34, 34, 42, 32, 29, 29, 24, 38, 31, 28, 28, 28, 28, 22, 22, 28, 25, 23, 27, 25], "name": "Highway MPG"}], {}, {"showLink": true, "linkText": "Export to plot.ly"})});</script></div></div>
+</div>
+</div>
+<div class="section" id="styling-outliers">
+<h1>Styling Outliers<a class="headerlink" href="#styling-outliers" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="define-the-first-boxplot">
+<h2>Define the first boxplot<a class="headerlink" href="#define-the-first-boxplot" title="Permalink to this headline">¶</a></h2>
+<p>The value of <b>boxpoints</b> decides which points are plotted separtely with markers rather than being represented by a box. The default value is ‘outliers’. A value of ‘all’ will plot all the points outside the box (in addition to plotting the box).</p>
+<p>Other possible values for boxpoints are ‘suspectedoutliers’ (values outside a certain range) and False (where only a box is drawn)</p>
+<p><b>boxmean</b> defines whether a dotted line will be drawn to represent the mean of the distribution</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">trace0</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Box</span><span class="p">(</span><span class="n">y</span> <span class="o">=</span> <span class="n">auto_data</span><span class="p">[</span><span class="s1">&#39;city-mpg&#39;</span><span class="p">],</span> 
+                <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;City MPG&#39;</span><span class="p">,</span> 
+                
+                <span class="n">boxpoints</span> <span class="o">=</span> <span class="s1">&#39;all&#39;</span><span class="p">,</span>
+                
+                <span class="n">boxmean</span> <span class="o">=</span> <span class="kc">True</span>                
+               <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="define-the-second-boxplot">
+<h2>Define the second boxplot<a class="headerlink" href="#define-the-second-boxplot" title="Permalink to this headline">¶</a></h2>
+<p>A value of ‘sd’ for <b>boxmean</b> will also show the standard deviation for the distribution along with the mean</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">trace1</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Box</span><span class="p">(</span><span class="n">y</span> <span class="o">=</span> <span class="n">auto_data</span><span class="p">[</span><span class="s1">&#39;highway-mpg&#39;</span><span class="p">],</span> 
+                <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;Highway MPG&#39;</span><span class="p">,</span> 
+                
+                <span class="n">boxmean</span> <span class="o">=</span> <span class="s1">&#39;sd&#39;</span>
+               <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="n">trace0</span><span class="p">,</span> <span class="n">trace1</span><span class="p">]</span>
+
+<span class="n">offline</span><span class="o">.</span><span class="n">iplot</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div id="8d263dc8-8fd4-42ad-83e8-c921ceee3ea3" style="height: 525px; width: 100%;" class="plotly-graph-div"></div><script type="text/javascript">require(["plotly"], function(Plotly) { window.PLOTLYENV=window.PLOTLYENV || {};window.PLOTLYENV.BASE_URL="https://plot.ly";Plotly.newPlot("8d263dc8-8fd4-42ad-83e8-c921ceee3ea3", [{"type": "box", "y": [21, 21, 19, 24, 18, 19, 19, 19, 17, 16, 23, 23, 21, 21, 20, 16, 16, 15, 47, 38, 38, 37, 31, 24, 31, 31, 31, 24, 24, 19, 49, 31, 38, 30, 30, 30, 30, 27, 27, 27, 27, 24, 25, 24, 38, 38, 24, 15, 15, 13, 30, 31, 31, 31, 31, 17, 17, 17, 16, 26, 26, 26, 26, 36, 26, 19, 31, 22, 22, 22, 22, 16, 16, 14, 14, 19, 37, 31, 31, 24, 23, 25, 19, 19, 19, 25, 25, 23, 23, 31, 45, 31, 31, 31, 31, 31, 31, 31, 31, 27, 27, 17, 17, 19, 19, 17, 19, 19, 28, 19, 25, 19, 28, 19, 25, 19, 28, 18, 37, 24, 31, 31, 31, 24, 19, 19, 17, 17, 17, 17, 23, 23, 21, 21, 21, 21, 19, 19, 31, 26, 26, 32, 28, 26, 24, 24, 28, 25, 23, 23, 35, 31, 31, 31, 27, 27, 30, 30, 34, 38, 38, 28, 28, 29, 29, 26, 26, 24, 24, 24, 24, 24, 24, 29, 30, 27, 27, 27, 20, 19, 20, 19, 37, 27, 37, 27, 27, 37, 26, 24, 24, 19, 33, 25, 23, 23, 24, 24, 17, 17, 23, 19, 18, 26, 19], "name": "City MPG", "boxpoints": "all", "boxmean": true}, {"type": "box", "y": [27, 27, 26, 30, 22, 25, 25, 25, 20, 22, 29, 29, 28, 28, 25, 22, 22, 20, 53, 43, 43, 41, 38, 30, 38, 38, 38, 30, 30, 24, 54, 38, 42, 34, 34, 34, 34, 33, 33, 33, 33, 28, 31, 29, 43, 43, 29, 19, 19, 17, 31, 38, 38, 38, 38, 23, 23, 23, 23, 32, 32, 32, 32, 42, 32, 27, 39, 25, 25, 25, 25, 18, 18, 16, 16, 24, 41, 38, 38, 30, 30, 32, 24, 24, 24, 32, 32, 30, 30, 37, 50, 37, 37, 37, 37, 37, 37, 37, 37, 34, 34, 22, 22, 25, 25, 23, 25, 24, 33, 24, 25, 24, 33, 24, 25, 24, 33, 24, 41, 30, 38, 38, 38, 30, 24, 27, 25, 25, 25, 28, 31, 31, 28, 28, 28, 28, 26, 26, 36, 31, 31, 37, 33, 32, 25, 29, 32, 31, 29, 23, 39, 38, 38, 37, 32, 32, 37, 37, 36, 47, 47, 34, 34, 34, 34, 29, 29, 30, 30, 30, 30, 30, 30, 34, 33, 32, 32, 32, 24, 24, 24, 24, 46, 34, 46, 34, 34, 42, 32, 29, 29, 24, 38, 31, 28, 28, 28, 28, 22, 22, 28, 25, 23, 27, 25], "name": "Highway MPG", "boxmean": "sd"}], {}, {"showLink": true, "linkText": "Export to plot.ly"})});</script></div></div>
+</div>
+</div>
+<div class="section" id="more-styling">
+<h2>More styling<a class="headerlink" href="#more-styling" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="style-the-first-boxplot">
+<h3>Style the first boxplot<a class="headerlink" href="#style-the-first-boxplot" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p><b>marker</b> defines the markers (by default only the outliers)</p></li>
+<li><p><b>line</b> configures the enclosing box lines and the whiskers. The default width is 2</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">trace0</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Box</span><span class="p">(</span><span class="n">y</span> <span class="o">=</span> <span class="n">auto_data</span><span class="p">[</span><span class="s1">&#39;city-mpg&#39;</span><span class="p">],</span> 
+                <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;City MPG&#39;</span><span class="p">,</span>
+                
+                <span class="n">marker</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;skyblue&#39;</span><span class="p">),</span>
+                
+                <span class="n">line</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;navy&#39;</span><span class="p">,</span> 
+                            <span class="n">width</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>  
+               <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="style-the-second-boxplot">
+<h3>Style the second boxplot<a class="headerlink" href="#style-the-second-boxplot" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p><b>fillcolor</b> sets the color with which to fill the box. The default is the line color with 50% transparency</p></li>
+<li><p><b>symbol</b> for the marker has a number of options (<a class="reference external" href="https://plot.ly/python/reference/#box-marker-symbol">https://plot.ly/python/reference/#box-marker-symbol</a>)</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">trace1</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Box</span><span class="p">(</span><span class="n">y</span> <span class="o">=</span> <span class="n">auto_data</span><span class="p">[</span><span class="s1">&#39;highway-mpg&#39;</span><span class="p">],</span> 
+                <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;Highway MPG&#39;</span><span class="p">,</span>
+                
+                <span class="n">fillcolor</span> <span class="o">=</span> <span class="s1">&#39;bisque&#39;</span><span class="p">,</span>
+                
+                <span class="n">marker</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;deeppink&#39;</span><span class="p">,</span> 
+                              <span class="n">symbol</span> <span class="o">=</span> <span class="s1">&#39;square&#39;</span><span class="p">),</span>
+                
+                <span class="n">line</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;tomato&#39;</span><span class="p">)</span>
+               <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="n">trace0</span><span class="p">,</span> <span class="n">trace1</span><span class="p">]</span>
+
+<span class="n">offline</span><span class="o">.</span><span class="n">iplot</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div id="bf023b78-8261-40fd-b99f-e8af7fd42a3c" style="height: 525px; width: 100%;" class="plotly-graph-div"></div><script type="text/javascript">require(["plotly"], function(Plotly) { window.PLOTLYENV=window.PLOTLYENV || {};window.PLOTLYENV.BASE_URL="https://plot.ly";Plotly.newPlot("bf023b78-8261-40fd-b99f-e8af7fd42a3c", [{"type": "box", "y": [21, 21, 19, 24, 18, 19, 19, 19, 17, 16, 23, 23, 21, 21, 20, 16, 16, 15, 47, 38, 38, 37, 31, 24, 31, 31, 31, 24, 24, 19, 49, 31, 38, 30, 30, 30, 30, 27, 27, 27, 27, 24, 25, 24, 38, 38, 24, 15, 15, 13, 30, 31, 31, 31, 31, 17, 17, 17, 16, 26, 26, 26, 26, 36, 26, 19, 31, 22, 22, 22, 22, 16, 16, 14, 14, 19, 37, 31, 31, 24, 23, 25, 19, 19, 19, 25, 25, 23, 23, 31, 45, 31, 31, 31, 31, 31, 31, 31, 31, 27, 27, 17, 17, 19, 19, 17, 19, 19, 28, 19, 25, 19, 28, 19, 25, 19, 28, 18, 37, 24, 31, 31, 31, 24, 19, 19, 17, 17, 17, 17, 23, 23, 21, 21, 21, 21, 19, 19, 31, 26, 26, 32, 28, 26, 24, 24, 28, 25, 23, 23, 35, 31, 31, 31, 27, 27, 30, 30, 34, 38, 38, 28, 28, 29, 29, 26, 26, 24, 24, 24, 24, 24, 24, 29, 30, 27, 27, 27, 20, 19, 20, 19, 37, 27, 37, 27, 27, 37, 26, 24, 24, 19, 33, 25, 23, 23, 24, 24, 17, 17, 23, 19, 18, 26, 19], "name": "City MPG", "marker": {"color": "skyblue"}, "line": {"color": "navy", "width": 1}}, {"type": "box", "y": [27, 27, 26, 30, 22, 25, 25, 25, 20, 22, 29, 29, 28, 28, 25, 22, 22, 20, 53, 43, 43, 41, 38, 30, 38, 38, 38, 30, 30, 24, 54, 38, 42, 34, 34, 34, 34, 33, 33, 33, 33, 28, 31, 29, 43, 43, 29, 19, 19, 17, 31, 38, 38, 38, 38, 23, 23, 23, 23, 32, 32, 32, 32, 42, 32, 27, 39, 25, 25, 25, 25, 18, 18, 16, 16, 24, 41, 38, 38, 30, 30, 32, 24, 24, 24, 32, 32, 30, 30, 37, 50, 37, 37, 37, 37, 37, 37, 37, 37, 34, 34, 22, 22, 25, 25, 23, 25, 24, 33, 24, 25, 24, 33, 24, 25, 24, 33, 24, 41, 30, 38, 38, 38, 30, 24, 27, 25, 25, 25, 28, 31, 31, 28, 28, 28, 28, 26, 26, 36, 31, 31, 37, 33, 32, 25, 29, 32, 31, 29, 23, 39, 38, 38, 37, 32, 32, 37, 37, 36, 47, 47, 34, 34, 34, 34, 29, 29, 30, 30, 30, 30, 30, 30, 34, 33, 32, 32, 32, 24, 24, 24, 24, 46, 34, 46, 34, 34, 42, 32, 29, 29, 24, 38, 31, 28, 28, 28, 28, 22, 22, 28, 25, 23, 27, 25], "name": "Highway MPG", "fillcolor": "bisque", "marker": {"color": "deeppink", "symbol": "square"}, "line": {"color": "tomato"}}], {}, {"showLink": true, "linkText": "Export to plot.ly"})});</script></div></div>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "hossainlab/dataviz",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./plotly"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            
+
+
+
+<div class='prev-next-bottom'>
+    
+
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Jubayer Hossain<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>

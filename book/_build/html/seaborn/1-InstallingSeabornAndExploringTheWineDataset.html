@@ -1,0 +1,831 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Visualizing Relationships and Distributions in Seaborn &#8212; Data Visualization with Python</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet" />
+  <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.e8f53015daec13862f6db5e763c41738.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe,.cell"
+        const thebe_selector_input = "pre,.cell_input div.highlight"
+        const thebe_selector_output = ".output,.cell_output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="shortcut icon" href="../_static/logo.jpg"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      <img src="../_static/logo.jpg" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Data Visualization with Python</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <p class="caption">
+ <span class="caption-text">
+  Matplotlib
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../matplotlib/00-Intro%20to%20Data%20Visualization.html">
+   Intro to Data Visualization with Matplotlib
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../matplotlib/02_InteractiveBackends.html">
+     Backends
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/seaborn/1-InstallingSeabornAndExploringTheWineDataset.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/hossainlab/dataviz/"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/hossainlab/dataviz/master?urlpath=tree/book/seaborn/1-InstallingSeabornAndExploringTheWineDataset.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/hossainlab/dataviz/blob/master/book/seaborn/1-InstallingSeabornAndExploringTheWineDataset.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        <button type="button" class="btn btn-secondary topbarbtn"
+            onclick="initThebeSBT()" title="Launch Thebe" data-toggle="tooltip" data-placement="left"><i
+                class="fas fa-play"></i><span style="margin-left: .4em;">Live Code</span></button>
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#getting-into-the-seaborn-domain">
+   Getting into the seaborn domain
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#what-data-do-we-work-on">
+   What data do we work on
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#we-use-the-pandas-library-for-generating-dataframes">
+     We use the Pandas library for generating dataframes
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="visualizing-relationships-and-distributions-in-seaborn">
+<h1>Visualizing Relationships and Distributions in Seaborn<a class="headerlink" href="#visualizing-relationships-and-distributions-in-seaborn" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="getting-into-the-seaborn-domain">
+<h2>Getting into the seaborn domain<a class="headerlink" href="#getting-into-the-seaborn-domain" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip3 install seaborn
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting seaborn
+  Downloading https://files.pythonhosted.org/packages/10/01/dd1c7838cde3b69b247aaeb61016e238cafd8188a276e366d36aa6bcdab4/seaborn-0.8.1.tar.gz (178kB)
+    100% |████████████████████████████████| 184kB 1.3MB/s ta 0:00:01
+?25hCollecting scipy (from seaborn)
+  Downloading https://files.pythonhosted.org/packages/87/52/1ca31e34c44864072a1c14e78e345ac2cae00400a363e794a41529ad7e35/scipy-1.0.1-cp35-cp35m-macosx_10_6_intel.macosx_10_9_intel.macosx_10_9_x86_64.macosx_10_10_intel.macosx_10_10_x86_64.whl (16.3MB)
+    100% |████████████████████████████████| 16.3MB 79kB/s eta 0:00:011
+?25hCollecting matplotlib (from seaborn)
+  Downloading https://files.pythonhosted.org/packages/41/ac/5db3f25a7fbfe1b9ea6af82375e15b64d8aa9535b0570a13ba89debc77f6/matplotlib-2.2.2-cp35-cp35m-macosx_10_6_intel.macosx_10_9_intel.macosx_10_9_x86_64.macosx_10_10_intel.macosx_10_10_x86_64.whl (13.6MB)
+    100% |████████████████████████████████| 13.6MB 102kB/s ta 0:00:011  11% |███▊                            | 1.6MB 2.1MB/s eta 0:00:06
+?25hCollecting pandas (from seaborn)
+  Downloading https://files.pythonhosted.org/packages/da/e8/64832fc4107f249f0ca1596f0914a40e9cef490569b3d972a59fc786a360/pandas-0.22.0-cp35-cp35m-macosx_10_6_intel.macosx_10_9_intel.macosx_10_9_x86_64.macosx_10_10_intel.macosx_10_10_x86_64.whl (14.9MB)
+    100% |████████████████████████████████| 14.9MB 81kB/s eta 0:00:011   56% |██████████████████              | 8.4MB 2.5MB/s eta 0:00:03
+?25hRequirement already satisfied: numpy&gt;=1.8.2 in /usr/local/lib/python3.5/site-packages (from scipy-&gt;seaborn)
+Requirement already satisfied: python-dateutil&gt;=2.1 in /usr/local/lib/python3.5/site-packages (from matplotlib-&gt;seaborn)
+Collecting cycler&gt;=0.10 (from matplotlib-&gt;seaborn)
+  Downloading https://files.pythonhosted.org/packages/f7/d2/e07d3ebb2bd7af696440ce7e754c59dd546ffe1bbe732c8ab68b9c834e61/cycler-0.10.0-py2.py3-none-any.whl
+Collecting pytz (from matplotlib-&gt;seaborn)
+  Downloading https://files.pythonhosted.org/packages/dc/83/15f7833b70d3e067ca91467ca245bae0f6fe56ddc7451aa0dc5606b120f2/pytz-2018.4-py2.py3-none-any.whl (510kB)
+    100% |████████████████████████████████| 512kB 1.7MB/s ta 0:00:01
+?25hCollecting pyparsing!=2.0.4,!=2.1.2,!=2.1.6,&gt;=2.0.1 (from matplotlib-&gt;seaborn)
+  Downloading https://files.pythonhosted.org/packages/6a/8a/718fd7d3458f9fab8e67186b00abdd345b639976bc7fb3ae722e1b026a50/pyparsing-2.2.0-py2.py3-none-any.whl (56kB)
+    100% |████████████████████████████████| 61kB 2.6MB/s ta 0:00:01
+?25hRequirement already satisfied: six&gt;=1.10 in /usr/local/lib/python3.5/site-packages (from matplotlib-&gt;seaborn)
+Collecting kiwisolver&gt;=1.0.1 (from matplotlib-&gt;seaborn)
+  Downloading https://files.pythonhosted.org/packages/69/a2/421afa75b6470f34dd8129b6e86f9983d83381e907cea86da616502eedad/kiwisolver-1.0.1-cp35-cp35m-macosx_10_6_intel.macosx_10_9_intel.macosx_10_9_x86_64.macosx_10_10_intel.macosx_10_10_x86_64.whl (108kB)
+    100% |████████████████████████████████| 112kB 3.0MB/s ta 0:00:01
+?25hRequirement already satisfied: setuptools in /usr/local/lib/python3.5/site-packages (from kiwisolver&gt;=1.0.1-&gt;matplotlib-&gt;seaborn)
+Building wheels for collected packages: seaborn
+  Running setup.py bdist_wheel for seaborn ... ?25ldone
+?25h  Stored in directory: /Users/jananiravi/Library/Caches/pip/wheels/26/0a/44/53ddd89769e62f7c6691976375b86c6492e7dd20a2d3970e32
+Successfully built seaborn
+Installing collected packages: scipy, cycler, pytz, pyparsing, kiwisolver, matplotlib, pandas, seaborn
+Successfully installed cycler-0.10.0 kiwisolver-1.0.1 matplotlib-2.2.2 pandas-0.22.0 pyparsing-2.2.0 pytz-2018.4 scipy-1.0.1 seaborn-0.8.1
+<span class=" -Color -Color-Yellow">You are using pip version 9.0.3, however version 10.0.1 is available.</span>
+<span class=" -Color -Color-Yellow">You should consider upgrading via the &#39;pip install --upgrade pip&#39; command.</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">sns</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.8.1
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="what-data-do-we-work-on">
+<h2>What data do we work on<a class="headerlink" href="#what-data-do-we-work-on" title="Permalink to this headline">¶</a></h2>
+<p>Ideally, data in a tabulated format - dataframe</p>
+<div class="section" id="we-use-the-pandas-library-for-generating-dataframes">
+<h3>We use the Pandas library for generating dataframes<a class="headerlink" href="#we-use-the-pandas-library-for-generating-dataframes" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.22.0
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>Load dataset into pandas from a .csv file; store it as a dataframe</p></li>
+<li><p>File downloaded from <a class="reference external" href="https://archive.ics.uci.edu/ml/machine-learning-databases/wine-quality/winequality-white.csv">https://archive.ics.uci.edu/ml/machine-learning-databases/wine-quality/winequality-white.csv</a></p></li>
+<li><p>Even though the file comes with headers, we still specify them so that they are in our desired format</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wine_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;datasets/winequality-white.csv&#39;</span><span class="p">,</span> 
+                        <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Fixed Acidity&quot;</span><span class="p">,</span> <span class="s2">&quot;Volatile Acidity&quot;</span><span class="p">,</span> <span class="s2">&quot;Citric Acid&quot;</span><span class="p">,</span> <span class="s2">&quot;Residual Sugar&quot;</span><span class="p">,</span>
+                                <span class="s2">&quot;Chlorides&quot;</span><span class="p">,</span> <span class="s2">&quot;Free Sulfur Dioxide&quot;</span><span class="p">,</span> <span class="s2">&quot;Total Sulfur Dioxide&quot;</span><span class="p">,</span> <span class="s2">&quot;Density&quot;</span><span class="p">,</span> 
+                                <span class="s2">&quot;pH&quot;</span><span class="p">,</span> <span class="s2">&quot;Sulphates&quot;</span><span class="p">,</span> <span class="s2">&quot;Alcohol&quot;</span><span class="p">,</span> <span class="s2">&quot;Quality&quot;</span><span class="p">],</span>
+                        <span class="n">skiprows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                        <span class="n">sep</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;\s*;\s*&#39;</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s1">&#39;python&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wine_data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Fixed Acidity</th>
+      <th>Volatile Acidity</th>
+      <th>Citric Acid</th>
+      <th>Residual Sugar</th>
+      <th>Chlorides</th>
+      <th>Free Sulfur Dioxide</th>
+      <th>Total Sulfur Dioxide</th>
+      <th>Density</th>
+      <th>pH</th>
+      <th>Sulphates</th>
+      <th>Alcohol</th>
+      <th>Quality</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>7.0</td>
+      <td>0.27</td>
+      <td>0.36</td>
+      <td>20.7</td>
+      <td>0.045</td>
+      <td>45.0</td>
+      <td>170.0</td>
+      <td>1.0010</td>
+      <td>3.00</td>
+      <td>0.45</td>
+      <td>8.8</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>6.3</td>
+      <td>0.30</td>
+      <td>0.34</td>
+      <td>1.6</td>
+      <td>0.049</td>
+      <td>14.0</td>
+      <td>132.0</td>
+      <td>0.9940</td>
+      <td>3.30</td>
+      <td>0.49</td>
+      <td>9.5</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>8.1</td>
+      <td>0.28</td>
+      <td>0.40</td>
+      <td>6.9</td>
+      <td>0.050</td>
+      <td>30.0</td>
+      <td>97.0</td>
+      <td>0.9951</td>
+      <td>3.26</td>
+      <td>0.44</td>
+      <td>10.1</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>7.2</td>
+      <td>0.23</td>
+      <td>0.32</td>
+      <td>8.5</td>
+      <td>0.058</td>
+      <td>47.0</td>
+      <td>186.0</td>
+      <td>0.9956</td>
+      <td>3.19</td>
+      <td>0.40</td>
+      <td>9.9</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>7.2</td>
+      <td>0.23</td>
+      <td>0.32</td>
+      <td>8.5</td>
+      <td>0.058</td>
+      <td>47.0</td>
+      <td>186.0</td>
+      <td>0.9956</td>
+      <td>3.19</td>
+      <td>0.40</td>
+      <td>9.9</td>
+      <td>6</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Displaying the bottom 5 entries</span>
+<span class="n">wine_data</span><span class="o">.</span><span class="n">tail</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Fixed Acidity</th>
+      <th>Volatile Acidity</th>
+      <th>Citric Acid</th>
+      <th>Residual Sugar</th>
+      <th>Chlorides</th>
+      <th>Free Sulfur Dioxide</th>
+      <th>Total Sulfur Dioxide</th>
+      <th>Density</th>
+      <th>pH</th>
+      <th>Sulphates</th>
+      <th>Alcohol</th>
+      <th>Quality</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>4893</th>
+      <td>6.2</td>
+      <td>0.21</td>
+      <td>0.29</td>
+      <td>1.6</td>
+      <td>0.039</td>
+      <td>24.0</td>
+      <td>92.0</td>
+      <td>0.99114</td>
+      <td>3.27</td>
+      <td>0.50</td>
+      <td>11.2</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <th>4894</th>
+      <td>6.6</td>
+      <td>0.32</td>
+      <td>0.36</td>
+      <td>8.0</td>
+      <td>0.047</td>
+      <td>57.0</td>
+      <td>168.0</td>
+      <td>0.99490</td>
+      <td>3.15</td>
+      <td>0.46</td>
+      <td>9.6</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>4895</th>
+      <td>6.5</td>
+      <td>0.24</td>
+      <td>0.19</td>
+      <td>1.2</td>
+      <td>0.041</td>
+      <td>30.0</td>
+      <td>111.0</td>
+      <td>0.99254</td>
+      <td>2.99</td>
+      <td>0.46</td>
+      <td>9.4</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <th>4896</th>
+      <td>5.5</td>
+      <td>0.29</td>
+      <td>0.30</td>
+      <td>1.1</td>
+      <td>0.022</td>
+      <td>20.0</td>
+      <td>110.0</td>
+      <td>0.98869</td>
+      <td>3.34</td>
+      <td>0.38</td>
+      <td>12.8</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <th>4897</th>
+      <td>6.0</td>
+      <td>0.21</td>
+      <td>0.38</td>
+      <td>0.8</td>
+      <td>0.020</td>
+      <td>22.0</td>
+      <td>98.0</td>
+      <td>0.98941</td>
+      <td>3.26</td>
+      <td>0.32</td>
+      <td>11.8</td>
+      <td>6</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p><em>The dataset discusses different wine samples and their qualities</em>
+The dataset has details about the content of alcohol, sugar, different acids in each wine sample and even has a wine quality represented by numbers.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">wine_data</span><span class="o">.</span><span class="n">index</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4898
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wine_data</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Fixed Acidity</th>
+      <th>Volatile Acidity</th>
+      <th>Citric Acid</th>
+      <th>Residual Sugar</th>
+      <th>Chlorides</th>
+      <th>Free Sulfur Dioxide</th>
+      <th>Total Sulfur Dioxide</th>
+      <th>Density</th>
+      <th>pH</th>
+      <th>Sulphates</th>
+      <th>Alcohol</th>
+      <th>Quality</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>4898.000000</td>
+      <td>4898.000000</td>
+      <td>4898.000000</td>
+      <td>4898.000000</td>
+      <td>4898.000000</td>
+      <td>4898.000000</td>
+      <td>4898.000000</td>
+      <td>4898.000000</td>
+      <td>4898.000000</td>
+      <td>4898.000000</td>
+      <td>4898.000000</td>
+      <td>4898.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>6.854788</td>
+      <td>0.278241</td>
+      <td>0.334192</td>
+      <td>6.391415</td>
+      <td>0.045772</td>
+      <td>35.308085</td>
+      <td>138.360657</td>
+      <td>0.994027</td>
+      <td>3.188267</td>
+      <td>0.489847</td>
+      <td>10.514267</td>
+      <td>5.877909</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>0.843868</td>
+      <td>0.100795</td>
+      <td>0.121020</td>
+      <td>5.072058</td>
+      <td>0.021848</td>
+      <td>17.007137</td>
+      <td>42.498065</td>
+      <td>0.002991</td>
+      <td>0.151001</td>
+      <td>0.114126</td>
+      <td>1.230621</td>
+      <td>0.885639</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>3.800000</td>
+      <td>0.080000</td>
+      <td>0.000000</td>
+      <td>0.600000</td>
+      <td>0.009000</td>
+      <td>2.000000</td>
+      <td>9.000000</td>
+      <td>0.987110</td>
+      <td>2.720000</td>
+      <td>0.220000</td>
+      <td>8.000000</td>
+      <td>3.000000</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>6.300000</td>
+      <td>0.210000</td>
+      <td>0.270000</td>
+      <td>1.700000</td>
+      <td>0.036000</td>
+      <td>23.000000</td>
+      <td>108.000000</td>
+      <td>0.991723</td>
+      <td>3.090000</td>
+      <td>0.410000</td>
+      <td>9.500000</td>
+      <td>5.000000</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>6.800000</td>
+      <td>0.260000</td>
+      <td>0.320000</td>
+      <td>5.200000</td>
+      <td>0.043000</td>
+      <td>34.000000</td>
+      <td>134.000000</td>
+      <td>0.993740</td>
+      <td>3.180000</td>
+      <td>0.470000</td>
+      <td>10.400000</td>
+      <td>6.000000</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>7.300000</td>
+      <td>0.320000</td>
+      <td>0.390000</td>
+      <td>9.900000</td>
+      <td>0.050000</td>
+      <td>46.000000</td>
+      <td>167.000000</td>
+      <td>0.996100</td>
+      <td>3.280000</td>
+      <td>0.550000</td>
+      <td>11.400000</td>
+      <td>6.000000</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>14.200000</td>
+      <td>1.100000</td>
+      <td>1.660000</td>
+      <td>65.800000</td>
+      <td>0.346000</td>
+      <td>289.000000</td>
+      <td>440.000000</td>
+      <td>1.038980</td>
+      <td>3.820000</td>
+      <td>1.080000</td>
+      <td>14.200000</td>
+      <td>9.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "hossainlab/dataviz",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./seaborn"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            
+
+
+
+<div class='prev-next-bottom'>
+    
+
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Jubayer Hossain<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>

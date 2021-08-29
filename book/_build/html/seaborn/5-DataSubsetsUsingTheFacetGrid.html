@@ -1,0 +1,1032 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>How do we use FacetGrid? &#8212; Data Visualization with Python</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet" />
+  <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.e8f53015daec13862f6db5e763c41738.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe,.cell"
+        const thebe_selector_input = "pre,.cell_input div.highlight"
+        const thebe_selector_output = ".output,.cell_output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="shortcut icon" href="../_static/logo.jpg"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      <img src="../_static/logo.jpg" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Data Visualization with Python</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <p class="caption">
+ <span class="caption-text">
+  Matplotlib
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../matplotlib/00-Intro%20to%20Data%20Visualization.html">
+   Intro to Data Visualization with Matplotlib
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../matplotlib/02_InteractiveBackends.html">
+     Backends
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/seaborn/5-DataSubsetsUsingTheFacetGrid.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/hossainlab/dataviz/"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/hossainlab/dataviz/master?urlpath=tree/book/seaborn/5-DataSubsetsUsingTheFacetGrid.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/hossainlab/dataviz/blob/master/book/seaborn/5-DataSubsetsUsingTheFacetGrid.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        <button type="button" class="btn btn-secondary topbarbtn"
+            onclick="initThebeSBT()" title="Launch Thebe" data-toggle="tooltip" data-placement="left"><i
+                class="fas fa-play"></i><span style="margin-left: .4em;">Live Code</span></button>
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   How do we use FacetGrid?
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#we-now-pass-multiple-variables-to-make-a-relational-plot">
+   We now pass multiple variables to make a relational plot.
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#adding-a-legend-to-show-what-the-colors-stand-for">
+   Adding a legend to show what the colors stand for
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#in-the-above-plot-we-have-more-details-in-the-1st-plot-when-compared-to-the-other-two-can-we-create-plots-such-that-each-individual-plot-has-a-different-size">
+   In the above plot, we have more details in the 1st plot when compared to the other two. Can we create plots such that each individual plot has a different size?
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#what-if-we-want-to-specify-colours-that-the-graph-has-to-use-for-each-parameter">
+   What if we want to specify colours that the graph has to use for each parameter?
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#can-we-extend-the-same-to-other-aspects-of-the-hue-variable">
+   Can we extend the same to other aspects of the hue variable?
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#in-the-above-plot-what-if-we-want-to-print-the-video-data-first-followed-by-photos-status-and-then-links">
+   In the above plot, what if we want to print the video data first, followed by photos, status and then links?
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#we-have-to-zoom-in-into-each-graph-if-we-want-to-understand-this-do-we-have-a-way-to-make-them-of-readable-size-and-position-them-better">
+   We have to zoom in into each graph if we want to understand this. Do we have a way to make them of readable size and position them better?
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>You have recently joined a startup as a social media manager. From the reports you see, the posts on facebook are not garnering as much of a response as those on twitter or instagram. Why is it so?
+You decide to study the kind of posts being made, analyse the response and see what is not working for the posts. Below is the dataset you receive from the team members.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fb_data</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;datasets/dataset_Facebook.csv&#39;</span><span class="p">,</span>
+                     <span class="n">sep</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;\s*;\s*&#39;</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s1">&#39;python&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><em>The dataset discusses response on facebook for a set of posts that include different types/catogories.</em></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fb_data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Page total likes</th>
+      <th>Type</th>
+      <th>Category</th>
+      <th>Post Month</th>
+      <th>Post Weekday</th>
+      <th>Post Hour</th>
+      <th>Paid</th>
+      <th>Lifetime Post Total Reach</th>
+      <th>Lifetime Post Total Impressions</th>
+      <th>Lifetime Engaged Users</th>
+      <th>Lifetime Post Consumers</th>
+      <th>Lifetime Post Consumptions</th>
+      <th>Lifetime Post Impressions by people who have liked your Page</th>
+      <th>Lifetime Post reach by people who like your Page</th>
+      <th>Lifetime People who have liked your Page and engaged with your post</th>
+      <th>comment</th>
+      <th>like</th>
+      <th>share</th>
+      <th>Total Interactions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>139441</td>
+      <td>Photo</td>
+      <td>2</td>
+      <td>12</td>
+      <td>4</td>
+      <td>3</td>
+      <td>0.0</td>
+      <td>2752</td>
+      <td>5091</td>
+      <td>178</td>
+      <td>109</td>
+      <td>159</td>
+      <td>3078</td>
+      <td>1640</td>
+      <td>119</td>
+      <td>4</td>
+      <td>79.0</td>
+      <td>17.0</td>
+      <td>100</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>139441</td>
+      <td>Status</td>
+      <td>2</td>
+      <td>12</td>
+      <td>3</td>
+      <td>10</td>
+      <td>0.0</td>
+      <td>10460</td>
+      <td>19057</td>
+      <td>1457</td>
+      <td>1361</td>
+      <td>1674</td>
+      <td>11710</td>
+      <td>6112</td>
+      <td>1108</td>
+      <td>5</td>
+      <td>130.0</td>
+      <td>29.0</td>
+      <td>164</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>139441</td>
+      <td>Photo</td>
+      <td>3</td>
+      <td>12</td>
+      <td>3</td>
+      <td>3</td>
+      <td>0.0</td>
+      <td>2413</td>
+      <td>4373</td>
+      <td>177</td>
+      <td>113</td>
+      <td>154</td>
+      <td>2812</td>
+      <td>1503</td>
+      <td>132</td>
+      <td>0</td>
+      <td>66.0</td>
+      <td>14.0</td>
+      <td>80</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>139441</td>
+      <td>Photo</td>
+      <td>2</td>
+      <td>12</td>
+      <td>2</td>
+      <td>10</td>
+      <td>1.0</td>
+      <td>50128</td>
+      <td>87991</td>
+      <td>2211</td>
+      <td>790</td>
+      <td>1119</td>
+      <td>61027</td>
+      <td>32048</td>
+      <td>1386</td>
+      <td>58</td>
+      <td>1572.0</td>
+      <td>147.0</td>
+      <td>1777</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>139441</td>
+      <td>Photo</td>
+      <td>2</td>
+      <td>12</td>
+      <td>2</td>
+      <td>3</td>
+      <td>0.0</td>
+      <td>7244</td>
+      <td>13594</td>
+      <td>671</td>
+      <td>410</td>
+      <td>580</td>
+      <td>6228</td>
+      <td>3200</td>
+      <td>396</td>
+      <td>19</td>
+      <td>325.0</td>
+      <td>49.0</td>
+      <td>393</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fb_data</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Page total likes</th>
+      <th>Category</th>
+      <th>Post Month</th>
+      <th>Post Weekday</th>
+      <th>Post Hour</th>
+      <th>Paid</th>
+      <th>Lifetime Post Total Reach</th>
+      <th>Lifetime Post Total Impressions</th>
+      <th>Lifetime Engaged Users</th>
+      <th>Lifetime Post Consumers</th>
+      <th>Lifetime Post Consumptions</th>
+      <th>Lifetime Post Impressions by people who have liked your Page</th>
+      <th>Lifetime Post reach by people who like your Page</th>
+      <th>Lifetime People who have liked your Page and engaged with your post</th>
+      <th>comment</th>
+      <th>like</th>
+      <th>share</th>
+      <th>Total Interactions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>500.000000</td>
+      <td>500.000000</td>
+      <td>500.000000</td>
+      <td>500.000000</td>
+      <td>500.000000</td>
+      <td>499.000000</td>
+      <td>500.00000</td>
+      <td>5.000000e+02</td>
+      <td>500.000000</td>
+      <td>500.000000</td>
+      <td>500.000000</td>
+      <td>5.000000e+02</td>
+      <td>500.000000</td>
+      <td>500.000000</td>
+      <td>500.00000</td>
+      <td>499.000000</td>
+      <td>496.000000</td>
+      <td>500.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>123194.176000</td>
+      <td>1.880000</td>
+      <td>7.038000</td>
+      <td>4.150000</td>
+      <td>7.840000</td>
+      <td>0.278557</td>
+      <td>13903.36000</td>
+      <td>2.958595e+04</td>
+      <td>920.344000</td>
+      <td>798.772000</td>
+      <td>1415.130000</td>
+      <td>1.676638e+04</td>
+      <td>6585.488000</td>
+      <td>609.986000</td>
+      <td>7.48200</td>
+      <td>177.945892</td>
+      <td>27.266129</td>
+      <td>212.120000</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>16272.813214</td>
+      <td>0.852675</td>
+      <td>3.307936</td>
+      <td>2.030701</td>
+      <td>4.368589</td>
+      <td>0.448739</td>
+      <td>22740.78789</td>
+      <td>7.680325e+04</td>
+      <td>985.016636</td>
+      <td>882.505013</td>
+      <td>2000.594118</td>
+      <td>5.979102e+04</td>
+      <td>7682.009405</td>
+      <td>612.725618</td>
+      <td>21.18091</td>
+      <td>323.398742</td>
+      <td>42.613292</td>
+      <td>380.233118</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>81370.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>0.000000</td>
+      <td>238.00000</td>
+      <td>5.700000e+02</td>
+      <td>9.000000</td>
+      <td>9.000000</td>
+      <td>9.000000</td>
+      <td>5.670000e+02</td>
+      <td>236.000000</td>
+      <td>9.000000</td>
+      <td>0.00000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>112676.000000</td>
+      <td>1.000000</td>
+      <td>4.000000</td>
+      <td>2.000000</td>
+      <td>3.000000</td>
+      <td>0.000000</td>
+      <td>3315.00000</td>
+      <td>5.694750e+03</td>
+      <td>393.750000</td>
+      <td>332.500000</td>
+      <td>509.250000</td>
+      <td>3.969750e+03</td>
+      <td>2181.500000</td>
+      <td>291.000000</td>
+      <td>1.00000</td>
+      <td>56.500000</td>
+      <td>10.000000</td>
+      <td>71.000000</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>129600.000000</td>
+      <td>2.000000</td>
+      <td>7.000000</td>
+      <td>4.000000</td>
+      <td>9.000000</td>
+      <td>0.000000</td>
+      <td>5281.00000</td>
+      <td>9.051000e+03</td>
+      <td>625.500000</td>
+      <td>551.500000</td>
+      <td>851.000000</td>
+      <td>6.255500e+03</td>
+      <td>3417.000000</td>
+      <td>412.000000</td>
+      <td>3.00000</td>
+      <td>101.000000</td>
+      <td>19.000000</td>
+      <td>123.500000</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>136393.000000</td>
+      <td>3.000000</td>
+      <td>10.000000</td>
+      <td>6.000000</td>
+      <td>11.000000</td>
+      <td>1.000000</td>
+      <td>13168.00000</td>
+      <td>2.208550e+04</td>
+      <td>1062.000000</td>
+      <td>955.500000</td>
+      <td>1463.000000</td>
+      <td>1.486050e+04</td>
+      <td>7989.000000</td>
+      <td>656.250000</td>
+      <td>7.00000</td>
+      <td>187.500000</td>
+      <td>32.250000</td>
+      <td>228.500000</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>139441.000000</td>
+      <td>3.000000</td>
+      <td>12.000000</td>
+      <td>7.000000</td>
+      <td>23.000000</td>
+      <td>1.000000</td>
+      <td>180480.00000</td>
+      <td>1.110282e+06</td>
+      <td>11452.000000</td>
+      <td>11328.000000</td>
+      <td>19779.000000</td>
+      <td>1.107833e+06</td>
+      <td>51456.000000</td>
+      <td>4376.000000</td>
+      <td>372.00000</td>
+      <td>5172.000000</td>
+      <td>790.000000</td>
+      <td>6334.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>You decide to do some statistical analysis and plot them on graphs to visualise the status of the responses on facebook. Graphs are anyday easier to comprehend than a long list of numbers!</p>
+<p>Earlier, we tried to combine plots to simultaneously study relationships between pairs of variables - by exploiting the row, column and hue parameters along with lmplot and factorplot, for instance.
+Here, let us try to use the exclusive FacetGrid class that comes along with Seaborn. <br></p>
+<p>FacetGrid is a subplot grid for plotting conditional relationships.</p>
+<p>FacetGrid is very useful for</p>
+<ul class="simple">
+<li><p>Visualising distributions and relations between variables, within subsets of the concerned dataset.</p></li>
+<li><p>As seen before, there are three dimensions along which we observe the data - row, column and hue.</p></li>
+</ul>
+<div class="section" id="how-do-we-use-facetgrid">
+<h1>How do we use FacetGrid?<a class="headerlink" href="#how-do-we-use-facetgrid" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>We first initialise a FacetGrid object with a dataframe</p></li>
+<li><p>Specify the row, column and hue parameters</p></li>
+<li><p>Every unique value of the categorical variable is then used to create a facet along the specified axis.</p></li>
+<li><p>A plotting function is applied to each subset by using a map function</p></li>
+</ul>
+<p>Let us create a FacetGrid object.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g</span><span class="o">=</span><span class="n">sns</span><span class="o">.</span><span class="n">FacetGrid</span><span class="p">(</span><span class="n">fb_data</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s2">&quot;Type&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/5-DataSubsetsUsingTheFacetGrid_11_0.png" src="../_images/5-DataSubsetsUsingTheFacetGrid_11_0.png" />
+</div>
+</div>
+<p>We see that the matplotlib figure and axes are set up. We now have to map this with a plotting function, which will then be plotted on the above created structure. We will soon see that we can call different plots we have seen so far, alongwith the FacetGrid.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g</span><span class="o">=</span><span class="n">sns</span><span class="o">.</span><span class="n">FacetGrid</span><span class="p">(</span><span class="n">fb_data</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s2">&quot;Type&quot;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">,</span> <span class="s2">&quot;Total Interactions&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x1a1fed75c0&gt;
+</pre></div>
+</div>
+<img alt="../_images/5-DataSubsetsUsingTheFacetGrid_13_1.png" src="../_images/5-DataSubsetsUsingTheFacetGrid_13_1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g</span><span class="o">=</span><span class="n">sns</span><span class="o">.</span><span class="n">FacetGrid</span><span class="p">(</span><span class="n">fb_data</span><span class="p">,</span><span class="n">col</span><span class="o">=</span><span class="s2">&quot;Type&quot;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">,</span><span class="s2">&quot;Total Interactions&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="o">-</span><span class="mi">20</span><span class="p">,</span><span class="mi">3000</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">30</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(0, 30)
+</pre></div>
+</div>
+<img alt="../_images/5-DataSubsetsUsingTheFacetGrid_14_1.png" src="../_images/5-DataSubsetsUsingTheFacetGrid_14_1.png" />
+</div>
+</div>
+<p>We have called the plt.hist function to plot a histogram for the total interactions for the different types of posts made on facebook.</p>
+<p>It is clear that the post containing a photograph is the biggest winner. It has the maximum interaction in the form of comments, likes and shares. The histogram shows that the interaction between 0 and 500 has the largest area, implying highest number of interactions.</p>
+<p>All posts have more interactions in the range of 50 to 500.</p>
+<p>The posts with a status are more popular than those with links or videos.</p>
+</div>
+<div class="section" id="we-now-pass-multiple-variables-to-make-a-relational-plot">
+<h1>We now pass multiple variables to make a relational plot.<a class="headerlink" href="#we-now-pass-multiple-variables-to-make-a-relational-plot" title="Permalink to this headline">¶</a></h1>
+<p>The scatter plot is used</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g</span><span class="o">=</span><span class="n">sns</span><span class="o">.</span><span class="n">FacetGrid</span><span class="p">(</span><span class="n">fb_data</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s2">&quot;Type&quot;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">,</span><span class="s2">&quot;Lifetime Post Total Reach&quot;</span><span class="p">,</span> <span class="s2">&quot;Lifetime Engaged Users&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x1a20373cf8&gt;
+</pre></div>
+</div>
+<img alt="../_images/5-DataSubsetsUsingTheFacetGrid_17_1.png" src="../_images/5-DataSubsetsUsingTheFacetGrid_17_1.png" />
+</div>
+</div>
+</div>
+<div class="section" id="adding-a-legend-to-show-what-the-colors-stand-for">
+<h1>Adding a legend to show what the colors stand for<a class="headerlink" href="#adding-a-legend-to-show-what-the-colors-stand-for" title="Permalink to this headline">¶</a></h1>
+<p>We have added “alpha=0.7” to reduce the opacity of the points in the scatterplot.
+It is 1 by default. Making it closer to 0 makes it more transparent.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g</span><span class="o">=</span><span class="n">sns</span><span class="o">.</span><span class="n">FacetGrid</span><span class="p">(</span><span class="n">fb_data</span><span class="p">,</span><span class="n">col</span><span class="o">=</span><span class="s2">&quot;Type&quot;</span><span class="p">,</span><span class="n">hue</span><span class="o">=</span><span class="s2">&quot;Paid&quot;</span><span class="p">)</span>
+
+<span class="n">g</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">,</span><span class="s2">&quot;Lifetime Post Total Reach&quot;</span><span class="p">,</span><span class="s2">&quot;Lifetime Engaged Users&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+
+<span class="n">g</span><span class="o">.</span><span class="n">add_legend</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x1a20365080&gt;
+</pre></div>
+</div>
+<img alt="../_images/5-DataSubsetsUsingTheFacetGrid_19_1.png" src="../_images/5-DataSubsetsUsingTheFacetGrid_19_1.png" />
+</div>
+</div>
+<p>We can see that there are more posts that reach just less than about 50000 people. From the graph, we see that paid posts seem to be able to engage users for lifetime, while both paid and unpaid posts in this dataset seem to have the same reach.</p>
+<p>Calling the reg plot(),</p>
+<ul class="simple">
+<li><p>The margin title parameter is made true to add the title for each row</p></li>
+<li><p>fit_reg is made false as we do not want to plot a regression line</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g</span><span class="o">=</span><span class="n">sns</span><span class="o">.</span><span class="n">FacetGrid</span><span class="p">(</span><span class="n">fb_data</span><span class="p">,</span> <span class="n">row</span><span class="o">=</span><span class="s2">&quot;Category&quot;</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s2">&quot;Type&quot;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;Paid&quot;</span><span class="p">,</span> <span class="n">margin_titles</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">g</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">sns</span><span class="o">.</span><span class="n">regplot</span><span class="p">,</span><span class="s2">&quot;Post Month&quot;</span><span class="p">,</span> <span class="s2">&quot;Total Interactions&quot;</span><span class="p">,</span> <span class="n">fit_reg</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="n">g</span><span class="o">.</span><span class="n">add_legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2500</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(0, 2500)
+</pre></div>
+</div>
+<img alt="../_images/5-DataSubsetsUsingTheFacetGrid_23_1.png" src="../_images/5-DataSubsetsUsingTheFacetGrid_23_1.png" />
+</div>
+</div>
+<p>The above shows different kinds of facebook posts made throughout the year, and the total interactions received from all posts.</p>
+<ul class="simple">
+<li><p>The patterns show that paid posts made in the second half of the year have more interactions.</p></li>
+<li><p>Unpaid posts hit a high response at the start and end of the year for photos, mid year for status posts and end of the year for video posts. Links seem to have a mediocre standard response throughout the year.</p></li>
+<li><p>Category 1 posts have the best response for photos, while category 2 favours posts with statuses most.</p></li>
+</ul>
+</div>
+<div class="section" id="in-the-above-plot-we-have-more-details-in-the-1st-plot-when-compared-to-the-other-two-can-we-create-plots-such-that-each-individual-plot-has-a-different-size">
+<h1>In the above plot, we have more details in the 1st plot when compared to the other two. Can we create plots such that each individual plot has a different size?<a class="headerlink" href="#in-the-above-plot-we-have-more-details-in-the-1st-plot-when-compared-to-the-other-two-can-we-create-plots-such-that-each-individual-plot-has-a-different-size" title="Permalink to this headline">¶</a></h1>
+<p>Yes, we use the gridspec parameter.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g</span><span class="o">=</span><span class="n">sns</span><span class="o">.</span><span class="n">FacetGrid</span><span class="p">(</span><span class="n">fb_data</span><span class="p">,</span><span class="n">row</span><span class="o">=</span><span class="s2">&quot;Category&quot;</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s2">&quot;Type&quot;</span><span class="p">,</span><span class="n">hue</span><span class="o">=</span><span class="s2">&quot;Paid&quot;</span><span class="p">,</span> <span class="n">margin_titles</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                <span class="n">gridspec_kws</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;width_ratios&quot;</span><span class="p">:[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">]})</span>
+
+<span class="n">g</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">sns</span><span class="o">.</span><span class="n">regplot</span><span class="p">,</span><span class="s2">&quot;Post Month&quot;</span><span class="p">,</span><span class="s2">&quot;Total Interactions&quot;</span><span class="p">,</span><span class="n">fit_reg</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="n">g</span><span class="o">.</span><span class="n">add_legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2500</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(0, 2500)
+</pre></div>
+</div>
+<img alt="../_images/5-DataSubsetsUsingTheFacetGrid_26_1.png" src="../_images/5-DataSubsetsUsingTheFacetGrid_26_1.png" />
+</div>
+</div>
+</div>
+<div class="section" id="what-if-we-want-to-specify-colours-that-the-graph-has-to-use-for-each-parameter">
+<h1>What if we want to specify colours that the graph has to use for each parameter?<a class="headerlink" href="#what-if-we-want-to-specify-colours-that-the-graph-has-to-use-for-each-parameter" title="Permalink to this headline">¶</a></h1>
+<p><em>Create a dictionary with key as parameter and value as the color, for the hue variable</em></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">h</span><span class="o">=</span><span class="p">{</span><span class="mi">0</span><span class="p">:</span><span class="s2">&quot;red&quot;</span><span class="p">,</span><span class="mi">1</span><span class="p">:</span><span class="s2">&quot;green&quot;</span><span class="p">}</span>
+<span class="n">g</span><span class="o">=</span><span class="n">sns</span><span class="o">.</span><span class="n">FacetGrid</span><span class="p">(</span><span class="n">fb_data</span><span class="p">,</span><span class="n">row</span><span class="o">=</span><span class="s2">&quot;Category&quot;</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s2">&quot;Type&quot;</span><span class="p">,</span><span class="n">hue</span><span class="o">=</span><span class="s2">&quot;Paid&quot;</span><span class="p">,</span> <span class="n">margin_titles</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                <span class="n">palette</span><span class="o">=</span><span class="n">h</span><span class="p">)</span>
+
+<span class="n">g</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">sns</span><span class="o">.</span><span class="n">regplot</span><span class="p">,</span><span class="s2">&quot;Post Month&quot;</span><span class="p">,</span><span class="s2">&quot;Total Interactions&quot;</span><span class="p">,</span><span class="n">fit_reg</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="n">g</span><span class="o">.</span><span class="n">add_legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2500</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(0, 2500)
+</pre></div>
+</div>
+<img alt="../_images/5-DataSubsetsUsingTheFacetGrid_28_1.png" src="../_images/5-DataSubsetsUsingTheFacetGrid_28_1.png" />
+</div>
+</div>
+</div>
+<div class="section" id="can-we-extend-the-same-to-other-aspects-of-the-hue-variable">
+<h1>Can we extend the same to other aspects of the hue variable?<a class="headerlink" href="#can-we-extend-the-same-to-other-aspects-of-the-hue-variable" title="Permalink to this headline">¶</a></h1>
+<p>Pass the arguments in exactly the same manner as above to hue_kw parameter</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Creating a dictionary for markers and passing it to hue_kws variable</span>
+<span class="n">h</span><span class="o">=</span><span class="p">{</span><span class="mi">0</span><span class="p">:</span><span class="s2">&quot;red&quot;</span><span class="p">,</span><span class="mi">1</span><span class="p">:</span><span class="s2">&quot;green&quot;</span><span class="p">}</span>
+<span class="n">i</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;marker&quot;</span><span class="p">:[</span><span class="s2">&quot;^&quot;</span><span class="p">,</span><span class="s2">&quot;v&quot;</span><span class="p">]}</span>
+
+<span class="n">g</span><span class="o">=</span><span class="n">sns</span><span class="o">.</span><span class="n">FacetGrid</span><span class="p">(</span><span class="n">fb_data</span><span class="p">,</span><span class="n">row</span><span class="o">=</span><span class="s2">&quot;Category&quot;</span><span class="p">,</span> 
+                <span class="n">col</span><span class="o">=</span><span class="s2">&quot;Type&quot;</span><span class="p">,</span>
+                <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;Paid&quot;</span><span class="p">,</span> 
+                <span class="n">margin_titles</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                <span class="n">palette</span><span class="o">=</span><span class="n">h</span><span class="p">,</span>
+                <span class="n">hue_kws</span><span class="o">=</span><span class="n">i</span><span class="p">)</span>
+
+
+<span class="n">g</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">sns</span><span class="o">.</span><span class="n">regplot</span><span class="p">,</span><span class="s2">&quot;Post Month&quot;</span><span class="p">,</span><span class="s2">&quot;Total Interactions&quot;</span><span class="p">,</span><span class="n">fit_reg</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="n">g</span><span class="o">.</span><span class="n">add_legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2500</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(0, 2500)
+</pre></div>
+</div>
+<img alt="../_images/5-DataSubsetsUsingTheFacetGrid_30_1.png" src="../_images/5-DataSubsetsUsingTheFacetGrid_30_1.png" />
+</div>
+</div>
+<p><em>We see that the points are plotted with the specified markers. As we have also specified colours, we see that the markers are in accordance with the passed in color scheme</em></p>
+<p>Calling the bar plot,</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g</span><span class="o">=</span><span class="n">sns</span><span class="o">.</span><span class="n">FacetGrid</span><span class="p">(</span><span class="n">fb_data</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s2">&quot;Type&quot;</span><span class="p">)</span>
+
+<span class="n">g</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">,</span> <span class="s2">&quot;Post Weekday&quot;</span><span class="p">,</span> <span class="s2">&quot;Page total likes&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/anaconda3/lib/python3.6/site-packages/seaborn/axisgrid.py:703: UserWarning: Using the barplot function without specifying `order` is likely to produce an incorrect plot.
+  warnings.warn(warning)
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x1a20bb49b0&gt;
+</pre></div>
+</div>
+<img alt="../_images/5-DataSubsetsUsingTheFacetGrid_34_2.png" src="../_images/5-DataSubsetsUsingTheFacetGrid_34_2.png" />
+</div>
+</div>
+<p>We can see that</p>
+<ul class="simple">
+<li><p>The number of likes received for photos are equal for every day of the week</p></li>
+<li><p>Likes for status posts dropped midweek</p></li>
+<li><p>The likes for posts with links increased slowly with every day of the week. Friday saw the most number of likes</p></li>
+<li><p>Likes for videos posted was almost constant throughout, slowly increasing in number as weekend emerged</p></li>
+</ul>
+</div>
+<div class="section" id="in-the-above-plot-what-if-we-want-to-print-the-video-data-first-followed-by-photos-status-and-then-links">
+<h1>In the above plot, what if we want to print the video data first, followed by photos, status and then links?<a class="headerlink" href="#in-the-above-plot-what-if-we-want-to-print-the-video-data-first-followed-by-photos-status-and-then-links" title="Permalink to this headline">¶</a></h1>
+<p><em>We simply pass in an ordered list to the corresponding parameter, for eg, row_order, hue_order, etc.</em> <br>
+By default, the variables are ordered in ascending order if they are numbers, and in the order of appearance otherwise.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g</span><span class="o">=</span><span class="n">sns</span><span class="o">.</span><span class="n">FacetGrid</span><span class="p">(</span><span class="n">fb_data</span><span class="p">,</span><span class="n">col</span><span class="o">=</span><span class="s2">&quot;Type&quot;</span><span class="p">,</span> <span class="n">col_order</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Video&quot;</span><span class="p">,</span> <span class="s2">&quot;Photo&quot;</span><span class="p">,</span> <span class="s2">&quot;Status&quot;</span><span class="p">,</span> <span class="s2">&quot;Link&quot;</span><span class="p">])</span>
+
+<span class="n">g</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">,</span><span class="s2">&quot;Post Weekday&quot;</span><span class="p">,</span><span class="s2">&quot;Page total likes&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/anaconda3/lib/python3.6/site-packages/seaborn/axisgrid.py:703: UserWarning: Using the barplot function without specifying `order` is likely to produce an incorrect plot.
+  warnings.warn(warning)
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x1a21e80748&gt;
+</pre></div>
+</div>
+<img alt="../_images/5-DataSubsetsUsingTheFacetGrid_37_2.png" src="../_images/5-DataSubsetsUsingTheFacetGrid_37_2.png" />
+</div>
+</div>
+<p>Let us plot the same graph for every month now. We will know the how the number of likes overall varies every month.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g</span><span class="o">=</span><span class="n">sns</span><span class="o">.</span><span class="n">FacetGrid</span><span class="p">(</span><span class="n">fb_data</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s2">&quot;Post Month&quot;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">,</span><span class="s2">&quot;Post Weekday&quot;</span><span class="p">,</span> <span class="s2">&quot;Page total likes&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/anaconda3/lib/python3.6/site-packages/seaborn/axisgrid.py:703: UserWarning: Using the barplot function without specifying `order` is likely to produce an incorrect plot.
+  warnings.warn(warning)
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x1a224ce2e8&gt;
+</pre></div>
+</div>
+<img alt="../_images/5-DataSubsetsUsingTheFacetGrid_40_2.png" src="../_images/5-DataSubsetsUsingTheFacetGrid_40_2.png" />
+</div>
+</div>
+</div>
+<div class="section" id="we-have-to-zoom-in-into-each-graph-if-we-want-to-understand-this-do-we-have-a-way-to-make-them-of-readable-size-and-position-them-better">
+<h1>We have to zoom in into each graph if we want to understand this. Do we have a way to make them of readable size and position them better?<a class="headerlink" href="#we-have-to-zoom-in-into-each-graph-if-we-want-to-understand-this-do-we-have-a-way-to-make-them-of-readable-size-and-position-them-better" title="Permalink to this headline">¶</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g</span><span class="o">=</span><span class="n">sns</span><span class="o">.</span><span class="n">FacetGrid</span><span class="p">(</span><span class="n">fb_data</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s2">&quot;Post Month&quot;</span><span class="p">,</span> <span class="n">col_wrap</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">,</span><span class="s2">&quot;Post Weekday&quot;</span><span class="p">,</span> <span class="s2">&quot;Page total likes&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/anaconda3/lib/python3.6/site-packages/seaborn/axisgrid.py:703: UserWarning: Using the barplot function without specifying `order` is likely to produce an incorrect plot.
+  warnings.warn(warning)
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x1a21b0b208&gt;
+</pre></div>
+</div>
+<img alt="../_images/5-DataSubsetsUsingTheFacetGrid_42_2.png" src="../_images/5-DataSubsetsUsingTheFacetGrid_42_2.png" />
+</div>
+</div>
+<p>Posts seem to be better received in the last quarter of the year.</p>
+<p>We have added the col_wrap parameter and set it to 4. Thus we have 4 columns in every row, and the rest of the entries are carried forward to the next rows. <br>
+<strong>Note: The same cannot be applied to the row variable</strong></p>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "hossainlab/dataviz",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./seaborn"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            
+
+
+
+<div class='prev-next-bottom'>
+    
+
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Jubayer Hossain<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>
